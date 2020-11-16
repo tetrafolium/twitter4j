@@ -70,6 +70,15 @@ final class LazyUser implements twitter4j.User {
     public String getName() {
         return getTarget().getName();
     }
+    
+    /**
+     * Returns the email of the user
+     *
+     * @return the email of the user
+     */
+    public String getEmail() {
+        return getTarget().getEmail();
+    }
 
 
     /**
@@ -158,6 +167,11 @@ final class LazyUser implements twitter4j.User {
         return getTarget().getOriginalProfileImageURL();
     }
 
+    @Override
+    public String get400x400ProfileImageURL() {
+        return getTarget().get400x400ProfileImageURL();
+    }
+
     /**
      * Returns the profile image url of the user, served over SSL
      *
@@ -180,6 +194,11 @@ final class LazyUser implements twitter4j.User {
     @Override
     public String getOriginalProfileImageURLHttps() {
         return getTarget().getOriginalProfileImageURLHttps();
+    }
+
+    @Override
+    public String get400x400ProfileImageURLHttps() {
+        return getTarget().get400x400ProfileImageURLHttps();
     }
 
     @Override
@@ -332,6 +351,21 @@ final class LazyUser implements twitter4j.User {
     @Override
     public String getProfileBannerMobileRetinaURL() {
         return getTarget().getProfileBannerMobileRetinaURL();
+    }
+
+    @Override
+    public String getProfileBanner300x100URL() {
+        return getTarget().getProfileBanner300x100URL();
+    }
+
+    @Override
+    public String getProfileBanner600x200URL() {
+        return getTarget().getProfileBanner600x200URL();
+    }
+
+    @Override
+    public String getProfileBanner1500x500URL() {
+        return getTarget().getProfileBanner1500x500URL();
     }
 
     public boolean isProfileBackgroundTiled() {

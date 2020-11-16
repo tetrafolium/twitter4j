@@ -15,20 +15,17 @@
  */
 package twitter4j;
 
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * @author Yusuke Yamamoto - yusuke at mac.com
  * @since Twitter4J 2.2.4
  */
-public class PlaceGeoResourcesTest extends TwitterTestBase {
-    public PlaceGeoResourcesTest(String name) {
-        super(name);
-    }
-
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
-    public void testGeoMethods() throws Exception {
+class PlaceGeoResourcesTest extends TwitterTestBase {
+    @Test
+    void testGeoMethods() throws Exception {
         GeoQuery query;
         ResponseList<Place> places;
         query = new GeoQuery(new GeoLocation(0, 0));
@@ -57,7 +54,7 @@ public class PlaceGeoResourcesTest extends TwitterTestBase {
             assertNotNull(TwitterObjectFactory.getRawJSON(place));
             assertEquals(place, TwitterObjectFactory.createPlace(TwitterObjectFactory.getRawJSON(place)));
             assertEquals("San Francisco, CA", place.getFullName());
-            assertEquals("California, USA", place.getContainedWithIn()[0].getFullName());
+            assertEquals("San Francisco-Oakland-San Jose CA", place.getContainedWithIn()[0].getFullName());
         } catch (TwitterException te) {
             // is being rate limited
             assertEquals(400, te.getStatusCode());
@@ -70,7 +67,8 @@ public class PlaceGeoResourcesTest extends TwitterTestBase {
         assertEquals(sanFrancisco, status.getPlace().getId());
     }
 
-    public void testGeoLocation() throws Exception {
+    @Test
+    void testGeoLocation() throws Exception {
         final double LATITUDE = 12.3456;
         final double LONGITUDE = -34.5678;
 

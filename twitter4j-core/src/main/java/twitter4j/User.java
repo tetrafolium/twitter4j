@@ -37,6 +37,13 @@ public interface User extends Comparable<User>, TwitterResponse, java.io.Seriali
      * @return the name of the user
      */
     String getName();
+    
+    /**
+     * Returns the email of the user, if the app is whitelisted by Twitter
+     *
+     * @return the email of the user
+     */
+    String getEmail();
 
     /**
      * Returns the screen name of the user
@@ -80,6 +87,12 @@ public interface User extends Comparable<User>, TwitterResponse, java.io.Seriali
 
     String getOriginalProfileImageURL();
 
+    /**
+     * @since Twitter4J 4.0.7
+     * @return profile image url
+     */
+    String get400x400ProfileImageURL();
+
     String getProfileImageURLHttps();
 
     String getBiggerProfileImageURLHttps();
@@ -87,6 +100,12 @@ public interface User extends Comparable<User>, TwitterResponse, java.io.Seriali
     String getMiniProfileImageURLHttps();
 
     String getOriginalProfileImageURLHttps();
+
+    /**
+     * @since Twitter4J 4.0.7
+     * @return profile image url
+     */
+    String get400x400ProfileImageURLHttps();
 
     /**
      * Tests if the user has not uploaded their own avatar
@@ -201,6 +220,24 @@ public interface User extends Comparable<User>, TwitterResponse, java.io.Seriali
      * @return profile banner mobile retina URL
      */
     String getProfileBannerMobileRetinaURL();
+
+    /**
+     * @since Twitter4J 4.0.7
+     * @return profile banner 300x100 URL
+     */
+    String getProfileBanner300x100URL();
+
+    /**
+     * @since Twitter4J 4.0.7
+     * @return profile banner 600x200 URL
+     */
+    String getProfileBanner600x200URL();
+
+    /**
+     * @since Twitter4J 4.0.7
+     * @return profile banner 1500x500 URL
+     */
+    String getProfileBanner1500x500URL();
 
     boolean isProfileBackgroundTiled();
 

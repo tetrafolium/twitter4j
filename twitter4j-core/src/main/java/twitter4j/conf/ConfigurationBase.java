@@ -22,6 +22,7 @@ import twitter4j.Logger;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -72,6 +73,9 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
     private boolean includeMyRetweetEnabled = true;
     private boolean includeEntitiesEnabled = true;
     private boolean trimUserEnabled = false;
+    private boolean includeExtAltTextEnabled = true;
+    private boolean tweetModeExtended = true;
+    private boolean includeEmailEnabled = false;
 
     private boolean jsonStoreEnabled = false;
 
@@ -88,12 +92,14 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
     private Properties mediaProviderParameters = null;
     private boolean daemonEnabled = true;
 
+    private String streamThreadName = "";
 
     protected ConfigurationBase() {
         httpConf = new MyHttpClientConfiguration(null // proxy host
                 , null // proxy user
                 , null // proxy password
                 , -1 // proxy port
+                , false // proxy socks
                 , 20000 // connection timeout
                 , 120000 // read timeout
                 , false // pretty debug
@@ -106,17 +112,19 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         private String httpProxyHost = null;
         private String httpProxyUser = null;
         private String httpProxyPassword = null;
+        private boolean httpProxySocks = false;
         private int httpProxyPort = -1;
         private int httpConnectionTimeout = 20000;
         private int httpReadTimeout = 120000;
         private boolean prettyDebug = false;
         private boolean gzipEnabled = true;
 
-        MyHttpClientConfiguration(String httpProxyHost, String httpProxyUser, String httpProxyPassword, int httpProxyPort, int httpConnectionTimeout, int httpReadTimeout, boolean prettyDebug, boolean gzipEnabled) {
+        MyHttpClientConfiguration(String httpProxyHost, String httpProxyUser, String httpProxyPassword, int httpProxyPort, boolean httpProxySocks, int httpConnectionTimeout, int httpReadTimeout, boolean prettyDebug, boolean gzipEnabled) {
             this.httpProxyHost = httpProxyHost;
             this.httpProxyUser = httpProxyUser;
             this.httpProxyPassword = httpProxyPassword;
             this.httpProxyPort = httpProxyPort;
+            this.httpProxySocks = httpProxySocks;
             this.httpConnectionTimeout = httpConnectionTimeout;
             this.httpReadTimeout = httpReadTimeout;
             this.prettyDebug = prettyDebug;
@@ -141,6 +149,11 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         @Override
         public String getHttpProxyPassword() {
             return httpProxyPassword;
+        }
+
+        @Override
+        public boolean isHttpProxySocks() {
+            return httpProxySocks;
         }
 
         @Override
@@ -181,8 +194,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
             MyHttpClientConfiguration that = (MyHttpClientConfiguration) o;
 
             if (gzipEnabled != that.gzipEnabled) return false;
+            if (httpProxySocks != that.httpProxySocks) return false;
             if (httpConnectionTimeout != that.httpConnectionTimeout) return false;
             if (httpProxyPort != that.httpProxyPort) return false;
+            if (httpProxySocks != that.httpProxySocks) return false;
             if (httpReadTimeout != that.httpReadTimeout) return false;
             if (prettyDebug != that.prettyDebug) return false;
             if (httpProxyHost != null ? !httpProxyHost.equals(that.httpProxyHost) : that.httpProxyHost != null)
@@ -201,6 +216,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
             result = 31 * result + (httpProxyUser != null ? httpProxyUser.hashCode() : 0);
             result = 31 * result + (httpProxyPassword != null ? httpProxyPassword.hashCode() : 0);
             result = 31 * result + httpProxyPort;
+            result = 31 * result + (httpProxySocks ? 1 : 0);
             result = 31 * result + httpConnectionTimeout;
             result = 31 * result + httpReadTimeout;
             result = 31 * result + (prettyDebug ? 1 : 0);
@@ -215,6 +231,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                     ", httpProxyUser='" + httpProxyUser + '\'' +
                     ", httpProxyPassword='" + httpProxyPassword + '\'' +
                     ", httpProxyPort=" + httpProxyPort +
+                    ", proxyType=" + (httpProxySocks ? Proxy.Type.SOCKS : Proxy.Type.HTTP) +
                     ", httpConnectionTimeout=" + httpConnectionTimeout +
                     ", httpReadTimeout=" + httpReadTimeout +
                     ", prettyDebug=" + prettyDebug +
@@ -279,10 +296,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 , httpConf.getHttpProxyUser()
                 , httpConf.getHttpProxyPassword()
                 , httpConf.getHttpProxyPort()
+                , httpConf.isHttpProxySocks()
                 , httpConf.getHttpConnectionTimeout()
                 , httpConf.getHttpReadTimeout()
-                , prettyDebug
-                , httpConf.isGZIPEnabled()
+                , prettyDebug, httpConf.isGZIPEnabled()
         );
     }
 
@@ -291,10 +308,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 , httpConf.getHttpProxyUser()
                 , httpConf.getHttpProxyPassword()
                 , httpConf.getHttpProxyPort()
+                , httpConf.isHttpProxySocks()
                 , httpConf.getHttpConnectionTimeout()
                 , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled()
-                , gzipEnabled
+                , httpConf.isPrettyDebugEnabled(), gzipEnabled
         );
     }
 
@@ -305,10 +322,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 , httpConf.getHttpProxyUser()
                 , httpConf.getHttpProxyPassword()
                 , httpConf.getHttpProxyPort()
+                , httpConf.isHttpProxySocks()
                 , httpConf.getHttpConnectionTimeout()
                 , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled()
-                , httpConf.isGZIPEnabled()
+                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
@@ -317,10 +334,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 , proxyUser
                 , httpConf.getHttpProxyPassword()
                 , httpConf.getHttpProxyPort()
+                , httpConf.isHttpProxySocks()
                 , httpConf.getHttpConnectionTimeout()
                 , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled()
-                , httpConf.isGZIPEnabled()
+                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
@@ -329,10 +346,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 , httpConf.getHttpProxyUser()
                 , proxyPassword
                 , httpConf.getHttpProxyPort()
+                , httpConf.isHttpProxySocks()
                 , httpConf.getHttpConnectionTimeout()
                 , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled()
-                , httpConf.isGZIPEnabled()
+                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
@@ -341,10 +358,22 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 , httpConf.getHttpProxyUser()
                 , httpConf.getHttpProxyPassword()
                 , proxyPort
+                , httpConf.isHttpProxySocks()
                 , httpConf.getHttpConnectionTimeout()
                 , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled()
-                , httpConf.isGZIPEnabled()
+                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
+        );
+    }
+
+    protected final void setHttpProxySocks(boolean isSocksProxy) {
+        httpConf = new MyHttpClientConfiguration(httpConf.getHttpProxyHost()
+                , httpConf.getHttpProxyUser()
+                , httpConf.getHttpProxyPassword()
+                , httpConf.getHttpProxyPort()
+                , isSocksProxy
+                , httpConf.getHttpConnectionTimeout()
+                , httpConf.getHttpReadTimeout()
+                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
@@ -353,10 +382,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 , httpConf.getHttpProxyUser()
                 , httpConf.getHttpProxyPassword()
                 , httpConf.getHttpProxyPort()
+                , httpConf.isHttpProxySocks()
                 , connectionTimeout
                 , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled()
-                , httpConf.isGZIPEnabled()
+                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
@@ -365,10 +394,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 , httpConf.getHttpProxyUser()
                 , httpConf.getHttpProxyPassword()
                 , httpConf.getHttpProxyPort()
+                , httpConf.isHttpProxySocks()
                 , httpConf.getHttpConnectionTimeout()
                 , readTimeout
-                , httpConf.isPrettyDebugEnabled()
-                , httpConf.isGZIPEnabled()
+                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
@@ -613,6 +642,16 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
     }
 
     @Override
+    public boolean isIncludeExtAltTextEnabled() {
+        return this.includeExtAltTextEnabled;
+    }
+
+    @Override
+    public boolean isTweetModeExtended() {
+        return this.tweetModeExtended;
+    }
+
+    @Override
     public boolean isDaemonEnabled() {
         return daemonEnabled;
     }
@@ -621,8 +660,25 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         this.daemonEnabled = daemonEnabled;
     }
 
+    @Override
+    public boolean isIncludeEmailEnabled() {
+        return includeEmailEnabled;
+    }
+
+    protected void setIncludeEmailEnabled(boolean includeEmailEnabled) {
+        this.includeEmailEnabled = includeEmailEnabled;
+    }
+
     public void setTrimUserEnabled(boolean enabled) {
         this.trimUserEnabled = enabled;
+    }
+
+    public void setIncludeExtAltTextEnabled(boolean enabled) {
+        this.includeExtAltTextEnabled = enabled;
+    }
+
+    public void setTweetModeExtended(boolean enabled) {
+        this.tweetModeExtended = enabled;
     }
 
     @Override
@@ -706,6 +762,15 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         this.mediaProviderParameters = props;
     }
 
+    @Override
+    public String getStreamThreadName() {
+        return this.streamThreadName;
+    }
+
+    protected final void setStreamThreadName(String streamThreadName) {
+        this.streamThreadName = streamThreadName;
+    }
+
     static String fixURL(boolean useSSL, String url) {
         if (null == url) {
             return null;
@@ -729,25 +794,64 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
 
         ConfigurationBase that = (ConfigurationBase) o;
 
-        if (applicationOnlyAuthEnabled != that.applicationOnlyAuthEnabled) return false;
-        if (asyncNumThreads != that.asyncNumThreads) return false;
-        if (contributingTo != that.contributingTo) return false;
-        if (daemonEnabled != that.daemonEnabled) return false;
         if (debug != that.debug) return false;
+        if (httpStreamingReadTimeout != that.httpStreamingReadTimeout) return false;
         if (httpRetryCount != that.httpRetryCount) return false;
         if (httpRetryIntervalSeconds != that.httpRetryIntervalSeconds) return false;
-        if (httpStreamingReadTimeout != that.httpStreamingReadTimeout) return false;
-        if (includeEntitiesEnabled != that.includeEntitiesEnabled) return false;
+        if (asyncNumThreads != that.asyncNumThreads) return false;
+        if (contributingTo != that.contributingTo) return false;
         if (includeMyRetweetEnabled != that.includeMyRetweetEnabled) return false;
+        if (includeEntitiesEnabled != that.includeEntitiesEnabled) return false;
+        if (trimUserEnabled != that.trimUserEnabled) return false;
+        if (includeExtAltTextEnabled != that.includeExtAltTextEnabled) return false;
+        if (tweetModeExtended != that.tweetModeExtended) return false;
+        if (includeEmailEnabled != that.includeEmailEnabled) return false;
         if (jsonStoreEnabled != that.jsonStoreEnabled) return false;
         if (mbeanEnabled != that.mbeanEnabled) return false;
-        if (stallWarningsEnabled != that.stallWarningsEnabled) return false;
-        if (trimUserEnabled != that.trimUserEnabled) return false;
         if (userStreamRepliesAllEnabled != that.userStreamRepliesAllEnabled) return false;
         if (userStreamWithFollowingsEnabled != that.userStreamWithFollowingsEnabled) return false;
+        if (stallWarningsEnabled != that.stallWarningsEnabled) return false;
+        if (applicationOnlyAuthEnabled != that.applicationOnlyAuthEnabled) return false;
+        if (daemonEnabled != that.daemonEnabled) return false;
+        if (user != null ? !user.equals(that.user) : that.user != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (httpConf != null ? !httpConf.equals(that.httpConf) : that.httpConf != null) return false;
+        if (oAuthConsumerKey != null ? !oAuthConsumerKey.equals(that.oAuthConsumerKey) : that.oAuthConsumerKey != null)
+            return false;
+        if (oAuthConsumerSecret != null ? !oAuthConsumerSecret.equals(that.oAuthConsumerSecret) : that.oAuthConsumerSecret != null)
+            return false;
+        if (oAuthAccessToken != null ? !oAuthAccessToken.equals(that.oAuthAccessToken) : that.oAuthAccessToken != null)
+            return false;
+        if (oAuthAccessTokenSecret != null ? !oAuthAccessTokenSecret.equals(that.oAuthAccessTokenSecret) : that.oAuthAccessTokenSecret != null)
+            return false;
+        if (oAuth2TokenType != null ? !oAuth2TokenType.equals(that.oAuth2TokenType) : that.oAuth2TokenType != null)
+            return false;
+        if (oAuth2AccessToken != null ? !oAuth2AccessToken.equals(that.oAuth2AccessToken) : that.oAuth2AccessToken != null)
+            return false;
+        if (oAuth2Scope != null ? !oAuth2Scope.equals(that.oAuth2Scope) : that.oAuth2Scope != null) return false;
+        if (oAuthRequestTokenURL != null ? !oAuthRequestTokenURL.equals(that.oAuthRequestTokenURL) : that.oAuthRequestTokenURL != null)
+            return false;
+        if (oAuthAuthorizationURL != null ? !oAuthAuthorizationURL.equals(that.oAuthAuthorizationURL) : that.oAuthAuthorizationURL != null)
+            return false;
+        if (oAuthAccessTokenURL != null ? !oAuthAccessTokenURL.equals(that.oAuthAccessTokenURL) : that.oAuthAccessTokenURL != null)
+            return false;
+        if (oAuthAuthenticationURL != null ? !oAuthAuthenticationURL.equals(that.oAuthAuthenticationURL) : that.oAuthAuthenticationURL != null)
+            return false;
+        if (oAuth2TokenURL != null ? !oAuth2TokenURL.equals(that.oAuth2TokenURL) : that.oAuth2TokenURL != null)
+            return false;
+        if (oAuth2InvalidateTokenURL != null ? !oAuth2InvalidateTokenURL.equals(that.oAuth2InvalidateTokenURL) : that.oAuth2InvalidateTokenURL != null)
+            return false;
+        if (restBaseURL != null ? !restBaseURL.equals(that.restBaseURL) : that.restBaseURL != null) return false;
+        if (streamBaseURL != null ? !streamBaseURL.equals(that.streamBaseURL) : that.streamBaseURL != null)
+            return false;
+        if (userStreamBaseURL != null ? !userStreamBaseURL.equals(that.userStreamBaseURL) : that.userStreamBaseURL != null)
+            return false;
+        if (siteStreamBaseURL != null ? !siteStreamBaseURL.equals(that.siteStreamBaseURL) : that.siteStreamBaseURL != null)
+            return false;
+        if (uploadBaseURL != null ? !uploadBaseURL.equals(that.uploadBaseURL) : that.uploadBaseURL != null)
+            return false;
         if (dispatcherImpl != null ? !dispatcherImpl.equals(that.dispatcherImpl) : that.dispatcherImpl != null)
             return false;
-        if (httpConf != null ? !httpConf.equals(that.httpConf) : that.httpConf != null) return false;
         if (loggerFactory != null ? !loggerFactory.equals(that.loggerFactory) : that.loggerFactory != null)
             return false;
         if (mediaProvider != null ? !mediaProvider.equals(that.mediaProvider) : that.mediaProvider != null)
@@ -756,44 +860,8 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
             return false;
         if (mediaProviderParameters != null ? !mediaProviderParameters.equals(that.mediaProviderParameters) : that.mediaProviderParameters != null)
             return false;
-        if (oAuth2AccessToken != null ? !oAuth2AccessToken.equals(that.oAuth2AccessToken) : that.oAuth2AccessToken != null)
-            return false;
-        if (oAuth2InvalidateTokenURL != null ? !oAuth2InvalidateTokenURL.equals(that.oAuth2InvalidateTokenURL) : that.oAuth2InvalidateTokenURL != null)
-            return false;
-        if (oAuth2TokenType != null ? !oAuth2TokenType.equals(that.oAuth2TokenType) : that.oAuth2TokenType != null)
-            return false;
-        if (oAuth2TokenURL != null ? !oAuth2TokenURL.equals(that.oAuth2TokenURL) : that.oAuth2TokenURL != null)
-            return false;
-        if (oAuth2Scope != null ? !oAuth2Scope.equals(that.oAuth2Scope) : that.oAuth2Scope != null)
-            return false;
-        if (oAuthAccessToken != null ? !oAuthAccessToken.equals(that.oAuthAccessToken) : that.oAuthAccessToken != null)
-            return false;
-        if (oAuthAccessTokenSecret != null ? !oAuthAccessTokenSecret.equals(that.oAuthAccessTokenSecret) : that.oAuthAccessTokenSecret != null)
-            return false;
-        if (oAuthAccessTokenURL != null ? !oAuthAccessTokenURL.equals(that.oAuthAccessTokenURL) : that.oAuthAccessTokenURL != null)
-            return false;
-        if (oAuthAuthenticationURL != null ? !oAuthAuthenticationURL.equals(that.oAuthAuthenticationURL) : that.oAuthAuthenticationURL != null)
-            return false;
-        if (oAuthAuthorizationURL != null ? !oAuthAuthorizationURL.equals(that.oAuthAuthorizationURL) : that.oAuthAuthorizationURL != null)
-            return false;
-        if (oAuthConsumerKey != null ? !oAuthConsumerKey.equals(that.oAuthConsumerKey) : that.oAuthConsumerKey != null)
-            return false;
-        if (oAuthConsumerSecret != null ? !oAuthConsumerSecret.equals(that.oAuthConsumerSecret) : that.oAuthConsumerSecret != null)
-            return false;
-        if (oAuthRequestTokenURL != null ? !oAuthRequestTokenURL.equals(that.oAuthRequestTokenURL) : that.oAuthRequestTokenURL != null)
-            return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (restBaseURL != null ? !restBaseURL.equals(that.restBaseURL) : that.restBaseURL != null) return false;
-        if (uploadBaseURL != null ? !uploadBaseURL.equals(that.uploadBaseURL) : that.uploadBaseURL != null) return false;
-        if (siteStreamBaseURL != null ? !siteStreamBaseURL.equals(that.siteStreamBaseURL) : that.siteStreamBaseURL != null)
-            return false;
-        if (streamBaseURL != null ? !streamBaseURL.equals(that.streamBaseURL) : that.streamBaseURL != null)
-            return false;
-        if (user != null ? !user.equals(that.user) : that.user != null) return false;
-        if (userStreamBaseURL != null ? !userStreamBaseURL.equals(that.userStreamBaseURL) : that.userStreamBaseURL != null)
-            return false;
+        return streamThreadName != null ? streamThreadName.equals(that.streamThreadName) : that.streamThreadName == null;
 
-        return true;
     }
 
     @Override
@@ -819,10 +887,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         result = 31 * result + (oAuth2TokenURL != null ? oAuth2TokenURL.hashCode() : 0);
         result = 31 * result + (oAuth2InvalidateTokenURL != null ? oAuth2InvalidateTokenURL.hashCode() : 0);
         result = 31 * result + (restBaseURL != null ? restBaseURL.hashCode() : 0);
-        result = 31 * result + (uploadBaseURL != null ? uploadBaseURL.hashCode() : 0);
         result = 31 * result + (streamBaseURL != null ? streamBaseURL.hashCode() : 0);
         result = 31 * result + (userStreamBaseURL != null ? userStreamBaseURL.hashCode() : 0);
         result = 31 * result + (siteStreamBaseURL != null ? siteStreamBaseURL.hashCode() : 0);
+        result = 31 * result + (uploadBaseURL != null ? uploadBaseURL.hashCode() : 0);
         result = 31 * result + (dispatcherImpl != null ? dispatcherImpl.hashCode() : 0);
         result = 31 * result + asyncNumThreads;
         result = 31 * result + (loggerFactory != null ? loggerFactory.hashCode() : 0);
@@ -830,6 +898,9 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         result = 31 * result + (includeMyRetweetEnabled ? 1 : 0);
         result = 31 * result + (includeEntitiesEnabled ? 1 : 0);
         result = 31 * result + (trimUserEnabled ? 1 : 0);
+        result = 31 * result + (includeExtAltTextEnabled ? 1 : 0);
+        result = 31 * result + (tweetModeExtended ? 1 : 0);
+        result = 31 * result + (includeEmailEnabled ? 1 : 0);
         result = 31 * result + (jsonStoreEnabled ? 1 : 0);
         result = 31 * result + (mbeanEnabled ? 1 : 0);
         result = 31 * result + (userStreamRepliesAllEnabled ? 1 : 0);
@@ -840,6 +911,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         result = 31 * result + (mediaProviderAPIKey != null ? mediaProviderAPIKey.hashCode() : 0);
         result = 31 * result + (mediaProviderParameters != null ? mediaProviderParameters.hashCode() : 0);
         result = 31 * result + (daemonEnabled ? 1 : 0);
+        result = 31 * result + (streamThreadName != null ? streamThreadName.hashCode() : 0);
         return result;
     }
 
@@ -867,10 +939,10 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 ", oAuth2TokenURL='" + oAuth2TokenURL + '\'' +
                 ", oAuth2InvalidateTokenURL='" + oAuth2InvalidateTokenURL + '\'' +
                 ", restBaseURL='" + restBaseURL + '\'' +
-                ", uploadBaseURL='" + uploadBaseURL + '\'' +
                 ", streamBaseURL='" + streamBaseURL + '\'' +
                 ", userStreamBaseURL='" + userStreamBaseURL + '\'' +
                 ", siteStreamBaseURL='" + siteStreamBaseURL + '\'' +
+                ", uploadBaseURL='" + uploadBaseURL + '\'' +
                 ", dispatcherImpl='" + dispatcherImpl + '\'' +
                 ", asyncNumThreads=" + asyncNumThreads +
                 ", loggerFactory='" + loggerFactory + '\'' +
@@ -878,6 +950,9 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 ", includeMyRetweetEnabled=" + includeMyRetweetEnabled +
                 ", includeEntitiesEnabled=" + includeEntitiesEnabled +
                 ", trimUserEnabled=" + trimUserEnabled +
+                ", includeExtAltTextEnabled=" + includeExtAltTextEnabled +
+                ", tweetModeExtended=" + tweetModeExtended +
+                ", includeEmailEnabled=" + includeEmailEnabled +
                 ", jsonStoreEnabled=" + jsonStoreEnabled +
                 ", mbeanEnabled=" + mbeanEnabled +
                 ", userStreamRepliesAllEnabled=" + userStreamRepliesAllEnabled +
@@ -888,6 +963,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
                 ", mediaProviderAPIKey='" + mediaProviderAPIKey + '\'' +
                 ", mediaProviderParameters=" + mediaProviderParameters +
                 ", daemonEnabled=" + daemonEnabled +
+                ", streamThreadName='" + streamThreadName + '\'' +
                 '}';
     }
 
