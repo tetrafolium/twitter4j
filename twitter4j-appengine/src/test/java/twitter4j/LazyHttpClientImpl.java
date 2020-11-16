@@ -29,12 +29,12 @@ public class LazyHttpClientImpl extends HttpClientImpl {
     private static final long serialVersionUID = 7325894890960046422L;
     private final HttpClient client;
 
-    public LazyHttpClientImpl(HttpClientConfiguration conf) {
+    public LazyHttpClientImpl(final HttpClientConfiguration conf) {
         client = new AlternativeHttpClientImpl(conf);
     }
 
     @Override
-    public HttpResponse handleRequest(HttpRequest req) throws TwitterException {
+    public HttpResponse handleRequest(final HttpRequest req) throws TwitterException {
         return new LazyHttpResponseImpl(client, req);
     }
 
@@ -45,7 +45,7 @@ class LazyHttpResponseImpl extends HttpResponse {
     private HttpRequest req;
     private HttpResponse actualResponse = null;
 
-    LazyHttpResponseImpl(HttpClient client, HttpRequest req) {
+    LazyHttpResponseImpl(final HttpClient client, final HttpRequest req) {
         this.client = client;
         this.req = req;
     }
@@ -67,7 +67,7 @@ class LazyHttpResponseImpl extends HttpResponse {
         return actualResponse.getStatusCode();
     }
 
-    public String getResponseHeader(String name) {
+    public String getResponseHeader(final String name) {
         ensure();
         return actualResponse.getResponseHeader(name);
     }

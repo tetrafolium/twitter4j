@@ -32,7 +32,7 @@ public class BasicAuthorization implements Authorization, java.io.Serializable {
     private final String password;
     private final String basic;
 
-    public BasicAuthorization(String userId, String password) {
+    public BasicAuthorization(final String userId, final String password) {
         this.userId = userId;
         this.password = password;
         this.basic = encodeBasicAuthenticationString();
@@ -54,7 +54,7 @@ public class BasicAuthorization implements Authorization, java.io.Serializable {
     }
 
     @Override
-    public String getAuthorizationHeader(HttpRequest req) {
+    public String getAuthorizationHeader(final HttpRequest req) {
         return basic;
     }
 
@@ -67,7 +67,7 @@ public class BasicAuthorization implements Authorization, java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof BasicAuthorization)) return false;
 
@@ -84,10 +84,10 @@ public class BasicAuthorization implements Authorization, java.io.Serializable {
 
     @Override
     public String toString() {
-        return "BasicAuthorization{" +
-                "userId='" + userId + '\'' +
-                ", password='**********'\'" +
-                '}';
+        return "BasicAuthorization{"
+                + "userId='" + userId + '\''
+                + ", password='**********'\'"
+                + '}';
     }
 
 }

@@ -26,7 +26,7 @@ import twitter4j.TwitterStreamFactory;
  * example code to explain lambda expression. Prints tweets containing twitter4j or #twitter4j.
  */
 public class TwitterStreamLambda {
-    public static void main(String... args) {
+    public static void main(final String... args) {
         // Twitter4j 4.0.4+
         TwitterStreamFactory.getSingleton()
                 .onStatus(e -> System.out.println(String.format("@%s %s", e.getUser().getScreenName(), e.getText())))
@@ -35,17 +35,17 @@ public class TwitterStreamLambda {
 
     }
 
-    public static void oldTraditionalDullBoringImplementation(String... dummy){
+    public static void oldTraditionalDullBoringImplementation(final String... dummy) {
         // Twitter4J 4.0.3 or earlier
         TwitterStream stream = TwitterStreamFactory.getSingleton();
         stream.addListener(new StatusAdapter() {
             @Override
-            public void onStatus(Status status) {
+            public void onStatus(final Status status) {
                 String.format("@%s %s", status.getUser().getScreenName(), status.getText());
             }
 
             @Override
-            public void onException(Exception ex) {
+            public void onException(final Exception ex) {
                 ex.printStackTrace();
             }
         });

@@ -29,7 +29,7 @@ public final class ShowUserListSubscription {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 2) {
             System.out.println("Usage: java twitter4j.examples.list.ShowUserListSubscription [list id] [user id]");
             System.exit(-1);

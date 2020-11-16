@@ -60,13 +60,13 @@ public class AlternativeHttpClientImpl extends HttpClientBase implements HttpRes
         super(ConfigurationContext.getInstance().getHttpClientConfiguration());
     }
 
-    public AlternativeHttpClientImpl(HttpClientConfiguration conf) {
+    public AlternativeHttpClientImpl(final HttpClientConfiguration conf) {
         super(conf);
     }
 
 
     @Override
-    HttpResponse handleRequest(HttpRequest req) throws TwitterException {
+    HttpResponse handleRequest(final HttpRequest req) throws TwitterException {
         prepareOkHttpClient();
 
         OkHttpResponse res = null;
@@ -118,10 +118,10 @@ public class AlternativeHttpClientImpl extends HttpClientBase implements HttpRes
                     }
                 }
                 if (responseCode < OK || (responseCode != FOUND && MULTIPLE_CHOICES <= responseCode)) {
-                    if (responseCode == ENHANCE_YOUR_CLAIM ||
-                            responseCode == BAD_REQUEST ||
-                            responseCode < INTERNAL_SERVER_ERROR ||
-                            retriedCount == CONF.getHttpRetryCount()) {
+                    if (responseCode == ENHANCE_YOUR_CLAIM
+                            || responseCode == BAD_REQUEST
+                            || responseCode < INTERNAL_SERVER_ERROR
+                            || retriedCount == CONF.getHttpRetryCount()) {
 
                         throw new TwitterException(res.asString(), res);
                     }
@@ -148,7 +148,7 @@ public class AlternativeHttpClientImpl extends HttpClientBase implements HttpRes
         return res;
     }
 
-    private RequestBody getRequestBody(HttpRequest req) throws UnsupportedEncodingException {
+    private RequestBody getRequestBody(final HttpRequest req) throws UnsupportedEncodingException {
         if (HttpParameter.containsFile(req.getParameters())) {
             final String boundary = "----Twitter4J-upload" + System.currentTimeMillis();
 
@@ -181,7 +181,7 @@ public class AlternativeHttpClientImpl extends HttpClientBase implements HttpRes
         }
     }
 
-    private Headers getHeaders(HttpRequest req) {
+    private Headers getHeaders(final HttpRequest req) {
 
         Headers.Builder builder = new Headers.Builder();
 
@@ -223,7 +223,7 @@ public class AlternativeHttpClientImpl extends HttpClientBase implements HttpRes
             }
 
             @Override
-            public void writeTo(BufferedSink sink) throws IOException {
+            public void writeTo(final BufferedSink sink) throws IOException {
                 Source source = null;
                 try {
                     source = Okio.source(inputStream);

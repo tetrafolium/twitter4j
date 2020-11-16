@@ -7,116 +7,116 @@ package twitter4j;
  */
 public class SiteStreamsAdapter implements SiteStreamsListener {
     @Override
-    public void onStatus(long forUser, Status status) {
+    public void onStatus(final long forUser, final Status status) {
     }
 
     @Override
-    public void onDeletionNotice(long forUser, StatusDeletionNotice statusDeletionNotice) {
+    public void onDeletionNotice(final long forUser, final StatusDeletionNotice statusDeletionNotice) {
     }
 
     @Override
-    public void onFriendList(long forUser, long[] friendIds) {
+    public void onFriendList(final long forUser, final long[] friendIds) {
     }
 
     @Override
-    public void onFavorite(long forUser, User source, User target, Status favoritedStatus) {
+    public void onFavorite(final long forUser, final User source, final User target, final Status favoritedStatus) {
     }
 
     @Override
-    public void onUnfavorite(long forUser, User source, User target, Status unfavoritedStatus) {
+    public void onUnfavorite(final long forUser, final User source, final User target, final Status unfavoritedStatus) {
     }
 
     @Override
-    public void onFollow(long forUser, User source, User followedUser) {
+    public void onFollow(final long forUser, final User source, final User followedUser) {
     }
 
     @Override
-    public void onUnfollow(long forUser, User source, User followedUser) {
+    public void onUnfollow(final long forUser, final User source, final User followedUser) {
     }
 
     @Override
-    public void onDirectMessage(long forUser, DirectMessage directMessage) {
+    public void onDirectMessage(final long forUser, final DirectMessage directMessage) {
     }
 
     @Override
-    public void onDeletionNotice(long forUser, long directMessageId, long userId) {
+    public void onDeletionNotice(final long forUser, final long directMessageId, final long userId) {
     }
 
     @Override
-    public void onUserListMemberAddition(long forUser, User addedUser, User listOwner, UserList list) {
+    public void onUserListMemberAddition(final long forUser, final User addedUser, final User listOwner, final UserList list) {
     }
 
     @Override
-    public void onUserListMemberDeletion(long forUser, User deletedUser, User listOwner, UserList list) {
+    public void onUserListMemberDeletion(final long forUser, final User deletedUser, final User listOwner, final UserList list) {
     }
 
     @Override
-    public void onUserListSubscription(long forUser, User subscriber, User listOwner, UserList list) {
+    public void onUserListSubscription(final long forUser, final User subscriber, final User listOwner, final UserList list) {
     }
 
     @Override
-    public void onUserListUnsubscription(long forUser, User subscriber, User listOwner, UserList list) {
+    public void onUserListUnsubscription(final long forUser, final User subscriber, final User listOwner, final UserList list) {
     }
 
     @Override
-    public void onUserListCreation(long forUser, User listOwner, UserList list) {
+    public void onUserListCreation(final long forUser, final User listOwner, final UserList list) {
     }
 
     @Override
-    public void onUserListUpdate(long forUser, User listOwner, UserList list) {
+    public void onUserListUpdate(final long forUser, final User listOwner, final UserList list) {
     }
 
     @Override
-    public void onUserListDeletion(long forUser, User listOwner, UserList list) {
+    public void onUserListDeletion(final long forUser, final User listOwner, final UserList list) {
     }
 
     @Override
-    public void onUserProfileUpdate(long forUser, User updatedUser) {
+    public void onUserProfileUpdate(final long forUser, final User updatedUser) {
     }
 
     @Override
-    public void onUserSuspension(long forUser, long suspendedUser) {
+    public void onUserSuspension(final long forUser, final long suspendedUser) {
     }
 
     @Override
-    public void onUserDeletion(long forUser, long deletedUser) {
+    public void onUserDeletion(final long forUser, final long deletedUser) {
     }
 
     @Override
-    public void onBlock(long forUser, User source, User blockedUser) {
+    public void onBlock(final long forUser, final User source, final User blockedUser) {
     }
 
     @Override
-    public void onUnblock(long forUser, User source, User unblockedUser) {
+    public void onUnblock(final long forUser, final User source, final User unblockedUser) {
     }
 
     @Override
-    public void onRetweetedRetweet(User source, User target, Status retweetedStatus) {
+    public void onRetweetedRetweet(final User source, final User target, final Status retweetedStatus) {
     }
 
     @Override
-    public void onFavoritedRetweet(User source, User target, Status favoritedStatus) {
+    public void onFavoritedRetweet(final User source, final User target, final Status favoritedStatus) {
     }
 
     @Override
-    public void onQuotedTweet(User source, User target, Status quotingTweet) {
+    public void onQuotedTweet(final User source, final User target, final Status quotingTweet) {
     }
 
     @Override
-    public void onMute(long forUser, User source, User target) {
-
-    }
-
-    @Override
-    public void onUnmute(long forUser, User source, User target) {
+    public void onMute(final long forUser, final User source, final User target) {
 
     }
 
     @Override
-    public void onDisconnectionNotice(String screenName) {
+    public void onUnmute(final long forUser, final User source, final User target) {
+
     }
 
     @Override
-    public void onException(Exception ex) {
+    public void onDisconnectionNotice(final String screenName) {
+    }
+
+    @Override
+    public void onException(final Exception ex) {
     }
 }

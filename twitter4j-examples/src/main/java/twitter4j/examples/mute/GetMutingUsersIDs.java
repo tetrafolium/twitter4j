@@ -26,20 +26,20 @@ import twitter4j.TwitterFactory;
  * @author Shintaro Watanabe - shintaro.watanabe1226@gmail.com
  */
 public final class GetMutingUsersIDs {
-	/**
+        /**
      * Usage: java twitter4j.examples.mute.GetMutingUsersIDs
      *
      * @param args message
      */
-	public static void main( String[] args ) {
-		try {
-			Twitter twitter = new TwitterFactory().getInstance();
-			IDs ids = twitter.getMutesIDs(-1L);
-			for (long id : ids.getIDs()) {
-	            System.out.println(id);
-	        }
-	        System.out.println("done.");
-	        System.exit(0);
+        public static void main(final String[] args) {
+                try {
+                        Twitter twitter = new TwitterFactory().getInstance();
+                        IDs ids = twitter.getMutesIDs(-1L);
+                        for (long id : ids.getIDs()) {
+                    System.out.println(id);
+                }
+                System.out.println("done.");
+                System.exit(0);
 		} catch (TwitterException te) {
 			te.printStackTrace();
 	        System.out.println("Failed to get muting user ids: " + te.getMessage());

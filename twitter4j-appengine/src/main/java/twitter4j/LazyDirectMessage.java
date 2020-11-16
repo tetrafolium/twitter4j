@@ -34,7 +34,7 @@ final class LazyDirectMessage implements twitter4j.DirectMessage {
     private final ObjectFactory factory;
     private DirectMessage target = null;
 
-    LazyDirectMessage(HttpResponse res, ObjectFactory factory) {
+    LazyDirectMessage(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -123,7 +123,7 @@ final class LazyDirectMessage implements twitter4j.DirectMessage {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof DirectMessage)) return false;
         return getTarget().equals(o);
@@ -136,8 +136,8 @@ final class LazyDirectMessage implements twitter4j.DirectMessage {
 
     @Override
     public String toString() {
-        return "LazyDirectMessage{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyDirectMessage{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

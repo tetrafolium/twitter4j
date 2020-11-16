@@ -24,7 +24,7 @@ final class StreamingGZIPInputStream extends GZIPInputStream {
 
     private final InputStream wrapped;
 
-    public StreamingGZIPInputStream(InputStream is) throws IOException {
+    public StreamingGZIPInputStream(final InputStream is) throws IOException {
         super(is);
         wrapped = is;
     }

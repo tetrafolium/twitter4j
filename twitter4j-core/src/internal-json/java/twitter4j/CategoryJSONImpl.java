@@ -29,21 +29,21 @@ final class CategoryJSONImpl implements Category, java.io.Serializable {
     private String slug;
     private int size;
 
-    CategoryJSONImpl(JSONObject json) throws JSONException {
+    CategoryJSONImpl(final JSONObject json) throws JSONException {
         init(json);
     }
 
-    void init(JSONObject json) throws JSONException {
+    void init(final JSONObject json) throws JSONException {
         this.name = json.getString("name");
         this.slug = json.getString("slug");
         this.size = ParseUtil.getInt("size", json);
     }
 
-    static ResponseList<Category> createCategoriesList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<Category> createCategoriesList(final HttpResponse res, final Configuration conf) throws TwitterException {
         return createCategoriesList(res.asJSONArray(), res, conf);
     }
 
-    static ResponseList<Category> createCategoriesList(JSONArray array, HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<Category> createCategoriesList(final JSONArray array, final HttpResponse res, final Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 TwitterObjectFactory.clearThreadLocalMap();
@@ -87,7 +87,7 @@ final class CategoryJSONImpl implements Category, java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -112,10 +112,10 @@ final class CategoryJSONImpl implements Category, java.io.Serializable {
 
     @Override
     public String toString() {
-        return "CategoryJSONImpl{" +
-                "name='" + name + '\'' +
-                ", slug='" + slug + '\'' +
-                ", size=" + size +
-                '}';
+        return "CategoryJSONImpl{"
+                + "name='" + name + '\''
+                + ", slug='" + slug + '\''
+                + ", size=" + size
+                + '}';
     }
 }

@@ -35,7 +35,7 @@ final class LazySavedSearch implements twitter4j.SavedSearch {
     private final ObjectFactory factory;
     private SavedSearch target = null;
 
-    LazySavedSearch(HttpResponse res, ObjectFactory factory) {
+    LazySavedSearch(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -84,12 +84,12 @@ final class LazySavedSearch implements twitter4j.SavedSearch {
         return getTarget().getAccessLevel();
     }
 
-    public int compareTo(SavedSearch target) {
+    public int compareTo(final SavedSearch target) {
         return getTarget().compareTo(target);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof SavedSearch)) return false;
         return getTarget().equals(o);
@@ -102,8 +102,8 @@ final class LazySavedSearch implements twitter4j.SavedSearch {
 
     @Override
     public String toString() {
-        return "LazySavedSearch{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazySavedSearch{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

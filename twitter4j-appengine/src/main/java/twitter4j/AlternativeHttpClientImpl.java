@@ -32,17 +32,17 @@ class AlternativeHttpClientImpl extends HttpClientBase {
     private static final long serialVersionUID = 4559427508443601046L;
     private static final Logger logger = Logger.getLogger(AlternativeHttpClientImpl.class);
 
-    public AlternativeHttpClientImpl(HttpClientConfiguration conf) {
+    public AlternativeHttpClientImpl(final HttpClientConfiguration conf) {
         super(conf);
     }
 
     @Override
-    public HttpResponse handleRequest(HttpRequest req) throws TwitterException {
+    public HttpResponse handleRequest(final HttpRequest req) throws TwitterException {
         HTTPRequest request;
         try {
             request = new HTTPRequest(new URL(req.getURL())
-                    , HTTPMethod.valueOf(req.getMethod().name())
-                    , Builder.disallowTruncate().setDeadline(CONF.getHttpReadTimeout() / 1000D)
+, HTTPMethod.valueOf(req.getMethod().name())
+, Builder.disallowTruncate().setDeadline(CONF.getHttpReadTimeout() / 1000D)
             );
         } catch (MalformedURLException e) {
             throw new TwitterException(e);
@@ -117,7 +117,7 @@ class AlternativeHttpClientImpl extends HttpClientBase {
         }
     }
 
-    private void setHeaders(HttpRequest req, HTTPRequest request) {
+    private void setHeaders(final HttpRequest req, final HTTPRequest request) {
         if (logger.isDebugEnabled()) {
             logger.debug("Request: ");
             logger.debug(req.getMethod().name() + " ", req.getURL());

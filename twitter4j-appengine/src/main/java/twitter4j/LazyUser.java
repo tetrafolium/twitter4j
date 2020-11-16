@@ -36,7 +36,7 @@ final class LazyUser implements twitter4j.User {
     private Configuration conf;
     private User target = null;
 
-    LazyUser(HttpResponse res, ObjectFactory factory) {
+    LazyUser(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.conf = conf;
     }
@@ -451,12 +451,12 @@ final class LazyUser implements twitter4j.User {
         return getTarget().getAccessLevel();
     }
 
-    public int compareTo(User target) {
+    public int compareTo(final User target) {
         return getTarget().compareTo(target);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         return getTarget().equals(o);
@@ -469,8 +469,8 @@ final class LazyUser implements twitter4j.User {
 
     @Override
     public String toString() {
-        return "LazyUser{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyUser{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

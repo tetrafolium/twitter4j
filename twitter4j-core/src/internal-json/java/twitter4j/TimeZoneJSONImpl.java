@@ -25,7 +25,7 @@ public class TimeZoneJSONImpl implements TimeZone {
     private final String TZINFO_NAME;
     private final int UTC_OFFSET;
 
-    TimeZoneJSONImpl(JSONObject jSONObject) throws TwitterException {
+    TimeZoneJSONImpl(final JSONObject jSONObject) throws TwitterException {
         try {
             UTC_OFFSET = ParseUtil.getInt("utc_offset", jSONObject);
             NAME = jSONObject.getString("name");

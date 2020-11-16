@@ -26,11 +26,11 @@ final class ExceptionDiagnosis implements java.io.Serializable {
     private int lineNumberHash;
     private String hexString = "";
 
-    ExceptionDiagnosis(Throwable th) {
+    ExceptionDiagnosis(final Throwable th) {
         this(th, new String[]{});
     }
 
-    ExceptionDiagnosis(Throwable th, String[] inclusionFilter) {
+    ExceptionDiagnosis(final Throwable th, final String[] inclusionFilter) {
         Throwable th1 = th;
 
         StackTraceElement[] stackTrace = th.getStackTrace();
@@ -75,13 +75,13 @@ final class ExceptionDiagnosis implements java.io.Serializable {
         return hexString;
     }
 
-    private String toHexString(int value) {
+    private String toHexString(final int value) {
         String str = "0000000" + Integer.toHexString(value);
         return str.substring(str.length() - 8, str.length());
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -102,9 +102,9 @@ final class ExceptionDiagnosis implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "ExceptionDiagnosis{" +
-                "stackLineHash=" + stackLineHash +
-                ", lineNumberHash=" + lineNumberHash +
-                '}';
+        return "ExceptionDiagnosis{"
+                + "stackLineHash=" + stackLineHash
+                + ", lineNumberHash=" + lineNumberHash
+                + '}';
     }
 }

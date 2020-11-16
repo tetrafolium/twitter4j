@@ -31,7 +31,7 @@ final class LazyQueryResult implements twitter4j.QueryResult {
     private QueryResult target = null;
     private final Query query;
 
-    LazyQueryResult(HttpResponse res, ObjectFactory factory, Query query) {
+    LazyQueryResult(final HttpResponse res, final ObjectFactory factory, final Query query) {
         this.res = res;
         this.factory = factory;
         this.query = query;
@@ -103,7 +103,7 @@ final class LazyQueryResult implements twitter4j.QueryResult {
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof QueryResult)) return false;
         return getTarget().equals(o);
@@ -116,9 +116,9 @@ final class LazyQueryResult implements twitter4j.QueryResult {
 
     @Override
     public String toString() {
-        return "LazyQueryResult{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyQueryResult{"
+                + "target=" + getTarget()
+                + "}";
     }
 
     @Override

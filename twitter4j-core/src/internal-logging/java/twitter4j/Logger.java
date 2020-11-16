@@ -81,7 +81,7 @@ public abstract class Logger {
         }
     }
 
-    private static LoggerFactory getLoggerFactoryIfAvailable(String checkClassName, String implementationClass) {
+    private static LoggerFactory getLoggerFactoryIfAvailable(final String checkClassName, final String implementationClass) {
         try {
             Class.forName(checkClassName);
             return (LoggerFactory) Class.forName(implementationClass).newInstance();
@@ -102,7 +102,7 @@ public abstract class Logger {
      * @param clazz class
      * @return logger instance
      */
-    public static Logger getLogger(Class<?> clazz) {
+    public static Logger getLogger(final Class<?> clazz) {
         return LOGGER_FACTORY.getLogger(clazz);
     }
 

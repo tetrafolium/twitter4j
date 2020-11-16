@@ -76,7 +76,7 @@ public interface FriendsFollowersResources {
      * @see <a href="https://dev.twitter.com/docs/api/1.1/get/friends/ids">GET friends/ids | Twitter Developers</a>
      * @since Twitter4J 4.0.2
      */
-    IDs getFriendsIDs(long userId, long cursor,int count) throws TwitterException;
+    IDs getFriendsIDs(long userId, long cursor, int count) throws TwitterException;
 
     /**
      * Returns an array of numeric IDs for every user the specified user is following.
@@ -107,7 +107,7 @@ public interface FriendsFollowersResources {
      * @see <a href="https://dev.twitter.com/docs/api/1.1/get/friends/ids">GET friends/ids | Twitter Developers</a>
      * @since Twitter4J 4.0.2
      */
-    IDs getFriendsIDs(String screenName, long cursor,int count) throws TwitterException;
+    IDs getFriendsIDs(String screenName, long cursor, int count) throws TwitterException;
 
     /**
      * Returns an array of numeric IDs for every user the specified user is followed by.
@@ -182,7 +182,7 @@ public interface FriendsFollowersResources {
      * @see <a href="https://dev.twitter.com/docs/api/1.1/get/followers/ids">GET followers/ids | Twitter Developers</a>
      * @since Twitter4J 4.0.2
      */
-    IDs getFollowersIDs(String screenName, long cursor,int count) throws TwitterException;
+    IDs getFollowersIDs(String screenName, long cursor, int count) throws TwitterException;
 
 
     /**
@@ -337,7 +337,7 @@ public interface FriendsFollowersResources {
      * @since Twitter4J 2.1.9
      */
     Relationship updateFriendship(long userId, boolean enableDeviceNotification
-            , boolean retweets) throws TwitterException;
+, boolean retweets) throws TwitterException;
 
     /**
      * Allows you to enable or disable retweets and device notifications from the specified user.
@@ -353,7 +353,7 @@ public interface FriendsFollowersResources {
      * @since Twitter4J 2.1.9
      */
     Relationship updateFriendship(String screenName, boolean enableDeviceNotification
-            , boolean retweets) throws TwitterException;
+, boolean retweets) throws TwitterException;
 
     /**
      * Returns detailed information about the relationship between two users.

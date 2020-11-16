@@ -43,15 +43,15 @@ package twitter4j;
  */
 public class JSONException extends RuntimeException {
 
-    public JSONException(String s) {
+    public JSONException(final String s) {
         super(s);
     }
 
-    public JSONException(Throwable cause) {
+    public JSONException(final Throwable cause) {
         super(cause);
     }
 
-    public JSONException(String message, Throwable cause) {
+    public JSONException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

@@ -32,7 +32,7 @@ public final class CreateSavedSearch {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 1) {
             System.out.println("Usage: java twitter4j.examples.savedsearches.CreateSavedSearch [query]");
             System.exit(-1);

@@ -30,7 +30,7 @@ class AccountTotalsJSONImpl extends TwitterResponseImpl implements AccountTotals
     private final int favorites;
     private final int friends;
 
-    private AccountTotalsJSONImpl(HttpResponse res, JSONObject json) {
+    private AccountTotalsJSONImpl(final HttpResponse res, final JSONObject json) {
         super(res);
         updates = ParseUtil.getInt("updates", json);
         followers = ParseUtil.getInt("followers", json);
@@ -38,7 +38,7 @@ class AccountTotalsJSONImpl extends TwitterResponseImpl implements AccountTotals
         friends = ParseUtil.getInt("friends", json);
     }
 
-    /*package*/ AccountTotalsJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/ AccountTotalsJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         this(res, res.asJSONObject());
         if (conf.isJSONStoreEnabled()) {
             TwitterObjectFactory.clearThreadLocalMap();
@@ -46,7 +46,7 @@ class AccountTotalsJSONImpl extends TwitterResponseImpl implements AccountTotals
         }
     }
 
-    /*package*/ AccountTotalsJSONImpl(JSONObject json) throws TwitterException {
+    /*package*/ AccountTotalsJSONImpl(final JSONObject json) throws TwitterException {
         this(null, json);
     }
 
@@ -71,7 +71,7 @@ class AccountTotalsJSONImpl extends TwitterResponseImpl implements AccountTotals
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -96,11 +96,11 @@ class AccountTotalsJSONImpl extends TwitterResponseImpl implements AccountTotals
 
     @Override
     public String toString() {
-        return "AccountTotalsJSONImpl{" +
-                "updates=" + updates +
-                ", followers=" + followers +
-                ", favorites=" + favorites +
-                ", friends=" + friends +
-                '}';
+        return "AccountTotalsJSONImpl{"
+                + "updates=" + updates
+                + ", followers=" + followers
+                + ", favorites=" + favorites
+                + ", friends=" + friends
+                + '}';
     }
 }

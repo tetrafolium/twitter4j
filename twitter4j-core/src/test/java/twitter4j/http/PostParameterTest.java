@@ -63,7 +63,7 @@ class PostParameterTest {
 
     }
 
-    private void assertValidContentType(String expected, String fileName) {
+    private void assertValidContentType(final String expected, final String fileName) {
         HttpParameter param = new HttpParameter("file", new File(fileName));
         assertEquals(expected, param.getContentType());
 

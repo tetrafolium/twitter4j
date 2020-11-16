@@ -30,18 +30,18 @@ public final class RequestToken extends OAuthToken implements java.io.Serializab
     private final Configuration conf;
     private OAuthSupport oauth;
 
-    RequestToken(HttpResponse res, OAuthSupport oauth) throws TwitterException {
+    RequestToken(final HttpResponse res, final OAuthSupport oauth) throws TwitterException {
         super(res);
         conf = ConfigurationContext.getInstance();
         this.oauth = oauth;
     }
 
-    public RequestToken(String token, String tokenSecret) {
+    public RequestToken(final String token, final String tokenSecret) {
         super(token, tokenSecret);
         conf = ConfigurationContext.getInstance();
     }
 
-    RequestToken(String token, String tokenSecret, OAuthSupport oauth) {
+    RequestToken(final String token, final String tokenSecret, final OAuthSupport oauth) {
         super(token, tokenSecret);
         conf = ConfigurationContext.getInstance();
         this.oauth = oauth;

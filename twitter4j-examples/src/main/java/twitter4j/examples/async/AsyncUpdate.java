@@ -33,7 +33,7 @@ public final class AsyncUpdate {
      */
     private static final Object LOCK = new Object();
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(final String[] args) throws InterruptedException {
         if (args.length < 1) {
             System.out.println("Usage: java twitter4j.examples.AsyncUpdate text");
             System.exit(-1);
@@ -42,16 +42,16 @@ public final class AsyncUpdate {
         AsyncTwitter twitter = factory.getInstance();
         twitter.addListener(new TwitterAdapter() {
             @Override
-            public void updatedStatus(Status status) {
-                System.out.println("Successfully updated the status to [" +
-                        status.getText() + "].");
+            public void updatedStatus(final Status status) {
+                System.out.println("Successfully updated the status to ["
+                        + status.getText() + "].");
                 synchronized (LOCK) {
                     LOCK.notify();
                 }
             }
 
             @Override
-            public void onException(TwitterException e, TwitterMethod method) {
+            public void onException(final TwitterException e, final TwitterMethod method) {
                 if (method == UPDATE_STATUS) {
                     e.printStackTrace();
                     synchronized (LOCK) {

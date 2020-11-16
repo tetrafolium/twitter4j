@@ -29,7 +29,7 @@ public final class GetSimilarPlaces {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 3) {
             System.out.println("Usage: java twitter4j.examples.geo.GetSimilarPlaces [latitude] [longitude] [name] [place id]");
             System.exit(-1);

@@ -151,7 +151,7 @@ class OAuthTest extends TwitterTestBase {
         assertEquals(at.getUserId(), id1.id);
     }
 
-    private AccessToken getAccessToken(Twitter twitter, String url, RequestToken rt, String screenName, String password, boolean pinRequired) throws TwitterException {
+    private AccessToken getAccessToken(final Twitter twitter, final String url, final RequestToken rt, final String screenName, final String password, final boolean pinRequired) throws TwitterException {
 
         BrowserVersion browserVersion = BrowserVersion.getDefault();
         browserVersion.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15");
@@ -171,7 +171,7 @@ class OAuthTest extends TwitterTestBase {
         }
     }
 
-    private static String catchPattern(String body, String before, String after) {
+    private static String catchPattern(final String body, final String before, final String after) {
         int beforeIndex = body.indexOf(before);
         int afterIndex = body.indexOf(after, beforeIndex);
         return body.substring(beforeIndex + before.length(), afterIndex);
@@ -324,7 +324,7 @@ class OAuthTest extends TwitterTestBase {
 
     }
 
-    private void trySerializable(Object obj) throws IOException {
+    private void trySerializable(final Object obj) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new ByteArrayOutputStream());
         oos.writeObject(obj);
     }

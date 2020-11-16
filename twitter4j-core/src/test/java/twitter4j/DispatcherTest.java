@@ -56,7 +56,7 @@ class DispatcherTest {
         assertEquals(0, countThread(name));
     }
 
-    private int countThread(String name) {
+    private int countThread(final String name) {
         int count = 0;
         Map<Thread, StackTraceElement[]> allThreads = Thread.getAllStackTraces();
         for (Thread thread : allThreads.keySet()) {

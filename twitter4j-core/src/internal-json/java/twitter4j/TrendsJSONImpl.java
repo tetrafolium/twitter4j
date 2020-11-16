@@ -37,11 +37,11 @@ import java.util.Iterator;
     private Location location;
 
     @Override
-    public int compareTo(Trends that) {
+    public int compareTo(final Trends that) {
         return this.trendAt.compareTo(that.getTrendAt());
     }
 
-    TrendsJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    TrendsJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         init(res.asString(), conf.isJSONStoreEnabled());
         if (conf.isJSONStoreEnabled()) {
@@ -50,15 +50,15 @@ import java.util.Iterator;
         }
     }
 
-    TrendsJSONImpl(String jsonStr) throws TwitterException {
+    TrendsJSONImpl(final String jsonStr) throws TwitterException {
         this(jsonStr, false);
     }
 
-    TrendsJSONImpl(String jsonStr, boolean storeJSON) throws TwitterException {
+    TrendsJSONImpl(final String jsonStr, final boolean storeJSON) throws TwitterException {
         init(jsonStr, storeJSON);
     }
 
-    void init(String jsonStr, boolean storeJSON) throws TwitterException {
+    void init(final String jsonStr, final boolean storeJSON) throws TwitterException {
         try {
             JSONObject json;
             if (jsonStr.startsWith("[")) {
@@ -82,7 +82,7 @@ import java.util.Iterator;
     }
 
 
-    /*package*/ TrendsJSONImpl(Date asOf, Location location, Date trendAt, Trend[] trends) {
+    /*package*/ TrendsJSONImpl(final Date asOf, final Location location, final Date trendAt, final Trend[] trends) {
         this.asOf = asOf;
         this.location = location;
         this.trendAt = trendAt;
@@ -90,7 +90,7 @@ import java.util.Iterator;
     }
 
     /*package*/
-    static ResponseList<Trends> createTrendsList(HttpResponse res, boolean storeJSON) throws
+    static ResponseList<Trends> createTrendsList(final HttpResponse res, final boolean storeJSON) throws
             TwitterException {
         JSONObject json = res.asJSONObject();
         ResponseList<Trends> trends;
@@ -107,15 +107,15 @@ import java.util.Iterator;
                 if (key.length() == 19) {
                     // current trends
                     trends.add(new TrendsJSONImpl(asOf, location, ParseUtil.getDate(key
-                            , "yyyy-MM-dd HH:mm:ss"), trendsArray));
+, "yyyy-MM-dd HH:mm:ss"), trendsArray));
                 } else if (key.length() == 16) {
                     // daily trends
                     trends.add(new TrendsJSONImpl(asOf, location, ParseUtil.getDate(key
-                            , "yyyy-MM-dd HH:mm"), trendsArray));
+, "yyyy-MM-dd HH:mm"), trendsArray));
                 } else if (key.length() == 10) {
                     // weekly trends
                     trends.add(new TrendsJSONImpl(asOf, location, ParseUtil.getDate(key
-                            , "yyyy-MM-dd"), trendsArray));
+, "yyyy-MM-dd"), trendsArray));
                 }
             }
             Collections.sort(trends);
@@ -125,7 +125,7 @@ import java.util.Iterator;
         }
     }
 
-    private static Location extractLocation(JSONObject json, boolean storeJSON) throws TwitterException {
+    private static Location extractLocation(final JSONObject json, final boolean storeJSON) throws TwitterException {
         if (json.isNull("locations")) {
             return null;
         }
@@ -144,7 +144,7 @@ import java.util.Iterator;
         return location;
     }
 
-    private static Trend[] jsonArrayToTrendArray(JSONArray array, boolean storeJSON) throws JSONException {
+    private static Trend[] jsonArrayToTrendArray(final JSONArray array, final boolean storeJSON) throws JSONException {
         Trend[] trends = new Trend[array.length()];
         for (int i = 0; i < array.length(); i++) {
             JSONObject trend = array.getJSONObject(i);
@@ -174,7 +174,7 @@ import java.util.Iterator;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Trends)) return false;
 
@@ -199,10 +199,10 @@ import java.util.Iterator;
 
     @Override
     public String toString() {
-        return "TrendsJSONImpl{" +
-                "asOf=" + asOf +
-                ", trendAt=" + trendAt +
-                ", trends=" + (trends == null ? null : Arrays.asList(trends)) +
-                '}';
+        return "TrendsJSONImpl{"
+                + "asOf=" + asOf
+                + ", trendAt=" + trendAt
+                + ", trends=" + (trends == null ? null : Arrays.asList(trends))
+                + '}';
     }
 }

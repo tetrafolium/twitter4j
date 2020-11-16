@@ -35,7 +35,7 @@ package twitter4j;
         accessLevel = NONE;
     }
 
-    public TwitterResponseImpl(HttpResponse res) {
+    public TwitterResponseImpl(final HttpResponse res) {
         this.rateLimitStatus = RateLimitStatusJSONImpl.createFromResponseHeader(res);
         accessLevel = ParseUtil.toAccessLevel(res);
     }

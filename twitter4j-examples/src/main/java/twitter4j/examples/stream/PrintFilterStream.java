@@ -35,7 +35,7 @@ public final class PrintFilterStream {
      * @param args follow(comma separated user ids) track(comma separated filter terms)
      * @throws TwitterException when Twitter service or network is unavailable
      */
-    public static void main(String[] args) throws TwitterException {
+    public static void main(final String[] args) throws TwitterException {
         if (args.length < 1) {
             System.out.println("Usage: java twitter4j.examples.PrintFilterStream [follow(comma separated numerical user ids)] [track(comma separated filter terms)]");
             System.exit(-1);
@@ -43,32 +43,32 @@ public final class PrintFilterStream {
 
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance().addListener(new StatusListener() {
             @Override
-            public void onStatus(Status status) {
+            public void onStatus(final Status status) {
                 System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
             }
 
             @Override
-            public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+            public void onDeletionNotice(final StatusDeletionNotice statusDeletionNotice) {
                 System.out.println("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
             }
 
             @Override
-            public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
+            public void onTrackLimitationNotice(final int numberOfLimitedStatuses) {
                 System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
             }
 
             @Override
-            public void onScrubGeo(long userId, long upToStatusId) {
+            public void onScrubGeo(final long userId, final long upToStatusId) {
                 System.out.println("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
             }
 
             @Override
-            public void onStallWarning(StallWarning warning) {
+            public void onStallWarning(final StallWarning warning) {
                 System.out.println("Got stall warning:" + warning);
             }
 
             @Override
-            public void onException(Exception ex) {
+            public void onException(final Exception ex) {
                 ex.printStackTrace();
             }
         });
@@ -94,7 +94,7 @@ public final class PrintFilterStream {
         twitterStream.filter(new FilterQuery(0, followArray, trackArray));
     }
 
-    private static boolean isNumericalArgument(String argument) {
+    private static boolean isNumericalArgument(final String argument) {
         String args[] = argument.split(",");
         boolean isNumericalArgument = true;
         for (String arg : args) {

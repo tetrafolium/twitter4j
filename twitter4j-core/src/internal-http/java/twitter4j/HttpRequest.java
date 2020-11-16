@@ -49,8 +49,8 @@ public final class HttpRequest implements java.io.Serializable {
      * @param authorization  Authentication implementation. Currently BasicAuthentication, OAuthAuthentication and NullAuthentication are supported.
      * @param requestHeaders request headers
      */
-    public HttpRequest(RequestMethod method, String url, HttpParameter[] parameters
-            , Authorization authorization, Map<String, String> requestHeaders) {
+    public HttpRequest(final RequestMethod method, final String url, final HttpParameter[] parameters
+, final Authorization authorization, final Map<String, String> requestHeaders) {
         this.method = method;
         if (method != RequestMethod.POST && parameters != null && parameters.length != 0) {
             this.url = url + "?" + HttpParameter.encodeParameters(parameters);
@@ -84,7 +84,7 @@ public final class HttpRequest implements java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -115,12 +115,12 @@ public final class HttpRequest implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "HttpRequest{" +
-                "requestMethod=" + method +
-                ", url='" + url + '\'' +
-                ", postParams=" + (parameters == null ? null : Arrays.asList(parameters)) +
-                ", authentication=" + authorization +
-                ", requestHeaders=" + requestHeaders +
-                '}';
+        return "HttpRequest{"
+                + "requestMethod=" + method
+                + ", url='" + url + '\''
+                + ", postParams=" + (parameters == null ? null : Arrays.asList(parameters))
+                + ", authentication=" + authorization
+                + ", requestHeaders=" + requestHeaders
+                + '}';
     }
 }

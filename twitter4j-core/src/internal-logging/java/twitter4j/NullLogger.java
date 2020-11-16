@@ -42,38 +42,38 @@ final class NullLogger extends Logger {
     }
 
     @Override
-    public void debug(String message) {
+    public void debug(final String message) {
     }
 
     @Override
-    public void debug(String message, String message2) {
+    public void debug(final String message, final String message2) {
     }
 
     @Override
-    public void info(String message) {
+    public void info(final String message) {
     }
 
     @Override
-    public void info(String message, String message2) {
+    public void info(final String message, final String message2) {
     }
 
     @Override
-    public void warn(String message) {
+    public void warn(final String message) {
     }
 
     @Override
-    public void warn(String message, String message2) {
+    public void warn(final String message, final String message2) {
     }
 
     @Override
-    public void warn(String message, Throwable th) {
+    public void warn(final String message, final Throwable th) {
     }
 
     @Override
-    public void error(String message) {
+    public void error(final String message) {
     }
 
     @Override
-    public void error(String message, Throwable th) {
+    public void error(final String message, final Throwable th) {
     }
 }

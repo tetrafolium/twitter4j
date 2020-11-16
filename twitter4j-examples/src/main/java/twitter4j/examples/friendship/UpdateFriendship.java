@@ -32,7 +32,7 @@ public final class UpdateFriendship {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 3) {
             System.out.println(
                     "Usage: java twitter4j.examples.user.UpdateFriendship [screen name] [enable device notification(true|false)] [enable retweets(true|false)]");
@@ -41,7 +41,7 @@ public final class UpdateFriendship {
         try {
             Twitter twitter = new TwitterFactory().getInstance();
             Relationship relationship = twitter.updateFriendship(args[0]
-                    , Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]));
+, Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]));
             System.out.println("Successfully updated the friendship of [" + relationship.getTargetUserScreenName() + "].");
             System.exit(0);
         } catch (TwitterException te) {

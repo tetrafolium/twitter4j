@@ -32,7 +32,7 @@ public final class SaveRawJSON {
      *
      * @param args String[]
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         Twitter twitter = new TwitterFactory().getInstance();
         System.out.println("Saving public timeline.");
         try {
@@ -56,7 +56,7 @@ public final class SaveRawJSON {
         }
     }
 
-    private static void storeJSON(String rawJSON, String fileName) throws IOException {
+    private static void storeJSON(final String rawJSON, final String fileName) throws IOException {
         FileOutputStream fos = null;
         OutputStreamWriter osw = null;
         BufferedWriter bw = null;

@@ -55,7 +55,7 @@ public final class TimeSpanConverter implements Serializable {
      *
      * @param locale locale
      */
-    public TimeSpanConverter(Locale locale) {
+    public TimeSpanConverter(final Locale locale) {
         String language = locale.getLanguage();
         if ("it".equals(language)) {
             formats[NOW] = new MessageFormat("Ora");
@@ -123,11 +123,11 @@ public final class TimeSpanConverter implements Serializable {
         }
     }
 
-    public String toTimeSpanString(Date date) {
+    public String toTimeSpanString(final Date date) {
         return toTimeSpanString(date.getTime());
     }
 
-    public String toTimeSpanString(long milliseconds) {
+    public String toTimeSpanString(final long milliseconds) {
         int deltaInSeconds = (int) ((System.currentTimeMillis() - milliseconds) / 1000);
         if (deltaInSeconds >= ONE_DAY_IN_SECONDS) {
             if (deltaInSeconds >= ONE_MONTH_IN_SECONDS) {
@@ -139,7 +139,7 @@ public final class TimeSpanConverter implements Serializable {
         return toTimeSpanString(deltaInSeconds);
     }
 
-    private String toTimeSpanString(int deltaInSeconds) {
+    private String toTimeSpanString(final int deltaInSeconds) {
         if (deltaInSeconds <= 1) {
             return formats[NOW].format(null);
         } else if (deltaInSeconds < 60) {
@@ -154,7 +154,7 @@ public final class TimeSpanConverter implements Serializable {
             return formats[N_MINUTES_AGO].format(new Object[]{minutes});
         }
 
-        if (deltaInSeconds < 105 * 60) {// between 0:45 and 1:45 => 1
+        if (deltaInSeconds < 105 * 60) { // between 0:45 and 1:45 => 1
             return formats[AN_HOUR_AGO].format(null);
         }
         int hours = ((deltaInSeconds + 15 * 60) / ONE_HOUR_IN_SECONDS);

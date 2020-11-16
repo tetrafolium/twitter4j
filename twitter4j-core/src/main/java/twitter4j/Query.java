@@ -35,7 +35,7 @@ public final class Query implements java.io.Serializable {
     private String query = null;
     private String lang = null;
     private String locale = null;
-    private long maxId = -1l;
+    private long maxId = -1L;
     private int count = -1;
     private String since = null;
     private long sinceId = -1;
@@ -47,54 +47,54 @@ public final class Query implements java.io.Serializable {
     public Query() {
     }
 
-    public Query(String query) {
+    public Query(final String query) {
         this.query = query;
     }
     
-    /* package */ static Query createWithNextPageQuery(String nextPageQuery) {
+    /* package */ static Query createWithNextPageQuery(final String nextPageQuery) {
         Query query = new Query();
         query.nextPageQuery = nextPageQuery;
         
-        if(nextPageQuery != null) {
-            String nextPageParameters=nextPageQuery.substring(1, nextPageQuery.length());
+        if (nextPageQuery != null) {
+            String nextPageParameters = nextPageQuery.substring(1, nextPageQuery.length());
             
-            Map<String,String> params=new LinkedHashMap<String,String>();
-            for(HttpParameter param : HttpParameter.decodeParameters(nextPageParameters)) {
+            Map<String, String> params = new LinkedHashMap<String, String>();
+            for (HttpParameter param : HttpParameter.decodeParameters(nextPageParameters)) {
                 // Yes, we'll overwrite duplicate parameters, but we should not
                 // get duplicate parameters from this endpoint.
                 params.put(param.getName(), param.getValue());
             }
             
-            if(params.containsKey("q"))
+            if (params.containsKey("q"))
                 query.setQuery(params.get("q"));
-            if(params.containsKey("lang"))
+            if (params.containsKey("lang"))
                 query.setLang(params.get("lang"));
-            if(params.containsKey("locale"))
+            if (params.containsKey("locale"))
                 query.setLocale(params.get("locale"));
-            if(params.containsKey("max_id"))
+            if (params.containsKey("max_id"))
                 query.setMaxId(Long.parseLong(params.get("max_id")));
-            if(params.containsKey("count"))
+            if (params.containsKey("count"))
                 query.setCount(Integer.parseInt(params.get("count")));
-            if(params.containsKey("geocode")) {
-                String[] parts=params.get("geocode").split(",");
-                double latitude=Double.parseDouble(parts[0]);
-                double longitude=Double.parseDouble(parts[1]);
+            if (params.containsKey("geocode")) {
+                String[] parts = params.get("geocode").split(",");
+                double latitude = Double.parseDouble(parts[0]);
+                double longitude = Double.parseDouble(parts[1]);
                 
-                double radius=0.0;
-                Query.Unit unit=null;
-                String radiusstr=parts[2];
-                for(Query.Unit value : Query.Unit.values())
-                    if(radiusstr.endsWith(value.name())) {
-                        radius = Double.parseDouble(radiusstr.substring(0, radiusstr.length()-2));
+                double radius = 0.0;
+                Query.Unit unit = null;
+                String radiusstr = parts[2];
+                for (Query.Unit value : Query.Unit.values())
+                    if (radiusstr.endsWith(value.name())) {
+                        radius = Double.parseDouble(radiusstr.substring(0, radiusstr.length() - 2));
                         unit   = value;
                         break;
                     }
-                if(unit == null)
-                    throw new IllegalArgumentException("unrecognized geocode radius: "+radiusstr);
+                if (unit == null)
+                    throw new IllegalArgumentException("unrecognized geocode radius: " + radiusstr);
                 
                 query.setGeoCode(new GeoLocation(latitude, longitude), radius, unit);
             }
-            if(params.containsKey("result_type"))
+            if (params.containsKey("result_type"))
                 query.setResultType(Query.ResultType.valueOf(params.get("result_type")));
             
             // We don't pull out since, until -- they get pushed into the query
@@ -119,7 +119,7 @@ public final class Query implements java.io.Serializable {
      * @see <a href="https://dev.twitter.com/docs/api/1.1/get/search">GET search | Twitter Developers</a>
      * @see <a href="http://search.twitter.com/operators">Twitter API / Search Operators</a>
      */
-    public void setQuery(String query) {
+    public void setQuery(final String query) {
         this.query = query;
     }
 
@@ -132,7 +132,7 @@ public final class Query implements java.io.Serializable {
      * @see <a href="http://search.twitter.com/operators">Twitter API / Search Operators</a>
      * @since Twitter4J 2.1.0
      */
-    public Query query(String query) {
+    public Query query(final String query) {
         setQuery(query);
         return this;
     }
@@ -151,7 +151,7 @@ public final class Query implements java.io.Serializable {
      *
      * @param lang an <a href="http://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 code</a>
      */
-    public void setLang(String lang) {
+    public void setLang(final String lang) {
         this.lang = lang;
     }
 
@@ -162,7 +162,7 @@ public final class Query implements java.io.Serializable {
      * @return the instance
      * @since Twitter4J 2.1.0
      */
-    public Query lang(String lang) {
+    public Query lang(final String lang) {
         setLang(lang);
         return this;
     }
@@ -183,7 +183,7 @@ public final class Query implements java.io.Serializable {
      * @param locale the locale
      * @since Twitter4J 2.1.1
      */
-    public void setLocale(String locale) {
+    public void setLocale(final String locale) {
         this.locale = locale;
     }
 
@@ -194,7 +194,7 @@ public final class Query implements java.io.Serializable {
      * @return the instance
      * @since Twitter4J 2.1.1
      */
-    public Query locale(String locale) {
+    public Query locale(final String locale) {
         setLocale(locale);
         return this;
     }
@@ -215,7 +215,7 @@ public final class Query implements java.io.Serializable {
      * @param maxId maxId
      * @since Twitter4J 2.1.1
      */
-    public void setMaxId(long maxId) {
+    public void setMaxId(final long maxId) {
         this.maxId = maxId;
     }
 
@@ -226,7 +226,7 @@ public final class Query implements java.io.Serializable {
      * @return this instance
      * @since Twitter4J 2.1.1
      */
-    public Query maxId(long maxId) {
+    public Query maxId(final long maxId) {
         setMaxId(maxId);
         return this;
     }
@@ -245,7 +245,7 @@ public final class Query implements java.io.Serializable {
      *
      * @param count the number of tweets to return per page
      */
-    public void setCount(int count) {
+    public void setCount(final int count) {
         this.count = count;
     }
 
@@ -256,7 +256,7 @@ public final class Query implements java.io.Serializable {
      * @return the instance
      * @since Twitter4J 2.1.0
      */
-    public Query count(int count) {
+    public Query count(final int count) {
         setCount(count);
         return this;
     }
@@ -277,7 +277,7 @@ public final class Query implements java.io.Serializable {
      * @param since since
      * @since Twitter4J 2.1.1
      */
-    public void setSince(String since) {
+    public void setSince(final String since) {
         this.since = since;
     }
 
@@ -288,7 +288,7 @@ public final class Query implements java.io.Serializable {
      * @return since
      * @since Twitter4J 2.1.1
      */
-    public Query since(String since) {
+    public Query since(final String since) {
         setSince(since);
         return this;
     }
@@ -307,7 +307,7 @@ public final class Query implements java.io.Serializable {
      *
      * @param sinceId returns tweets with status ids greater than the given id
      */
-    public void setSinceId(long sinceId) {
+    public void setSinceId(final long sinceId) {
         this.sinceId = sinceId;
     }
 
@@ -318,7 +318,7 @@ public final class Query implements java.io.Serializable {
      * @return the instance
      * @since Twitter4J 2.1.0
      */
-    public Query sinceId(long sinceId) {
+    public Query sinceId(final long sinceId) {
         setSinceId(sinceId);
         return this;
     }
@@ -347,8 +347,8 @@ public final class Query implements java.io.Serializable {
      * @param unit     Query.MILES or Query.KILOMETERS
      * @since Twitter4J 4.0.1
      */
-    public void setGeoCode(GeoLocation location, double radius
-            , Unit unit) {
+    public void setGeoCode(final GeoLocation location, final double radius
+, final Unit unit) {
         this.geocode = location.getLatitude() + "," + location.getLongitude() + "," + radius + unit.name();
     }
 
@@ -361,8 +361,8 @@ public final class Query implements java.io.Serializable {
      * @return the instance
      * @since Twitter4J 4.0.7
      */
-    public Query geoCode(GeoLocation location, double radius
-            , Unit unit) {
+    public Query geoCode(final GeoLocation location, final double radius
+, final Unit unit) {
         setGeoCode(location, radius, unit);
         return this;
     }
@@ -383,7 +383,7 @@ public final class Query implements java.io.Serializable {
      * @param until until
      * @since Twitter4J 2.1.1
      */
-    public void setUntil(String until) {
+    public void setUntil(final String until) {
         this.until = until;
     }
 
@@ -394,7 +394,7 @@ public final class Query implements java.io.Serializable {
      * @return the instance
      * @since Twitter4J 2.1.1
      */
-    public Query until(String until) {
+    public Query until(final String until) {
         setUntil(until);
         return this;
     }
@@ -432,7 +432,7 @@ public final class Query implements java.io.Serializable {
      * @param resultType Query.MIXED or Query.POPULAR or Query.RECENT
      * @since Twitter4J 2.1.3
      */
-    public void setResultType(ResultType resultType) {
+    public void setResultType(final ResultType resultType) {
         this.resultType = resultType;
     }
 
@@ -443,7 +443,7 @@ public final class Query implements java.io.Serializable {
      * @return the instance
      * @since Twitter4J 2.1.3
      */
-    public Query resultType(ResultType resultType) {
+    public Query resultType(final ResultType resultType) {
         setResultType(resultType);
         return this;
     }
@@ -469,13 +469,13 @@ public final class Query implements java.io.Serializable {
         return params.toArray(paramArray);
     }
 
-    private void appendParameter(String name, String value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final String value, final List<HttpParameter> params) {
         if (value != null) {
             params.add(new HttpParameter(name, value));
         }
     }
 
-    private void appendParameter(String name, long value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final long value, final List<HttpParameter> params) {
         if (0 <= value) {
             params.add(new HttpParameter(name, String.valueOf(value)));
         }
@@ -486,7 +486,7 @@ public final class Query implements java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -526,18 +526,18 @@ public final class Query implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Query{" +
-                "query='" + query + '\'' +
-                ", lang='" + lang + '\'' +
-                ", locale='" + locale + '\'' +
-                ", maxId=" + maxId +
-                ", count=" + count +
-                ", since='" + since + '\'' +
-                ", sinceId=" + sinceId +
-                ", geocode='" + geocode + '\'' +
-                ", until='" + until + '\'' +
-                ", resultType='" + resultType + '\'' +
-                ", nextPageQuery='" + nextPageQuery + '\'' +
-                '}';
+        return "Query{"
+                + "query='" + query + '\''
+                + ", lang='" + lang + '\''
+                + ", locale='" + locale + '\''
+                + ", maxId=" + maxId
+                + ", count=" + count
+                + ", since='" + since + '\''
+                + ", sinceId=" + sinceId
+                + ", geocode='" + geocode + '\''
+                + ", until='" + until + '\''
+                + ", resultType='" + resultType + '\''
+                + ", nextPageQuery='" + nextPageQuery + '\''
+                + '}';
     }
 }

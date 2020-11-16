@@ -44,7 +44,7 @@ class RateLimitStatusJSONImplTest {
         }
 
         @Override
-        public String getResponseHeader(String name) {
+        public String getResponseHeader(final String name) {
             if (name.equals("X-Rate-Limit-Limit")) {
                 return "180";
             } else if (name.equals("X-Rate-Limit-Remaining")) {

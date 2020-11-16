@@ -100,7 +100,7 @@ public class TwitterFactory implements java.io.Serializable {
      * @param conf the configuration to use
      * @since Twitter4J 2.1.1
      */
-    public TwitterFactory(Configuration conf) {
+    public TwitterFactory(final Configuration conf) {
         if (conf == null) {
             throw new NullPointerException("configuration cannot be null");
         }
@@ -112,7 +112,7 @@ public class TwitterFactory implements java.io.Serializable {
      *
      * @param configTreePath the path
      */
-    public TwitterFactory(String configTreePath) {
+    public TwitterFactory(final String configTreePath) {
         this(ConfigurationContext.getInstance(configTreePath));
     }
 
@@ -134,7 +134,7 @@ public class TwitterFactory implements java.io.Serializable {
      * @return an instance
      * @since Twitter4J 2.1.9
      */
-    public Twitter getInstance(AccessToken accessToken) {
+    public Twitter getInstance(final AccessToken accessToken) {
         String consumerKey = conf.getOAuthConsumerKey();
         String consumerSecret = conf.getOAuthConsumerSecret();
         if (null == consumerKey && null == consumerSecret) {
@@ -145,7 +145,7 @@ public class TwitterFactory implements java.io.Serializable {
         return getInstance(oauth);
     }
 
-    public Twitter getInstance(Authorization auth) {
+    public Twitter getInstance(final Authorization auth) {
         try {
             return TWITTER_CONSTRUCTOR.newInstance(conf, auth);
         } catch (InstantiationException e) {

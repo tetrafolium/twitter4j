@@ -31,7 +31,7 @@ public class OEmbedJSONImpl extends TwitterResponseImpl implements OEmbed, java.
     private String authorURL;
     private int width;
 
-    /*package*/ OEmbedJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/ OEmbedJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         JSONObject json = res.asJSONObject();
         init(json);
@@ -41,12 +41,12 @@ public class OEmbedJSONImpl extends TwitterResponseImpl implements OEmbed, java.
         }
     }
 
-    /*package*/ OEmbedJSONImpl(JSONObject json) throws TwitterException {
+    /*package*/ OEmbedJSONImpl(final JSONObject json) throws TwitterException {
         super();
         init(json);
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         try {
             html = json.getString("html");
             authorName = json.getString("author_name");
@@ -101,7 +101,7 @@ public class OEmbedJSONImpl extends TwitterResponseImpl implements OEmbed, java.
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -132,14 +132,14 @@ public class OEmbedJSONImpl extends TwitterResponseImpl implements OEmbed, java.
 
     @Override
     public String toString() {
-        return "OEmbedJSONImpl{" +
-                "html='" + html + '\'' +
-                ", authorName='" + authorName + '\'' +
-                ", url='" + url + '\'' +
-                ", version='" + version + '\'' +
-                ", cacheAge=" + cacheAge +
-                ", authorURL='" + authorURL + '\'' +
-                ", width=" + width +
-                '}';
+        return "OEmbedJSONImpl{"
+                + "html='" + html + '\''
+                + ", authorName='" + authorName + '\''
+                + ", url='" + url + '\''
+                + ", version='" + version + '\''
+                + ", cacheAge=" + cacheAge
+                + ", authorURL='" + authorURL + '\''
+                + ", width=" + width
+                + '}';
     }
 }

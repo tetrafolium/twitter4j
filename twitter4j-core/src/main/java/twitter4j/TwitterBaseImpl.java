@@ -47,7 +47,7 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
 
     Authorization auth;
 
-    /*package*/ TwitterBaseImpl(Configuration conf, Authorization auth) {
+    /*package*/ TwitterBaseImpl(final Configuration conf, final Authorization auth) {
         this.conf = conf;
         this.auth = auth;
         init();
@@ -128,7 +128,7 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
         return fillInIDAndScreenName(null);
     }
     
-    User fillInIDAndScreenName(HttpParameter[] parameters) throws TwitterException {
+    User fillInIDAndScreenName(final HttpParameter[] parameters) throws TwitterException {
         ensureAuthorizationEnabled();
         User user = new UserJSONImpl(http.get(conf.getRestBaseURL() + "account/verify_credentials.json", parameters, auth, this), conf);
         this.screenName = user.getScreenName();
@@ -137,7 +137,7 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
     }
 
     @Override
-    public void addRateLimitStatusListener(RateLimitStatusListener listener) {
+    public void addRateLimitStatusListener(final RateLimitStatusListener listener) {
         rateLimitStatusListeners.add(listener);
     }
 
@@ -145,12 +145,12 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
     public void onRateLimitStatus(final Consumer<RateLimitStatusEvent> action) {
         rateLimitStatusListeners.add(new RateLimitStatusListener() {
             @Override
-            public void onRateLimitStatus(RateLimitStatusEvent event) {
+            public void onRateLimitStatus(final RateLimitStatusEvent event) {
                 action.accept(event);
             }
 
             @Override
-            public void onRateLimitReached(RateLimitStatusEvent event) {
+            public void onRateLimitReached(final RateLimitStatusEvent event) {
             }
         });
     }
@@ -159,18 +159,18 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
     public void onRateLimitReached(final Consumer<RateLimitStatusEvent> action) {
         rateLimitStatusListeners.add(new RateLimitStatusListener() {
             @Override
-            public void onRateLimitStatus(RateLimitStatusEvent event) {
+            public void onRateLimitStatus(final RateLimitStatusEvent event) {
             }
 
             @Override
-            public void onRateLimitReached(RateLimitStatusEvent event) {
+            public void onRateLimitReached(final RateLimitStatusEvent event) {
                 action.accept(event);
             }
         });
     }
 
     @Override
-    public void httpResponseReceived(HttpResponseEvent event) {
+    public void httpResponseReceived(final HttpResponseEvent event) {
         if (rateLimitStatusListeners.size() != 0) {
             HttpResponse res = event.getResponse();
             TwitterException te = event.getTwitterException();
@@ -228,7 +228,7 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
         }
     }
 
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+    private void writeObject(final java.io.ObjectOutputStream out) throws IOException {
         // http://docs.oracle.com/javase/6/docs/platform/serialization/spec/output.html#861
         out.putFields();
         out.writeFields();
@@ -244,7 +244,7 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
         out.writeObject(serializableRateLimitStatusListeners);
     }
 
-    private void readObject(ObjectInputStream stream)
+    private void readObject(final ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         // http://docs.oracle.com/javase/6/docs/platform/serialization/spec/input.html#2971
         stream.readFields();
@@ -260,7 +260,7 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
     // methods declared in OAuthSupport interface
 
     @Override
-    public synchronized void setOAuthConsumer(String consumerKey, String consumerSecret) {
+    public synchronized void setOAuthConsumer(final String consumerKey, final String consumerSecret) {
         if (null == consumerKey) {
             throw new NullPointerException("consumer key is null");
         }
@@ -292,17 +292,17 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
     }
 
     @Override
-    public RequestToken getOAuthRequestToken(String callbackUrl) throws TwitterException {
+    public RequestToken getOAuthRequestToken(final String callbackUrl) throws TwitterException {
         return getOAuth().getOAuthRequestToken(callbackUrl);
     }
 
     @Override
-    public RequestToken getOAuthRequestToken(String callbackUrl, String xAuthAccessType) throws TwitterException {
+    public RequestToken getOAuthRequestToken(final String callbackUrl, final String xAuthAccessType) throws TwitterException {
         return getOAuth().getOAuthRequestToken(callbackUrl, xAuthAccessType);
     }
 
     @Override
-    public RequestToken getOAuthRequestToken(String callbackUrl, String xAuthAccessType, String xAuthMode) throws TwitterException {
+    public RequestToken getOAuthRequestToken(final String callbackUrl, final String xAuthAccessType, final String xAuthMode) throws TwitterException {
         return getOAuth().getOAuthRequestToken(callbackUrl, xAuthAccessType, xAuthMode);
     }
 
@@ -347,14 +347,14 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
 
 
     @Override
-    public synchronized AccessToken getOAuthAccessToken(String oauthVerifier) throws TwitterException {
+    public synchronized AccessToken getOAuthAccessToken(final String oauthVerifier) throws TwitterException {
         AccessToken oauthAccessToken = getOAuth().getOAuthAccessToken(oauthVerifier);
         screenName = oauthAccessToken.getScreenName();
         return oauthAccessToken;
     }
 
     @Override
-    public synchronized AccessToken getOAuthAccessToken(RequestToken requestToken) throws TwitterException {
+    public synchronized AccessToken getOAuthAccessToken(final RequestToken requestToken) throws TwitterException {
         OAuthSupport oauth = getOAuth();
         AccessToken oauthAccessToken = oauth.getOAuthAccessToken(requestToken);
         screenName = oauthAccessToken.getScreenName();
@@ -362,17 +362,17 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
     }
 
     @Override
-    public synchronized AccessToken getOAuthAccessToken(RequestToken requestToken, String oauthVerifier) throws TwitterException {
+    public synchronized AccessToken getOAuthAccessToken(final RequestToken requestToken, final String oauthVerifier) throws TwitterException {
         return getOAuth().getOAuthAccessToken(requestToken, oauthVerifier);
     }
 
     @Override
-    public synchronized void setOAuthAccessToken(AccessToken accessToken) {
+    public synchronized void setOAuthAccessToken(final AccessToken accessToken) {
         getOAuth().setOAuthAccessToken(accessToken);
     }
 
     @Override
-    public synchronized AccessToken getOAuthAccessToken(String screenName, String password) throws TwitterException {
+    public synchronized AccessToken getOAuthAccessToken(final String screenName, final String password) throws TwitterException {
         return getOAuth().getOAuthAccessToken(screenName, password);
     }
     /* OAuth support methods */
@@ -391,7 +391,7 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
     }
 
     @Override
-    public void setOAuth2Token(OAuth2Token oauth2Token) {
+    public void setOAuth2Token(final OAuth2Token oauth2Token) {
         getOAuth2().setOAuth2Token(oauth2Token);
     }
 
@@ -409,7 +409,7 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof TwitterBaseImpl)) return false;
 
@@ -437,11 +437,11 @@ abstract class TwitterBaseImpl implements TwitterBase, java.io.Serializable, OAu
 
     @Override
     public String toString() {
-        return "TwitterBase{" +
-            "conf=" + conf +
-            ", http=" + http +
-            ", rateLimitStatusListeners=" + rateLimitStatusListeners +
-            ", auth=" + auth +
-            '}';
+        return "TwitterBase{"
+            + "conf=" + conf
+            + ", http=" + http
+            + ", rateLimitStatusListeners=" + rateLimitStatusListeners
+            + ", auth=" + auth
+            + '}';
     }
 }

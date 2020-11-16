@@ -37,7 +37,7 @@ import java.util.Map;
     private int resetTimeInSeconds;
     private int secondsUntilReset;
 
-    static Map<String, RateLimitStatus> createRateLimitStatuses(HttpResponse res, Configuration conf) throws TwitterException {
+    static Map<String, RateLimitStatus> createRateLimitStatuses(final HttpResponse res, final Configuration conf) throws TwitterException {
         JSONObject json = res.asJSONObject();
         Map<String, RateLimitStatus> map = createRateLimitStatuses(json);
         if (conf.isJSONStoreEnabled()) {
@@ -47,7 +47,7 @@ import java.util.Map;
         return map;
     }
 
-    static Map<String, RateLimitStatus> createRateLimitStatuses(JSONObject json) throws TwitterException {
+    static Map<String, RateLimitStatus> createRateLimitStatuses(final JSONObject json) throws TwitterException {
         Map<String, RateLimitStatus> map = new HashMap<String, RateLimitStatus>();
         try {
             JSONObject resources = json.getJSONObject("resources");
@@ -68,31 +68,31 @@ import java.util.Map;
         }
     }
 
-    private RateLimitStatusJSONImpl(int limit, int remaining, int resetTimeInSeconds) {
+    private RateLimitStatusJSONImpl(final int limit, final int remaining, final int resetTimeInSeconds) {
         this.limit = limit;
         this.remaining = remaining;
         this.resetTimeInSeconds = resetTimeInSeconds;
         this.secondsUntilReset = (int) ((resetTimeInSeconds * 1000L - System.currentTimeMillis()) / 1000);
     }
 
-    RateLimitStatusJSONImpl(JSONObject json) throws TwitterException {
+    RateLimitStatusJSONImpl(final JSONObject json) throws TwitterException {
         init(json);
     }
 
-    void init(JSONObject json) throws TwitterException {
+    void init(final JSONObject json) throws TwitterException {
         this.limit = ParseUtil.getInt("limit", json);
         this.remaining = ParseUtil.getInt("remaining", json);
         this.resetTimeInSeconds = ParseUtil.getInt("reset", json);
         this.secondsUntilReset = (int) ((resetTimeInSeconds * 1000L - System.currentTimeMillis()) / 1000);
     }
 
-    static RateLimitStatus createFromResponseHeader(HttpResponse res) {
+    static RateLimitStatus createFromResponseHeader(final HttpResponse res) {
         if (null == res) {
             return null;
         }
-        int remainingHits;//"X-Rate-Limit-Remaining"
-        int limit;//"X-Rate-Limit-Limit"
-        int resetTimeInSeconds;//not included in the response header. Need to be calculated.
+        int remainingHits; //"X-Rate-Limit-Remaining"
+        int limit; //"X-Rate-Limit-Limit"
+        int resetTimeInSeconds; //not included in the response header. Need to be calculated.
 
         String strLimit = res.getResponseHeader("X-Rate-Limit-Limit");
         if (strLimit != null) {
@@ -137,7 +137,7 @@ import java.util.Map;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -162,12 +162,12 @@ import java.util.Map;
 
     @Override
     public String toString() {
-        return "RateLimitStatusJSONImpl{" +
-                "remaining=" + remaining +
-                ", limit=" + limit +
-                ", resetTimeInSeconds=" + resetTimeInSeconds +
-                ", secondsUntilReset=" + secondsUntilReset +
-                '}';
+        return "RateLimitStatusJSONImpl{"
+                + "remaining=" + remaining
+                + ", limit=" + limit
+                + ", resetTimeInSeconds=" + resetTimeInSeconds
+                + ", secondsUntilReset=" + secondsUntilReset
+                + '}';
     }
 
 }

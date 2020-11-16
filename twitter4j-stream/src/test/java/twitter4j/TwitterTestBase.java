@@ -48,7 +48,7 @@ public class TwitterTestBase {
         public final String accessToken;
         public final String accessTokenSecret;
 
-        TestUserInfo(String screenName) {
+        TestUserInfo(final String screenName) {
 
             this.screenName = p.getProperty(screenName + ".user");
             this.password = p.getProperty(screenName + ".password");
@@ -80,7 +80,7 @@ public class TwitterTestBase {
         } catch (FileNotFoundException fnfe) {
             try {
                 resource = new FileInputStream("../test.properties");
-            }catch (FileNotFoundException fnfe2) {
+            } catch (FileNotFoundException fnfe2) {
                 resource = TwitterTestBase.class.getResourceAsStream("/test.properties");
             }
         }

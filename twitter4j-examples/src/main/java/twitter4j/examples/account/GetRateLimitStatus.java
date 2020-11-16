@@ -34,10 +34,10 @@ public final class GetRateLimitStatus {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Twitter twitter = new TwitterFactory().getInstance();
-            Map<String ,RateLimitStatus> rateLimitStatus = twitter.getRateLimitStatus();
+            Map<String, RateLimitStatus> rateLimitStatus = twitter.getRateLimitStatus();
             for (String endpoint : rateLimitStatus.keySet()) {
                 RateLimitStatus status = rateLimitStatus.get(endpoint);
                 System.out.println("Endpoint: " + endpoint);

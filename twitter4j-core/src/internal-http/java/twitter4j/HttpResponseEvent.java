@@ -28,7 +28,7 @@ public final class HttpResponseEvent {
 
     private final TwitterException twitterException;
 
-    HttpResponseEvent(HttpRequest request, HttpResponse response, TwitterException te) {
+    HttpResponseEvent(final HttpRequest request, final HttpResponse response, final TwitterException te) {
         this.request = request;
         this.response = response;
         this.twitterException = te;
@@ -66,7 +66,7 @@ public final class HttpResponseEvent {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -89,9 +89,9 @@ public final class HttpResponseEvent {
 
     @Override
     public String toString() {
-        return "HttpResponseEvent{" +
-                "request=" + request +
-                ", response=" + response +
-                '}';
+        return "HttpResponseEvent{"
+                + "request=" + request
+                + ", response=" + response
+                + '}';
     }
 }

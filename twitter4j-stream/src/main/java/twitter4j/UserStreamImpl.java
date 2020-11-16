@@ -26,28 +26,28 @@ import java.io.InputStream;
  * @since Twitter4J 2.1.8
  */
 final class UserStreamImpl extends StatusStreamImpl implements UserStream {
-    /*package*/ UserStreamImpl(Dispatcher dispatcher, InputStream stream, Configuration conf) throws IOException {
+    /*package*/ UserStreamImpl(final Dispatcher dispatcher, final InputStream stream, final Configuration conf) throws IOException {
         super(dispatcher, stream, conf);
     }
 
-    /*package*/ UserStreamImpl(Dispatcher dispatcher, HttpResponse response, Configuration conf) throws IOException {
+    /*package*/ UserStreamImpl(final Dispatcher dispatcher, final HttpResponse response, final Configuration conf) throws IOException {
         super(dispatcher, response, conf);
     }
 
     @Override
-    public void next(UserStreamListener listener) throws TwitterException {
+    public void next(final UserStreamListener listener) throws TwitterException {
         handleNextElement(new StreamListener[]{listener}, EMPTY);
     }
 
     @Override
-    protected void onSender(JSONObject json, StreamListener[] listeners) throws TwitterException {
+    protected void onSender(final JSONObject json, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onDirectMessage(new DirectMessageJSONImpl(json));
         }
     }
 
     @Override
-    protected void onDirectMessage(JSONObject json, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onDirectMessage(final JSONObject json, final StreamListener[] listeners) throws TwitterException, JSONException {
         DirectMessage directMessage = asDirectMessage(json);
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onDirectMessage(directMessage);
@@ -55,13 +55,13 @@ final class UserStreamImpl extends StatusStreamImpl implements UserStream {
     }
 
     @Override
-    protected void onScrubGeo(JSONObject json, StreamListener[] listeners) throws TwitterException {
+    protected void onScrubGeo(final JSONObject json, final StreamListener[] listeners) throws TwitterException {
         // Not implemented yet
         logger.info("Geo-tagging deletion notice (not implemented yet): " + line);
     }
 
     @Override
-    protected void onFriends(JSONObject json, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onFriends(final JSONObject json, final StreamListener[] listeners) throws TwitterException, JSONException {
         long[] friendIds = asFriendList(json);
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onFriendList(friendIds);
@@ -69,42 +69,42 @@ final class UserStreamImpl extends StatusStreamImpl implements UserStream {
     }
 
     @Override
-    protected void onFavorite(JSONObject source, JSONObject target, JSONObject targetObject, StreamListener[] listeners) throws TwitterException {
+    protected void onFavorite(final JSONObject source, final JSONObject target, final JSONObject targetObject, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onFavorite(asUser(source), asUser(target), asStatus(targetObject));
         }
     }
 
     @Override
-    protected void onUnfavorite(JSONObject source, JSONObject target, JSONObject targetObject, StreamListener[] listeners) throws TwitterException {
+    protected void onUnfavorite(final JSONObject source, final JSONObject target, final JSONObject targetObject, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUnfavorite(asUser(source), asUser(target), asStatus(targetObject));
         }
     }
 
     @Override
-    protected void onFollow(JSONObject source, JSONObject target, StreamListener[] listeners) throws TwitterException {
+    protected void onFollow(final JSONObject source, final JSONObject target, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onFollow(asUser(source), asUser(target));
         }
     }
 
     @Override
-    protected void onUnfollow(JSONObject source, JSONObject target, StreamListener[] listeners) throws TwitterException {
+    protected void onUnfollow(final JSONObject source, final JSONObject target, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUnfollow(asUser(source), asUser(target));
         }
     }
 
     @Override
-    protected void onUserListMemberAddition(JSONObject addedMember, JSONObject owner, JSONObject target, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onUserListMemberAddition(final JSONObject addedMember, final JSONObject owner, final JSONObject target, final StreamListener[] listeners) throws TwitterException, JSONException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserListMemberAddition(asUser(addedMember), asUser(owner), asUserList(target));
         }
     }
 
     @Override
-    protected void onUserListMemberDeletion(JSONObject deletedMember, JSONObject owner, JSONObject target, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onUserListMemberDeletion(final JSONObject deletedMember, final JSONObject owner, final JSONObject target, final StreamListener[] listeners) throws TwitterException, JSONException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserListMemberDeletion(asUser(deletedMember), asUser(owner), asUserList(target));
         }
@@ -112,91 +112,91 @@ final class UserStreamImpl extends StatusStreamImpl implements UserStream {
 
 
     @Override
-    protected void onUserListSubscription(JSONObject source, JSONObject owner, JSONObject target, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onUserListSubscription(final JSONObject source, final JSONObject owner, final JSONObject target, final StreamListener[] listeners) throws TwitterException, JSONException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserListSubscription(asUser(source), asUser(owner), asUserList(target));
         }
     }
 
     @Override
-    protected void onUserListUnsubscription(JSONObject source, JSONObject owner, JSONObject target, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onUserListUnsubscription(final JSONObject source, final JSONObject owner, final JSONObject target, final StreamListener[] listeners) throws TwitterException, JSONException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserListUnsubscription(asUser(source), asUser(owner), asUserList(target));
         }
     }
 
     @Override
-    protected void onUserListCreation(JSONObject source, JSONObject target, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onUserListCreation(final JSONObject source, final JSONObject target, final StreamListener[] listeners) throws TwitterException, JSONException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserListCreation(asUser(source), asUserList(target));
         }
     }
 
     @Override
-    protected void onUserListUpdated(JSONObject source, JSONObject target, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onUserListUpdated(final JSONObject source, final JSONObject target, final StreamListener[] listeners) throws TwitterException, JSONException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserListUpdate(asUser(source), asUserList(target));
         }
     }
 
     @Override
-    protected void onUserListDestroyed(JSONObject source, JSONObject target, StreamListener[] listeners) throws TwitterException {
+    protected void onUserListDestroyed(final JSONObject source, final JSONObject target, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserListDeletion(asUser(source), asUserList(target));
         }
     }
 
     @Override
-    protected void onUserUpdate(JSONObject source, JSONObject target, StreamListener[] listeners) throws TwitterException {
+    protected void onUserUpdate(final JSONObject source, final JSONObject target, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserProfileUpdate(asUser(source));
         }
     }
 
     @Override
-    protected void onUserSuspension(long target, StreamListener[] listeners) throws TwitterException {
+    protected void onUserSuspension(final long target, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserSuspension(target);
         }
     }
 
     @Override
-    protected void onUserDeletion(long target, StreamListener[] listeners) throws TwitterException {
+    protected void onUserDeletion(final long target, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUserDeletion(target);
         }
     }
 
     @Override
-    protected void onBlock(JSONObject source, JSONObject target, StreamListener[] listeners) throws TwitterException {
+    protected void onBlock(final JSONObject source, final JSONObject target, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onBlock(asUser(source), asUser(target));
         }
     }
 
     @Override
-    protected void onUnblock(JSONObject source, JSONObject target, StreamListener[] listeners) throws TwitterException {
+    protected void onUnblock(final JSONObject source, final JSONObject target, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onUnblock(asUser(source), asUser(target));
         }
     }
 
     @Override
-    void onRetweetedRetweet(JSONObject source, JSONObject target, JSONObject targetObject, StreamListener[] listeners) throws TwitterException {
+    void onRetweetedRetweet(final JSONObject source, final JSONObject target, final JSONObject targetObject, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onRetweetedRetweet(asUser(source), asUser(target), asStatus(targetObject));
         }
     }
 
     @Override
-    void onFavoritedRetweet(JSONObject source, JSONObject target, JSONObject targetObject, StreamListener[] listeners) throws TwitterException {
+    void onFavoritedRetweet(final JSONObject source, final JSONObject target, final JSONObject targetObject, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onFavoritedRetweet(asUser(source), asUser(target), asStatus(targetObject));
         }
     }
 
     @Override
-    protected void onQuotedTweet(JSONObject source, JSONObject target, JSONObject targetObject, StreamListener[] listeners) throws TwitterException {
+    protected void onQuotedTweet(final JSONObject source, final JSONObject target, final JSONObject targetObject, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((UserStreamListener) listener).onQuotedTweet(asUser(source), asUser(target), asStatus(targetObject));
         }

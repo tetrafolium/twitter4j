@@ -25,13 +25,13 @@ class PagableResponseListImpl<T extends TwitterResponse> extends ResponseListImp
     private final long previousCursor;
     private final long nextCursor;
 
-    PagableResponseListImpl(RateLimitStatus rateLimitStatus, int accessLevel) {
+    PagableResponseListImpl(final RateLimitStatus rateLimitStatus, final int accessLevel) {
         super(rateLimitStatus, accessLevel);
         previousCursor = 0;
         nextCursor = 0;
     }
 
-    PagableResponseListImpl(int size, JSONObject json, HttpResponse res) {
+    PagableResponseListImpl(final int size, final JSONObject json, final HttpResponse res) {
         super(size, res);
         this.previousCursor = ParseUtil.getLong("previous_cursor", json);
         this.nextCursor = ParseUtil.getLong("next_cursor", json);

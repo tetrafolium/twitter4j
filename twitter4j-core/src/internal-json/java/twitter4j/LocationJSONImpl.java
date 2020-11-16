@@ -31,7 +31,7 @@ import twitter4j.conf.Configuration;
     private final String name;
     private final String url;
 
-    /*package*/ LocationJSONImpl(JSONObject location) throws TwitterException {
+    /*package*/ LocationJSONImpl(final JSONObject location) throws TwitterException {
         try {
             woeid = ParseUtil.getInt("woeid", location);
             countryName = ParseUtil.getUnescapedString("country", location);
@@ -52,7 +52,7 @@ import twitter4j.conf.Configuration;
     }
 
     /*package*/
-    static ResponseList<Location> createLocationList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<Location> createLocationList(final HttpResponse res, final Configuration conf) throws TwitterException {
         if (conf.isJSONStoreEnabled()) {
             TwitterObjectFactory.clearThreadLocalMap();
         }
@@ -60,7 +60,7 @@ import twitter4j.conf.Configuration;
     }
 
     /*package*/
-    static ResponseList<Location> createLocationList(JSONArray list, boolean storeJSON) throws TwitterException {
+    static ResponseList<Location> createLocationList(final JSONArray list, final boolean storeJSON) throws TwitterException {
         try {
             int size = list.length();
             ResponseList<Location> locations =
@@ -118,7 +118,7 @@ import twitter4j.conf.Configuration;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof LocationJSONImpl)) return false;
 
@@ -136,14 +136,14 @@ import twitter4j.conf.Configuration;
 
     @Override
     public String toString() {
-        return "LocationJSONImpl{" +
-                "woeid=" + woeid +
-                ", countryName='" + countryName + '\'' +
-                ", countryCode='" + countryCode + '\'' +
-                ", placeName='" + placeName + '\'' +
-                ", placeCode='" + placeCode + '\'' +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                '}';
+        return "LocationJSONImpl{"
+                + "woeid=" + woeid
+                + ", countryName='" + countryName + '\''
+                + ", countryCode='" + countryCode + '\''
+                + ", placeName='" + placeName + '\''
+                + ", placeCode='" + placeCode + '\''
+                + ", name='" + name + '\''
+                + ", url='" + url + '\''
+                + '}';
     }
 }

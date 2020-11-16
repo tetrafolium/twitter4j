@@ -32,7 +32,7 @@ public final class GetFollowersIDs {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Twitter twitter = new TwitterFactory().getInstance();
             long cursor = -1;

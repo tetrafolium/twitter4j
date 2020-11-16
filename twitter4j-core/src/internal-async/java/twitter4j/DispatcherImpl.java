@@ -37,7 +37,7 @@ final class DispatcherImpl implements Dispatcher {
                     int count = 0;
 
                     @Override
-                    public Thread newThread(Runnable r) {
+                    public Thread newThread(final Runnable r) {
                         Thread thread = new Thread(r);
                         thread.setName(String.format("Twitter4J Async Dispatcher[%d]", count++));
                         thread.setDaemon(conf.isDaemonEnabled());
@@ -54,7 +54,7 @@ final class DispatcherImpl implements Dispatcher {
     }
 
     @Override
-    public synchronized void invokeLater(Runnable task) {
+    public synchronized void invokeLater(final Runnable task) {
         executorService.execute(task);
     }
 
@@ -62,11 +62,11 @@ final class DispatcherImpl implements Dispatcher {
     public synchronized void shutdown() {
         executorService.shutdown();
         try {
-        	if (!executorService.awaitTermination(SHUTDOWN_TIME, TimeUnit.MILLISECONDS)) {
-        		executorService.shutdownNow();
-        	}
+                if (!executorService.awaitTermination(SHUTDOWN_TIME, TimeUnit.MILLISECONDS)) {
+                        executorService.shutdownNow();
+                }
         } catch (InterruptedException e) {
-        	logger.warn(e.getMessage());
+                logger.warn(e.getMessage());
         }
     }
 }

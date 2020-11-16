@@ -217,7 +217,7 @@ public class ApplicationOnlyAuthTest extends TwitterTestBase {
         }
     }
 
-    private void writeFile(String filename, String... lines) throws Exception {
+    private void writeFile(final String filename, final String... lines) throws Exception {
         File file = new File(filename);
         file.delete();
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
@@ -231,7 +231,7 @@ public class ApplicationOnlyAuthTest extends TwitterTestBase {
         }
     }
 
-    private void deleteFile(String filename) {
+    private void deleteFile(final String filename) {
         File file = new File(filename);
         file.delete();
     }

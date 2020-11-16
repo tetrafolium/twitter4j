@@ -38,7 +38,7 @@ import java.util.List;
     private List<Status> tweets;
     private String nextResults;
 
-    /*package*/ QueryResultJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/ QueryResultJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         JSONObject json = res.asJSONObject();
         try {
@@ -65,7 +65,7 @@ import java.util.List;
         }
     }
 
-    /*package*/ QueryResultJSONImpl(Query query) {
+    /*package*/ QueryResultJSONImpl(final Query query) {
         super();
         sinceId = query.getSinceId();
         count = query.getCount();
@@ -121,7 +121,7 @@ import java.util.List;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -158,14 +158,14 @@ import java.util.List;
 
     @Override
     public String toString() {
-        return "QueryResultJSONImpl{" +
-                "sinceId=" + sinceId +
-                ", maxId=" + maxId +
-                ", refreshUrl='" + refreshUrl + '\'' +
-                ", count=" + count +
-                ", completedIn=" + completedIn +
-                ", query='" + query + '\'' +
-                ", tweets=" + tweets +
-                '}';
+        return "QueryResultJSONImpl{"
+                + "sinceId=" + sinceId
+                + ", maxId=" + maxId
+                + ", refreshUrl='" + refreshUrl + '\''
+                + ", count=" + count
+                + ", completedIn=" + completedIn
+                + ", query='" + query + '\''
+                + ", tweets=" + tweets
+                + '}';
     }
 }

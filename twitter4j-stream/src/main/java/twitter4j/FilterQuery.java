@@ -49,7 +49,7 @@ public final class FilterQuery implements java.io.Serializable {
      *
      * @param follow Specifies the users, by ID, to receive public tweets from.
      */
-    public FilterQuery(long... follow) {
+    public FilterQuery(final long... follow) {
         this();
         this.count = 0;
         this.follow = follow;
@@ -61,7 +61,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param track Specifies keywords to track.
      * @since Twitter4J 4.0.4
      */
-    public FilterQuery(String... track) {
+    public FilterQuery(final String... track) {
         this();
         this.count = 0;
         this.track = track;
@@ -73,7 +73,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param count  Indicates the number of previous statuses to stream before transitioning to the live stream.
      * @param follow Specifies the users, by ID, to receive public tweets from.
      */
-    public FilterQuery(int count, long... follow) {
+    public FilterQuery(final int count, final long... follow) {
         this();
         this.count = count;
         this.follow = follow;
@@ -86,7 +86,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param follow Specifies the users, by ID, to receive public tweets from.
      * @param track  Specifies keywords to track.
      */
-    public FilterQuery(int count, long[] follow, String[] track) {
+    public FilterQuery(final int count, final long[] follow, final String[] track) {
         this();
         this.count = count;
         this.follow = follow;
@@ -101,7 +101,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param track     Specifies keywords to track.
      * @param locations Specifies the locations to track. 2D array
      */
-    public FilterQuery(int count, long[] follow, String[] track, double[][] locations) {
+    public FilterQuery(final int count, final long[] follow, final String[] track, final double[][] locations) {
         this.count = count;
         this.follow = follow;
         this.track = track;
@@ -117,7 +117,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param locations Specifies the locations to track. 2D array
      * @param language  Specifies the tweets language of the stream
      */
-    public FilterQuery(int count, long[] follow, String[] track, double[][] locations, String[] language) {
+    public FilterQuery(final int count, final long[] follow, final String[] track, final double[][] locations, final String[] language) {
         this.count = count;
         this.follow = follow;
         this.track = track;
@@ -131,7 +131,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param count Indicates the number of previous statuses to stream before transitioning to the live stream.
      * @return this instance
      */
-    public FilterQuery count(int count) {
+    public FilterQuery count(final int count) {
         this.count = count;
         return this;
     }
@@ -142,7 +142,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param follow Specifies the users, by ID, to receive public tweets from.
      * @return this instance
      */
-    public FilterQuery follow(long... follow) {
+    public FilterQuery follow(final long... follow) {
         this.follow = follow;
         return this;
     }
@@ -153,7 +153,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param track Specifies keywords to track.
      * @return this instance
      */
-    public FilterQuery track(String... track) {
+    public FilterQuery track(final String... track) {
         this.track = track;
         return this;
     }
@@ -164,7 +164,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param locations Specifies the locations to track. 2D array
      * @return this instance
      */
-    public FilterQuery locations(double[]... locations) {
+    public FilterQuery locations(final double[]... locations) {
         this.locations = locations;
         return this;
     }
@@ -175,7 +175,7 @@ public final class FilterQuery implements java.io.Serializable {
      * @param language Specifies languages to track.
      * @return this instance
      */
-    public FilterQuery language(String... language) {
+    public FilterQuery language(final String... language) {
         this.language = language;
         return this;
     }
@@ -187,13 +187,13 @@ public final class FilterQuery implements java.io.Serializable {
      * @param filterLevel one of either none, low, or medium.
      * @return this instance
      */
-    public FilterQuery filterLevel(String filterLevel) {
+    public FilterQuery filterLevel(final String filterLevel) {
         this.filterLevel = filterLevel;
         return this;
     }
 
 
-    /*package*/ HttpParameter[] asHttpParameterArray(HttpParameter stallWarningsParam) {
+    /*package*/ HttpParameter[] asHttpParameterArray(final HttpParameter stallWarningsParam) {
         ArrayList<HttpParameter> params = new ArrayList<HttpParameter>();
 
         params.add(new HttpParameter("count", count));
@@ -231,7 +231,7 @@ public final class FilterQuery implements java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -241,8 +241,8 @@ public final class FilterQuery implements java.io.Serializable {
         if (!Arrays.equals(follow, that.follow)) return false;
         if (!Arrays.equals(track, that.track)) return false;
         if (!Arrays.equals(language, that.language)) return false;
-        if (!(filterLevel == null ? that.filterLevel == null :
-            filterLevel.equals(that.filterLevel))) return false;
+        if (!(filterLevel == null ? that.filterLevel == null
+            : filterLevel.equals(that.filterLevel))) return false;
 
         return true;
     }
@@ -259,13 +259,13 @@ public final class FilterQuery implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "FilterQuery{" +
-            "count=" + count +
-            ", follow=" + Arrays.toString(follow) +
-            ", track=" + (track == null ? null : Arrays.asList(track)) +
-            ", locations=" + (locations == null ? null : Arrays.asList(locations)) +
-            ", language=" + (language == null ? null : Arrays.asList(language)) +
-            ", filter_level=" + filterLevel +
-            '}';
+        return "FilterQuery{"
+            + "count=" + count
+            + ", follow=" + Arrays.toString(follow)
+            + ", track=" + (track == null ? null : Arrays.asList(track))
+            + ", locations=" + (locations == null ? null : Arrays.asList(locations))
+            + ", language=" + (language == null ? null : Arrays.asList(language))
+            + ", filter_level=" + filterLevel
+            + '}';
     }
 }

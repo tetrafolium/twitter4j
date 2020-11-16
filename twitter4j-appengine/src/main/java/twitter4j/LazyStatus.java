@@ -34,7 +34,7 @@ final class LazyStatus implements twitter4j.Status {
     private final ObjectFactory factory;
     private Status target = null;
 
-    LazyStatus(HttpResponse res, ObjectFactory factory) {
+    LazyStatus(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -359,12 +359,12 @@ final class LazyStatus implements twitter4j.Status {
         return getTarget().getAccessLevel();
     }
 
-    public int compareTo(Status target) {
+    public int compareTo(final Status target) {
         return getTarget().compareTo(target);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Status)) return false;
         return getTarget().equals(o);
@@ -377,8 +377,8 @@ final class LazyStatus implements twitter4j.Status {
 
     @Override
     public String toString() {
-        return "LazyStatus{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyStatus{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

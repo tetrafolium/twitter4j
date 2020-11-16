@@ -114,7 +114,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
         async2.getUserTimeline();
         waitForResponse();
         assertTrue(10 < statuses.size(), "size");
-        async2.getUserTimeline(new Paging(999383469l));
+        async2.getUserTimeline(new Paging(999383469L));
     }
 
     @Test
@@ -180,7 +180,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
 //        assertIDExsits("yusukey is following ryunosukey", ids, yusuke);
 //    }
 
-    private void assertIDExsits(String assertion, IDs ids, int idToFind) {
+    private void assertIDExsits(final String assertion, final IDs ids, final int idToFind) {
         boolean found = false;
         for (long id : ids.getIDs()) {
             if (id == idToFind) {
@@ -222,7 +222,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
 
     @Test
     void testShow() throws Exception {
-        async2.showStatus(1000l);
+        async2.showStatus(1000L);
         waitForResponse();
         assertEquals(52, status.getUser().getId());
         assertDeserializedFormIsEqual(status);
@@ -377,7 +377,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
         TwitterListener listener = new TwitterAdapter() {
 
             @Override
-            public void gotRateLimitStatus(Map<String, RateLimitStatus> rateLimitStatus) {
+            public void gotRateLimitStatus(final Map<String, RateLimitStatus> rateLimitStatus) {
                 super.gotRateLimitStatus(rateLimitStatus);
                 RateLimitStatus searchTweetsRateLimit = rateLimitStatus.get("/search/tweets");
                 assertNotNull(searchTweetsRateLimit);
@@ -387,7 +387,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
 
 
             @Override
-            public void onException(TwitterException ex, TwitterMethod method) {
+            public void onException(final TwitterException ex, final TwitterMethod method) {
                 assertEquals(403, ex.getStatusCode());
                 assertEquals(220, ex.getErrorCode());
                 assertEquals("Your credentials do not allow access to this resource", ex.getErrorMessage());
@@ -419,7 +419,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
         TwitterListener listener = new TwitterAdapter() {
 
             @Override
-            public void gotRateLimitStatus(Map<String, RateLimitStatus> rateLimitStatus) {
+            public void gotRateLimitStatus(final Map<String, RateLimitStatus> rateLimitStatus) {
                 super.gotRateLimitStatus(rateLimitStatus);
                 RateLimitStatus searchTweetsRateLimit = rateLimitStatus.get("/search/tweets");
                 assertNotNull(searchTweetsRateLimit);
@@ -429,7 +429,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
 
 
             @Override
-            public void onException(TwitterException ex, TwitterMethod method) {
+            public void onException(final TwitterException ex, final TwitterMethod method) {
                 assertEquals(403, ex.getStatusCode());
                 assertEquals(220, ex.getErrorCode());
                 assertEquals("Your credentials do not allow access to this resource", ex.getErrorMessage());
@@ -473,57 +473,57 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
 
     /*Search API Methods*/
     @Override
-    public void searched(QueryResult result) {
+    public void searched(final QueryResult result) {
         this.queryResult = result;
         notifyResponse();
     }
 
     /*Timeline Methods*/
     @Override
-    public void gotHomeTimeline(ResponseList<Status> statuses) {
+    public void gotHomeTimeline(final ResponseList<Status> statuses) {
         this.statuses = statuses;
         notifyResponse();
     }
 
     @Override
-    public void gotUserTimeline(ResponseList<Status> statuses) {
+    public void gotUserTimeline(final ResponseList<Status> statuses) {
         this.statuses = statuses;
         notifyResponse();
     }
 
     @Override
-    public void gotRetweetsOfMe(ResponseList<Status> statuses) {
+    public void gotRetweetsOfMe(final ResponseList<Status> statuses) {
         this.statuses = statuses;
         notifyResponse();
     }
 
     @Override
-    public void gotMentions(ResponseList<Status> statuses) {
+    public void gotMentions(final ResponseList<Status> statuses) {
         this.statuses = statuses;
         notifyResponse();
     }
 
     @Override
-    public void lookedup(ResponseList<Status> statuses) {
+    public void lookedup(final ResponseList<Status> statuses) {
         this.statuses = statuses;
         notifyResponse();
     }
 
     /*Status Methods*/
     @Override
-    public void gotShowStatus(Status status) {
+    public void gotShowStatus(final Status status) {
         this.status = status;
         notifyResponse();
     }
 
     @Override
-    public void updatedStatus(Status status) {
+    public void updatedStatus(final Status status) {
         this.status = status;
         notifyResponse();
     }
 
     @Override
-    public void destroyedStatus(Status destroyedStatus) {
+    public void destroyedStatus(final Status destroyedStatus) {
         this.status = destroyedStatus;
         notifyResponse();
     }
@@ -532,13 +532,13 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.0.10
      */
     @Override
-    public void retweetedStatus(Status retweetedStatus) {
+    public void retweetedStatus(final Status retweetedStatus) {
         this.status = retweetedStatus;
         notifyResponse();
     }
 
     @Override
-    public void gotOEmbed(OEmbed oembed) {
+    public void gotOEmbed(final OEmbed oembed) {
         this.oembed = oembed;
         notifyResponse();
     }
@@ -547,26 +547,26 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.0
      */
     @Override
-    public void gotRetweets(ResponseList<Status> retweets) {
+    public void gotRetweets(final ResponseList<Status> retweets) {
         this.statuses = retweets;
         notifyResponse();
     }
 
     /*User Methods*/
     @Override
-    public void gotUserDetail(User user) {
+    public void gotUserDetail(final User user) {
         this.user = user;
         notifyResponse();
     }
 
     @Override
-    public void lookedupUsers(ResponseList<User> users) {
+    public void lookedupUsers(final ResponseList<User> users) {
         this.users = users;
         notifyResponse();
     }
 
     @Override
-    public void searchedUser(ResponseList<User> userList) {
+    public void searchedUser(final ResponseList<User> userList) {
         this.users = userList;
         notifyResponse();
     }
@@ -575,7 +575,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.1
      */
     @Override
-    public void gotSuggestedUserCategories(ResponseList<Category> categories) {
+    public void gotSuggestedUserCategories(final ResponseList<Category> categories) {
         this.categories = categories;
         notifyResponse();
     }
@@ -584,7 +584,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.1
      */
     @Override
-    public void gotUserSuggestions(ResponseList<User> users) {
+    public void gotUserSuggestions(final ResponseList<User> users) {
         this.users = users;
         notifyResponse();
     }
@@ -593,13 +593,13 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.9
      */
     @Override
-    public void gotMemberSuggestions(ResponseList<User> users) {
+    public void gotMemberSuggestions(final ResponseList<User> users) {
         this.users = users;
         notifyResponse();
     }
 
     @Override
-    public void gotContributors(ResponseList<User> users) {
+    public void gotContributors(final ResponseList<User> users) {
         notifyResponse();
     }
 
@@ -614,56 +614,56 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
     }
 
     @Override
-    public void gotContributees(ResponseList<User> users) {
+    public void gotContributees(final ResponseList<User> users) {
         notifyResponse();
     }
 
     /*List Methods*/
 
     @Override
-    public void createdUserList(UserList userList) {
+    public void createdUserList(final UserList userList) {
         this.userList = userList;
         notifyResponse();
     }
 
     @Override
-    public void updatedUserList(UserList userList) {
+    public void updatedUserList(final UserList userList) {
         this.userList = userList;
         notifyResponse();
     }
 
     @Override
-    public void gotUserLists(ResponseList<UserList> userLists) {
+    public void gotUserLists(final ResponseList<UserList> userLists) {
         this.userLists = userLists;
         notifyResponse();
     }
 
     @Override
-    public void gotShowUserList(UserList userList) {
+    public void gotShowUserList(final UserList userList) {
         this.userList = userList;
         notifyResponse();
     }
 
     @Override
-    public void destroyedUserList(UserList userList) {
+    public void destroyedUserList(final UserList userList) {
         this.userList = userList;
         notifyResponse();
     }
 
     @Override
-    public void gotUserListStatuses(ResponseList<Status> statuses) {
+    public void gotUserListStatuses(final ResponseList<Status> statuses) {
         this.statuses = statuses;
         notifyResponse();
     }
 
     @Override
-    public void gotUserListMemberships(PagableResponseList<UserList> userLists) {
+    public void gotUserListMemberships(final PagableResponseList<UserList> userLists) {
         this.pagableUserLists = userLists;
         notifyResponse();
     }
 
     @Override
-    public void gotUserListSubscriptions(PagableResponseList<UserList> userLists) {
+    public void gotUserListSubscriptions(final PagableResponseList<UserList> userLists) {
         this.pagableUserLists = userLists;
         notifyResponse();
     }
@@ -671,117 +671,117 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
     /*List Members Methods*/
 
     @Override
-    public void gotUserListMembers(PagableResponseList<User> users) {
+    public void gotUserListMembers(final PagableResponseList<User> users) {
         this.users = users;
         notifyResponse();
     }
 
     @Override
-    public void gotSavedSearches(ResponseList<SavedSearch> savedSearches) {
+    public void gotSavedSearches(final ResponseList<SavedSearch> savedSearches) {
         this.savedSearches = savedSearches;
         notifyResponse();
     }
 
     @Override
-    public void gotSavedSearch(SavedSearch savedSearch) {
+    public void gotSavedSearch(final SavedSearch savedSearch) {
         this.savedSearch = savedSearch;
         notifyResponse();
     }
 
     @Override
-    public void createdSavedSearch(SavedSearch savedSearch) {
+    public void createdSavedSearch(final SavedSearch savedSearch) {
         this.savedSearch = savedSearch;
         notifyResponse();
     }
 
     @Override
-    public void destroyedSavedSearch(SavedSearch savedSearch) {
+    public void destroyedSavedSearch(final SavedSearch savedSearch) {
         this.savedSearch = savedSearch;
         notifyResponse();
     }
 
     @Override
-    public void createdUserListMember(UserList userList) {
+    public void createdUserListMember(final UserList userList) {
         this.userList = userList;
     }
 
     @Override
-    public void createdUserListMembers(UserList userList) {
+    public void createdUserListMembers(final UserList userList) {
         this.userList = userList;
     }
 
     @Override
-    public void destroyedUserListMember(UserList userList) {
+    public void destroyedUserListMember(final UserList userList) {
         this.userList = userList;
     }
 
     @Override
-    public void checkedUserListMembership(User user) {
+    public void checkedUserListMembership(final User user) {
         this.user = user;
     }
 
     /*List Subscribers Methods*/
 
     @Override
-    public void gotUserListSubscribers(PagableResponseList<User> users) {
+    public void gotUserListSubscribers(final PagableResponseList<User> users) {
         this.users = users;
     }
 
     @Override
-    public void subscribedUserList(UserList userList) {
+    public void subscribedUserList(final UserList userList) {
         this.userList = userList;
     }
 
     @Override
-    public void unsubscribedUserList(UserList userList) {
+    public void unsubscribedUserList(final UserList userList) {
         this.userList = userList;
     }
 
     @Override
-    public void checkedUserListSubscription(User user) {
+    public void checkedUserListSubscription(final User user) {
         this.user = user;
     }
 
     /*Direct Message Methods*/
     @Override
-    public void gotDirectMessages(ResponseList<DirectMessage> messages) {
+    public void gotDirectMessages(final ResponseList<DirectMessage> messages) {
         this.messages = messages;
         notifyResponse();
     }
 
     @Override
-    public void gotSentDirectMessages(ResponseList<DirectMessage> messages) {
+    public void gotSentDirectMessages(final ResponseList<DirectMessage> messages) {
         this.messages = messages;
         notifyResponse();
     }
 
     @Override
-    public void sentDirectMessage(DirectMessage message) {
+    public void sentDirectMessage(final DirectMessage message) {
         this.message = message;
         notifyResponse();
     }
 
     @Override
-    public void destroyedDirectMessage(long id) {
+    public void destroyedDirectMessage(final long id) {
         this.id = id;
         notifyResponse();
     }
 
     @Override
-    public void gotDirectMessage(DirectMessage message) {
+    public void gotDirectMessage(final DirectMessage message) {
         this.message = message;
         notifyResponse();
     }
 
     /*Friendship Methods*/
     @Override
-    public void createdFriendship(User user) {
+    public void createdFriendship(final User user) {
         this.user = user;
         notifyResponse();
     }
 
     @Override
-    public void destroyedFriendship(User user) {
+    public void destroyedFriendship(final User user) {
         this.user = user;
         notifyResponse();
     }
@@ -790,19 +790,19 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.0
      */
     @Override
-    public void gotShowFriendship(Relationship relationship) {
+    public void gotShowFriendship(final Relationship relationship) {
         this.relationship = relationship;
         notifyResponse();
     }
 
     @Override
-    public void gotFriendsList(PagableResponseList<User> users) {
+    public void gotFriendsList(final PagableResponseList<User> users) {
         this.users = users;
         notifyResponse();
     }
 
     @Override
-    public void gotFollowersList(PagableResponseList<User> users) {
+    public void gotFollowersList(final PagableResponseList<User> users) {
         this.users = users;
         notifyResponse();
     }
@@ -811,7 +811,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.2
      */
     @Override
-    public void gotIncomingFriendships(IDs ids) {
+    public void gotIncomingFriendships(final IDs ids) {
         this.ids = ids;
         notifyResponse();
     }
@@ -820,33 +820,33 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.2
      */
     @Override
-    public void gotOutgoingFriendships(IDs ids) {
+    public void gotOutgoingFriendships(final IDs ids) {
         this.ids = ids;
         notifyResponse();
     }
 
     /*Social Graph Methods*/
     @Override
-    public void gotFriendsIDs(IDs ids) {
+    public void gotFriendsIDs(final IDs ids) {
         this.ids = ids;
         notifyResponse();
     }
 
     @Override
-    public void gotFollowersIDs(IDs ids) {
+    public void gotFollowersIDs(final IDs ids) {
         this.ids = ids;
         notifyResponse();
     }
 
     @Override
-    public void lookedUpFriendships(ResponseList<Friendship> friendships) {
+    public void lookedUpFriendships(final ResponseList<Friendship> friendships) {
         this.friendships = friendships;
         notifyResponse();
     }
 
 
     @Override
-    public void updatedFriendship(Relationship relationship) {
+    public void updatedFriendship(final Relationship relationship) {
         this.relationship = relationship;
         notifyResponse();
     }
@@ -854,25 +854,25 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
     /*Account Methods*/
 
     @Override
-    public void gotRateLimitStatus(Map<String, RateLimitStatus> rateLimitStatus) {
+    public void gotRateLimitStatus(final Map<String, RateLimitStatus> rateLimitStatus) {
         this.rateLimitStatus = rateLimitStatus;
         notifyResponse();
     }
 
     @Override
-    public void verifiedCredentials(User user) {
+    public void verifiedCredentials(final User user) {
         this.user = user;
         notifyResponse();
     }
 
     @Override
-    public void gotAccountSettings(AccountSettings settings) {
+    public void gotAccountSettings(final AccountSettings settings) {
         this.settings = settings;
         notifyResponse();
     }
 
     @Override
-    public void updatedAccountSettings(AccountSettings settings) {
+    public void updatedAccountSettings(final AccountSettings settings) {
         this.settings = settings;
         notifyResponse();
     }
@@ -881,83 +881,83 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.0
      */
     @Override
-    public void updatedProfileImage(User user) {
+    public void updatedProfileImage(final User user) {
         this.user = user;
         notifyResponse();
     }
 
 
     @Override
-    public void updatedProfile(User user) {
+    public void updatedProfile(final User user) {
         this.user = user;
         notifyResponse();
     }
 
     /*Favorite Methods*/
     @Override
-    public void gotFavorites(ResponseList<Status> statuses) {
+    public void gotFavorites(final ResponseList<Status> statuses) {
         this.statuses = statuses;
         notifyResponse();
     }
 
     @Override
-    public void createdFavorite(Status status) {
+    public void createdFavorite(final Status status) {
         this.status = status;
         notifyResponse();
     }
 
     @Override
-    public void destroyedFavorite(Status status) {
+    public void destroyedFavorite(final Status status) {
         this.status = status;
         notifyResponse();
     }
 
     /*Block Methods*/
     @Override
-    public void createdBlock(User user) {
+    public void createdBlock(final User user) {
         this.user = user;
         notifyResponse();
     }
 
     @Override
-    public void destroyedBlock(User user) {
+    public void destroyedBlock(final User user) {
         this.user = user;
         notifyResponse();
     }
 
     @Override
-    public void gotBlocksList(ResponseList<User> blockingUsers) {
+    public void gotBlocksList(final ResponseList<User> blockingUsers) {
         this.users = blockingUsers;
         notifyResponse();
     }
 
     @Override
-    public void gotBlockIDs(IDs blockingUsersIDs) {
+    public void gotBlockIDs(final IDs blockingUsersIDs) {
         this.ids = blockingUsersIDs;
         notifyResponse();
     }
 
     /*Mute Methods*/
     @Override
-    public void createdMute(User user) {
+    public void createdMute(final User user) {
         this.user = user;
         notifyResponse();
     }
 
     @Override
-    public void destroyedMute(User user) {
+    public void destroyedMute(final User user) {
         this.user = user;
         notifyResponse();
     }
 
     @Override
-    public void gotMutesList(ResponseList<User> mutingUsers) {
+    public void gotMutesList(final ResponseList<User> mutingUsers) {
         this.users = mutingUsers;
         notifyResponse();
     }
 
     @Override
-    public void gotMuteIDs(IDs mutingUsersIDs) {
+    public void gotMuteIDs(final IDs mutingUsersIDs) {
         this.ids = mutingUsersIDs;
         notifyResponse();
     }
@@ -965,7 +965,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
     /*Spam Reporting Methods*/
 
     @Override
-    public void reportedSpam(User reportedSpammer) {
+    public void reportedSpam(final User reportedSpammer) {
         this.user = reportedSpammer;
         notifyResponse();
     }
@@ -983,44 +983,44 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.1
      */
     @Override
-    public void gotAvailableTrends(ResponseList<Location> locations) {
+    public void gotAvailableTrends(final ResponseList<Location> locations) {
         this.locations = locations;
         notifyResponse();
     }
 
     @Override
-    public void gotClosestTrends(ResponseList<Location> locations) {
+    public void gotClosestTrends(final ResponseList<Location> locations) {
         this.locations = locations;
         notifyResponse();
     }
 
     /*Geo Methods*/
     @Override
-    public void searchedPlaces(ResponseList<Place> places) {
+    public void searchedPlaces(final ResponseList<Place> places) {
         this.places = places;
         notifyResponse();
     }
 
     @Override
-    public void gotSimilarPlaces(ResponseList<Place> places) {
+    public void gotSimilarPlaces(final ResponseList<Place> places) {
         this.places = places;
         notifyResponse();
     }
 
     @Override
-    public void gotReverseGeoCode(ResponseList<Place> places) {
+    public void gotReverseGeoCode(final ResponseList<Place> places) {
         this.places = places;
         notifyResponse();
     }
 
     @Override
-    public void gotGeoDetails(Place place) {
+    public void gotGeoDetails(final Place place) {
         this.place = place;
         notifyResponse();
     }
 
     @Override
-    public void gotPlaceTrends(Trends trends) {
+    public void gotPlaceTrends(final Trends trends) {
         this.trends = trends;
         notifyResponse();
     }
@@ -1031,7 +1031,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.7
      */
     @Override
-    public void gotTermsOfService(String str) {
+    public void gotTermsOfService(final String str) {
         notifyResponse();
     }
 
@@ -1039,19 +1039,19 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @since Twitter4J 2.1.7
      */
     @Override
-    public void gotPrivacyPolicy(String str) {
+    public void gotPrivacyPolicy(final String str) {
         notifyResponse();
     }
 
     /*Help Methods*/
     @Override
-    public void gotAPIConfiguration(TwitterAPIConfiguration conf) {
+    public void gotAPIConfiguration(final TwitterAPIConfiguration conf) {
         this.apiConf = conf;
         notifyResponse();
     }
 
     @Override
-    public void gotLanguages(ResponseList<HelpResources.Language> languages) {
+    public void gotLanguages(final ResponseList<HelpResources.Language> languages) {
         this.languages = languages;
         notifyResponse();
     }
@@ -1061,7 +1061,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @param method int
      */
     @Override
-    public void onException(TwitterException te, TwitterMethod method) {
+    public void onException(final TwitterException te, final TwitterMethod method) {
         this.te = te;
         System.out.println("onexception on " + method.name());
         te.printStackTrace();
@@ -1069,16 +1069,16 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
     }
 
     @Override
-    public void gotOAuthRequestToken(RequestToken token) {
+    public void gotOAuthRequestToken(final RequestToken token) {
     }
 
     @Override
-    public void gotOAuthAccessToken(AccessToken token) {
+    public void gotOAuthAccessToken(final AccessToken token) {
     }
 
     @Override
-    public void gotOAuth2Token(OAuth2Token token) {
-        System.out.println("[gotOAuth2Token] token:" + token.getAccessToken().replaceAll("\\w","*") + " type:" + token.getTokenType());
+    public void gotOAuth2Token(final OAuth2Token token) {
+        System.out.println("[gotOAuth2Token] token:" + token.getAccessToken().replaceAll("\\w", "*") + " type:" + token.getTokenType());
         assertEquals("bearer", token.getTokenType());
         notifyResponse();
     }
@@ -1101,7 +1101,7 @@ class AsyncTwitterTest extends TwitterTestBase implements TwitterListener {
      * @return the deserialized object
      * @throws Exception in the case the object is not (de)serializable
      */
-    public static Object assertDeserializedFormIsEqual(Object obj) throws Exception {
+    public static Object assertDeserializedFormIsEqual(final Object obj) throws Exception {
         ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(byteOutputStream);
         oos.writeObject(obj);

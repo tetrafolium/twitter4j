@@ -29,35 +29,35 @@ public class PrintRetweetStream {
      * @param args arguments doesn't take effect with this example
      * @throws TwitterException when Twitter service or network is unavailable
      */
-    public static void main(String[] args) throws TwitterException {
+    public static void main(final String[] args) throws TwitterException {
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance().addListener(new StatusListener() {
             @Override
-            public void onStatus(Status status) {
+            public void onStatus(final Status status) {
                 System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText());
             }
 
             @Override
-            public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+            public void onDeletionNotice(final StatusDeletionNotice statusDeletionNotice) {
                 System.out.println("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
             }
 
             @Override
-            public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
+            public void onTrackLimitationNotice(final int numberOfLimitedStatuses) {
                 System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
             }
 
             @Override
-            public void onScrubGeo(long userId, long upToStatusId) {
+            public void onScrubGeo(final long userId, final long upToStatusId) {
                 System.out.println("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
             }
 
             @Override
-            public void onStallWarning(StallWarning warning) {
+            public void onStallWarning(final StallWarning warning) {
                 System.out.println("Got stall warning:" + warning);
             }
 
             @Override
-            public void onException(Exception ex) {
+            public void onException(final Exception ex) {
                 ex.printStackTrace();
             }
         }).retweet();

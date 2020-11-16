@@ -56,14 +56,14 @@ class TwitterTest extends TwitterTestBase {
         assertTrue(rateLimitStatus.values().size() > 5);
 
         twitter1.addRateLimitStatusListener(new RateLimitStatusListener() {
-            public void onRateLimitStatus(RateLimitStatusEvent event) {
+            public void onRateLimitStatus(final RateLimitStatusEvent event) {
                 System.out.println("onRateLimitStatus" + event);
                 accountLimitStatusAcquired = event.isAccountRateLimitStatus();
                 ipLimitStatusAcquired = event.isIPRateLimitStatus();
                 TwitterTest.this.rateLimitStatus = event.getRateLimitStatus();
             }
 
-            public void onRateLimitReached(RateLimitStatusEvent event) {
+            public void onRateLimitReached(final RateLimitStatusEvent event) {
 
             }
 
@@ -72,13 +72,13 @@ class TwitterTest extends TwitterTestBase {
         assertDeserializedFormIsNotEqual(twitter1);
 
         twitter1.addRateLimitStatusListener(new RateLimitStatusListener() {
-            public void onRateLimitStatus(RateLimitStatusEvent event) {
+            public void onRateLimitStatus(final RateLimitStatusEvent event) {
                 accountLimitStatusAcquired = event.isAccountRateLimitStatus();
                 ipLimitStatusAcquired = event.isIPRateLimitStatus();
                 TwitterTest.this.rateLimitStatus = event.getRateLimitStatus();
             }
 
-            public void onRateLimitReached(RateLimitStatusEvent event) {
+            public void onRateLimitReached(final RateLimitStatusEvent event) {
             }
         });
         // the listener doesn't implement serializable and deserialized form should not be equal to the original object
@@ -104,7 +104,7 @@ class TwitterTest extends TwitterTestBase {
         assertEquals(TwitterResponse.READ_WRITE_DIRECTMESSAGES, response.getAccessLevel());
     }
 
-    public static Object assertDeserializedFormIsNotEqual(Object obj) throws Exception {
+    public static Object assertDeserializedFormIsNotEqual(final Object obj) throws Exception {
         ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(byteOutputStream);
         oos.writeObject(obj);

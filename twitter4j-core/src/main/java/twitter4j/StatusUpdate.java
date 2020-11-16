@@ -42,7 +42,7 @@ public final class StatusUpdate implements java.io.Serializable {
     private boolean autoPopulateReplyMetadata;
     private String attachmentUrl = null;
 
-    public StatusUpdate(String status) {
+    public StatusUpdate(final String status) {
         this.status = status;
     }
 
@@ -54,11 +54,11 @@ public final class StatusUpdate implements java.io.Serializable {
         return inReplyToStatusId;
     }
 
-    public void setInReplyToStatusId(long inReplyToStatusId) {
+    public void setInReplyToStatusId(final long inReplyToStatusId) {
         this.inReplyToStatusId = inReplyToStatusId;
     }
 
-    public StatusUpdate inReplyToStatusId(long inReplyToStatusId) {
+    public StatusUpdate inReplyToStatusId(final long inReplyToStatusId) {
         setInReplyToStatusId(inReplyToStatusId);
         return this;
     }
@@ -67,11 +67,11 @@ public final class StatusUpdate implements java.io.Serializable {
         return location;
     }
 
-    public void setLocation(GeoLocation location) {
+    public void setLocation(final GeoLocation location) {
         this.location = location;
     }
 
-    public StatusUpdate location(GeoLocation location) {
+    public StatusUpdate location(final GeoLocation location) {
         setLocation(location);
         return this;
     }
@@ -80,11 +80,11 @@ public final class StatusUpdate implements java.io.Serializable {
         return placeId;
     }
 
-    public void setPlaceId(String placeId) {
+    public void setPlaceId(final String placeId) {
         this.placeId = placeId;
     }
 
-    public StatusUpdate placeId(String placeId) {
+    public StatusUpdate placeId(final String placeId) {
         setPlaceId(placeId);
         return this;
     }
@@ -93,11 +93,11 @@ public final class StatusUpdate implements java.io.Serializable {
         return displayCoordinates;
     }
 
-    public void setDisplayCoordinates(boolean displayCoordinates) {
+    public void setDisplayCoordinates(final boolean displayCoordinates) {
         this.displayCoordinates = displayCoordinates;
     }
 
-    public StatusUpdate displayCoordinates(boolean displayCoordinates) {
+    public StatusUpdate displayCoordinates(final boolean displayCoordinates) {
         setDisplayCoordinates(displayCoordinates);
         return this;
     }
@@ -106,7 +106,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @param file media file
      * @since Twitter4J 2.2.5
      */
-    public void setMedia(File file) {
+    public void setMedia(final File file) {
         this.mediaFile = file;
     }
 
@@ -115,7 +115,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @return this instance
      * @since Twitter4J 2.2.5
      */
-    public StatusUpdate media(File file) {
+    public StatusUpdate media(final File file) {
         setMedia(file);
         return this;
     }
@@ -125,7 +125,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @param body media body as stream
      * @since Twitter4J 2.2.5
      */
-    public void setMedia(String name, InputStream body) {
+    public void setMedia(final String name, final InputStream body) {
         this.mediaName = name;
         this.mediaBody = body;
     }
@@ -134,7 +134,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @param mediaIds media ids
      * @since Twitter4J 4.0.2
      */
-    public void setMediaIds(long... mediaIds) {
+    public void setMediaIds(final long... mediaIds) {
         this.mediaIds = mediaIds;
     }
 
@@ -150,7 +150,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @param attachmentUrl attachment url
      * @since Twitter4J 4.0.7
      */
-    public void setAttachmentUrl(String attachmentUrl) {
+    public void setAttachmentUrl(final String attachmentUrl) {
         this.attachmentUrl = attachmentUrl;
     }
 
@@ -159,7 +159,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @return status update
      * @since Twitter4J 4.0.7
      */
-    public StatusUpdate attachmentUrl(String attachmentUrl) {
+    public StatusUpdate attachmentUrl(final String attachmentUrl) {
         setAttachmentUrl(attachmentUrl);
         return this;
     }
@@ -174,7 +174,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @return this instance
      * @since Twitter4J 2.2.5
      */
-    public StatusUpdate media(String name, InputStream body) {
+    public StatusUpdate media(final String name, final InputStream body) {
         setMedia(name, body);
         return this;
     }
@@ -183,7 +183,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @param possiblySensitive possibly sensitive
      * @since Twitter4J 2.2.5
      */
-    public void setPossiblySensitive(boolean possiblySensitive) {
+    public void setPossiblySensitive(final boolean possiblySensitive) {
         this.possiblySensitive = possiblySensitive;
     }
 
@@ -192,7 +192,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @return this instance
      * @since Twitter4J 2.2.5
      */
-    public StatusUpdate possiblySensitive(boolean possiblySensitive) {
+    public StatusUpdate possiblySensitive(final boolean possiblySensitive) {
         setPossiblySensitive(possiblySensitive);
         return this;
     }
@@ -219,7 +219,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @param autoPopulateReplyMetadata auto reply meta data
      * @since Twitter4J 4.0.7
      */
-    public void setAutoPopulateReplyMetadata(boolean autoPopulateReplyMetadata) {
+    public void setAutoPopulateReplyMetadata(final boolean autoPopulateReplyMetadata) {
         this.autoPopulateReplyMetadata = autoPopulateReplyMetadata;
     }
 
@@ -229,7 +229,7 @@ public final class StatusUpdate implements java.io.Serializable {
      * @return this instance
      * @since Twitter4J 4.0.7
      */
-    public StatusUpdate autoPopulateReplyMetadata(boolean autoPopulateReplyMetadata) {
+    public StatusUpdate autoPopulateReplyMetadata(final boolean autoPopulateReplyMetadata) {
         setAutoPopulateReplyMetadata(autoPopulateReplyMetadata);
         return this;
     }
@@ -258,7 +258,7 @@ public final class StatusUpdate implements java.io.Serializable {
         } else if (mediaIds != null && mediaIds.length >= 1) {
             params.add(new HttpParameter("media_ids", StringUtil.join(mediaIds)));
         }
-        if(autoPopulateReplyMetadata){
+        if (autoPopulateReplyMetadata) {
             appendParameter("auto_populate_reply_metadata", "true", params);
         }
         appendParameter("attachment_url", attachmentUrl, params);
@@ -266,22 +266,22 @@ public final class StatusUpdate implements java.io.Serializable {
         return params.toArray(paramArray);
     }
 
-    private void appendParameter(String name, String value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final String value, final List<HttpParameter> params) {
         if (value != null) {
             params.add(new HttpParameter(name, value));
         }
     }
 
-    private void appendParameter(String name, double value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final double value, final List<HttpParameter> params) {
         params.add(new HttpParameter(name, String.valueOf(value)));
     }
 
-    private void appendParameter(String name, long value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final long value, final List<HttpParameter> params) {
         params.add(new HttpParameter(name, String.valueOf(value)));
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -320,19 +320,19 @@ public final class StatusUpdate implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "StatusUpdate{" +
-                "status='" + status + '\'' +
-                ", inReplyToStatusId=" + inReplyToStatusId +
-                ", location=" + location +
-                ", placeId='" + placeId + '\'' +
-                ", displayCoordinates=" + displayCoordinates +
-                ", possiblySensitive=" + possiblySensitive +
-                ", mediaName='" + mediaName + '\'' +
-                ", mediaBody=" + mediaBody +
-                ", mediaFile=" + mediaFile +
-                ", mediaIds=" + Arrays.toString(mediaIds) +
-                ", autoPopulateReplyMetadata=" + autoPopulateReplyMetadata +
-                ", attachmentUrl='" + attachmentUrl + '\'' +
-                '}';
+        return "StatusUpdate{"
+                + "status='" + status + '\''
+                + ", inReplyToStatusId=" + inReplyToStatusId
+                + ", location=" + location
+                + ", placeId='" + placeId + '\''
+                + ", displayCoordinates=" + displayCoordinates
+                + ", possiblySensitive=" + possiblySensitive
+                + ", mediaName='" + mediaName + '\''
+                + ", mediaBody=" + mediaBody
+                + ", mediaFile=" + mediaFile
+                + ", mediaIds=" + Arrays.toString(mediaIds)
+                + ", autoPopulateReplyMetadata=" + autoPopulateReplyMetadata
+                + ", attachmentUrl='" + attachmentUrl + '\''
+                + '}';
     }
 }

@@ -54,7 +54,7 @@ public final class AsyncTwitterFactory implements java.io.Serializable {
      * @param conf the configuration to use
      * @since Twitter4J 2.1.1
      */
-    public AsyncTwitterFactory(Configuration conf) {
+    public AsyncTwitterFactory(final Configuration conf) {
         if (conf == null) {
             throw new NullPointerException("configuration cannot be null");
         }
@@ -67,7 +67,7 @@ public final class AsyncTwitterFactory implements java.io.Serializable {
      * @param configTreePath the path
      * @since Twitter4J 2.1.12
      */
-    public AsyncTwitterFactory(String configTreePath) {
+    public AsyncTwitterFactory(final String configTreePath) {
         this.conf = ConfigurationContext.getInstance(configTreePath);
     }
 
@@ -88,7 +88,7 @@ public final class AsyncTwitterFactory implements java.io.Serializable {
      * @param accessToken access token
      * @return an instance
      */
-    public AsyncTwitter getInstance(AccessToken accessToken) {
+    public AsyncTwitter getInstance(final AccessToken accessToken) {
         String consumerKey = conf.getOAuthConsumerKey();
         String consumerSecret = conf.getOAuthConsumerSecret();
         if (null == consumerKey && null == consumerSecret) {
@@ -104,7 +104,7 @@ public final class AsyncTwitterFactory implements java.io.Serializable {
      * @param auth authorization
      * @return an instance
      */
-    public AsyncTwitter getInstance(Authorization auth) {
+    public AsyncTwitter getInstance(final Authorization auth) {
         return new AsyncTwitterImpl(conf, auth);
     }
 
@@ -114,7 +114,7 @@ public final class AsyncTwitterFactory implements java.io.Serializable {
      * @param twitter Twitter instance
      * @return an instance
      */
-    public AsyncTwitter getInstance(Twitter twitter) {
+    public AsyncTwitter getInstance(final Twitter twitter) {
         return new AsyncTwitterImpl(twitter.getConfiguration(), twitter.getAuthorization());
     }
 

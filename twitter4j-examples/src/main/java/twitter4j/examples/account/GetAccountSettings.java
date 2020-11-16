@@ -29,7 +29,7 @@ public final class GetAccountSettings {
      *
      * @param args arguments doesn't take effect with this example
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Twitter twitter = new TwitterFactory().getInstance();
             AccountSettings settings = twitter.getAccountSettings();

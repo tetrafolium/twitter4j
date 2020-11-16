@@ -39,7 +39,7 @@ class PropertyConfigurationFactory implements ConfigurationFactory {
     // It may be preferable to cache the config instance
 
     @Override
-    public Configuration getInstance(String configTreePath) {
+    public Configuration getInstance(final String configTreePath) {
         PropertyConfiguration conf = new PropertyConfiguration(configTreePath);
         conf.dumpConfiguration();
         return conf;

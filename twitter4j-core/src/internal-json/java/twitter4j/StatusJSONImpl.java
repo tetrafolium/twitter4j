@@ -68,7 +68,7 @@ import static twitter4j.ParseUtil.getDate;
     private long quotedStatusId = -1L;
     private URLEntity quotedStatusPermalink;
 
-    /*package*/StatusJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/StatusJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         JSONObject json = res.asJSONObject();
         init(json);
@@ -78,7 +78,7 @@ import static twitter4j.ParseUtil.getDate;
         }
     }
 
-    /*package*/StatusJSONImpl(JSONObject json, Configuration conf) throws TwitterException {
+    /*package*/StatusJSONImpl(final JSONObject json, final Configuration conf) throws TwitterException {
         super();
         init(json);
         if (conf.isJSONStoreEnabled()) {
@@ -86,7 +86,7 @@ import static twitter4j.ParseUtil.getDate;
         }
     }
 
-    /*package*/ StatusJSONImpl(JSONObject json) throws TwitterException {
+    /*package*/ StatusJSONImpl(final JSONObject json) throws TwitterException {
         super();
         init(json);
     }
@@ -96,7 +96,7 @@ import static twitter4j.ParseUtil.getDate;
 
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         id = ParseUtil.getLong("id", json);
         source = ParseUtil.getUnescapedString("source", json);
         createdAt = getDate("created_at", json);
@@ -182,11 +182,11 @@ import static twitter4j.ParseUtil.getDate;
                     scopes = new ScopesImpl(placeIds);
                 }
             }
-            if (!json.isNull("withheld_in_countries")){
+            if (!json.isNull("withheld_in_countries")) {
                 JSONArray withheld_in_countries = json.getJSONArray("withheld_in_countries");
                 int length = withheld_in_countries.length();
                 withheldInCountries = new String[length];
-                for (int i = 0 ; i < length; i ++) {
+                for (int i = 0; i < length; i++) {
                     withheldInCountries[i] = withheld_in_countries.getString(i);
                 }
             }
@@ -195,7 +195,7 @@ import static twitter4j.ParseUtil.getDate;
         }
     }
 
-    private void collectEntities(JSONObject json) throws JSONException, TwitterException {
+    private void collectEntities(final JSONObject json) throws JSONException, TwitterException {
         if (!json.isNull("entities")) {
             JSONObject entities = json.getJSONObject("entities");
             userMentionEntities = EntitiesParseUtil.getUserMentions(entities);
@@ -215,7 +215,7 @@ import static twitter4j.ParseUtil.getDate;
         }
     }
 
-    private void mergeExtendedEntities(JSONObject json) throws JSONException, TwitterException {
+    private void mergeExtendedEntities(final JSONObject json) throws JSONException, TwitterException {
         if (!json.isNull("extended_entities")) {
             JSONObject extendedEntities = json.getJSONObject("extended_entities");
             if (!extendedEntities.isNull("media")) {
@@ -229,7 +229,7 @@ import static twitter4j.ParseUtil.getDate;
         }
     }
 
-    private void mergeExtendedTweet(JSONObject extendedTweet) throws TwitterException {
+    private void mergeExtendedTweet(final JSONObject extendedTweet) throws TwitterException {
         try {
             JSONArray indicesArray = extendedTweet.getJSONArray("display_text_range");
             displayTextRangeStart = indicesArray.getInt(0);
@@ -250,7 +250,7 @@ import static twitter4j.ParseUtil.getDate;
     }
 
     @Override
-    public int compareTo(Status that) {
+    public int compareTo(final Status that) {
         long delta = this.id - that.getId();
         if (delta < Integer.MIN_VALUE) {
             return Integer.MIN_VALUE;
@@ -433,7 +433,7 @@ import static twitter4j.ParseUtil.getDate;
     }
 
     /*package*/
-    static ResponseList<Status> createStatusList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<Status> createStatusList(final HttpResponse res, final Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 TwitterObjectFactory.clearThreadLocalMap();
@@ -464,7 +464,7 @@ import static twitter4j.ParseUtil.getDate;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (null == obj) {
             return false;
         }
@@ -476,35 +476,35 @@ import static twitter4j.ParseUtil.getDate;
 
     @Override
     public String toString() {
-        return "StatusJSONImpl{" +
-                "createdAt=" + createdAt +
-                ", id=" + id +
-                ", text='" + text + '\'' +
-                ", source='" + source + '\'' +
-                ", isTruncated=" + isTruncated +
-                ", inReplyToStatusId=" + inReplyToStatusId +
-                ", inReplyToUserId=" + inReplyToUserId +
-                ", isFavorited=" + isFavorited +
-                ", isRetweeted=" + isRetweeted +
-                ", favoriteCount=" + favoriteCount +
-                ", inReplyToScreenName='" + inReplyToScreenName + '\'' +
-                ", geoLocation=" + geoLocation +
-                ", place=" + place +
-                ", retweetCount=" + retweetCount +
-                ", isPossiblySensitive=" + isPossiblySensitive +
-                ", lang='" + lang + '\'' +
-                ", contributorsIDs=" + Arrays.toString(contributorsIDs) +
-                ", retweetedStatus=" + retweetedStatus +
-                ", userMentionEntities=" + Arrays.toString(userMentionEntities) +
-                ", urlEntities=" + Arrays.toString(urlEntities) +
-                ", hashtagEntities=" + Arrays.toString(hashtagEntities) +
-                ", mediaEntities=" + Arrays.toString(mediaEntities) +
-                ", symbolEntities=" + Arrays.toString(symbolEntities) +
-                ", currentUserRetweetId=" + currentUserRetweetId +
-                ", user=" + user +
-                ", withHeldInCountries=" + Arrays.toString(withheldInCountries)+
-                ", quotedStatusId=" + quotedStatusId +
-                ", quotedStatus=" + quotedStatus +
-                '}';
+        return "StatusJSONImpl{"
+                + "createdAt=" + createdAt
+                + ", id=" + id
+                + ", text='" + text + '\''
+                + ", source='" + source + '\''
+                + ", isTruncated=" + isTruncated
+                + ", inReplyToStatusId=" + inReplyToStatusId
+                + ", inReplyToUserId=" + inReplyToUserId
+                + ", isFavorited=" + isFavorited
+                + ", isRetweeted=" + isRetweeted
+                + ", favoriteCount=" + favoriteCount
+                + ", inReplyToScreenName='" + inReplyToScreenName + '\''
+                + ", geoLocation=" + geoLocation
+                + ", place=" + place
+                + ", retweetCount=" + retweetCount
+                + ", isPossiblySensitive=" + isPossiblySensitive
+                + ", lang='" + lang + '\''
+                + ", contributorsIDs=" + Arrays.toString(contributorsIDs)
+                + ", retweetedStatus=" + retweetedStatus
+                + ", userMentionEntities=" + Arrays.toString(userMentionEntities)
+                + ", urlEntities=" + Arrays.toString(urlEntities)
+                + ", hashtagEntities=" + Arrays.toString(hashtagEntities)
+                + ", mediaEntities=" + Arrays.toString(mediaEntities)
+                + ", symbolEntities=" + Arrays.toString(symbolEntities)
+                + ", currentUserRetweetId=" + currentUserRetweetId
+                + ", user=" + user
+                + ", withHeldInCountries=" + Arrays.toString(withheldInCountries)
+                + ", quotedStatusId=" + quotedStatusId
+                + ", quotedStatus=" + quotedStatus
+                + '}';
     }
 }

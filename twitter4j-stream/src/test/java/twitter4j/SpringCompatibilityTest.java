@@ -76,7 +76,7 @@ class SpringCompatibilityTest {
         assertTrue(twitterStream instanceof TwitterStream);
     }
 
-    private void writeFile(String path, String content) throws IOException {
+    private void writeFile(final String path, final String content) throws IOException {
         File file = new File(path);
         file.delete();
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
@@ -84,7 +84,7 @@ class SpringCompatibilityTest {
         bw.close();
     }
 
-    private void deleteFile(String path) throws IOException {
+    private void deleteFile(final String path) throws IOException {
         File file = new File(path);
         file.delete();
     }

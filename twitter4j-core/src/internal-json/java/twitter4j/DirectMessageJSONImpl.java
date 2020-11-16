@@ -44,7 +44,7 @@ import java.util.List;
     private QuickReply[] quickReplies;
     private String quickReplyResponse;
 
-    /*package*/DirectMessageJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/DirectMessageJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         JSONObject json = res.asJSONObject();
         try {
@@ -59,11 +59,11 @@ import java.util.List;
         }
     }
 
-    /*package*/DirectMessageJSONImpl(JSONObject json) throws TwitterException {
+    /*package*/DirectMessageJSONImpl(final JSONObject json) throws TwitterException {
         init(json);
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         try {
             id = ParseUtil.getLong("id", json);
             JSONObject messageCreate;
@@ -75,7 +75,7 @@ import java.util.List;
                 senderId = ParseUtil.getLong("sender_id", messageCreate);
                 messageData = messageCreate.getJSONObject("message_data");
 
-            }else{
+            } else {
                 // raw JSON data from Twitter4J 4.0.6 or before
                 createdAt = ParseUtil.getDate("created_at", json);;
                 senderId = ParseUtil.getLong("sender_id", json);
@@ -108,12 +108,12 @@ import java.util.List;
                 List<QuickReply> quickReplyList = new ArrayList<QuickReply>();
                 for (int i = 0; i < options.length(); i++) {
                     JSONObject option = options.getJSONObject(i);
-                    String description = option.isNull("description") ? null :option.getString("description");
-                    String metadata = option.isNull("metadata") ? null :option.getString("metadata");
+                    String description = option.isNull("description") ? null : option.getString("description");
+                    String metadata = option.isNull("metadata") ? null : option.getString("metadata");
                     quickReplyList.add(new QuickReply(option.getString("label"), description, metadata));
                 }
                 quickReplies = quickReplyList.toArray(new QuickReply[quickReplyList.size()]);
-            }else{
+            } else {
                 quickReplies = new QuickReply[0];
             }
             if (!messageData.isNull("quick_reply_response") && !messageData.getJSONObject("quick_reply_response").isNull("metadata")) {
@@ -127,7 +127,7 @@ import java.util.List;
         }
     }
 
-    static DirectMessageList createDirectMessageList(HttpResponse res, Configuration conf) throws TwitterException {
+    static DirectMessageList createDirectMessageList(final HttpResponse res, final Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 TwitterObjectFactory.clearThreadLocalMap();
@@ -138,14 +138,14 @@ import java.util.List;
                 JSONObject jsonObject = res.asJSONObject();
                 list = jsonObject.getJSONArray("events");
                 directMessages = new DirectMessageListImpl(list.length(), jsonObject, res);
-            }catch(TwitterException te){
+            } catch (TwitterException te) {
                 if (te.getCause() != null && te.getCause() instanceof JSONException) {
                     // serialized form from Twitter4J 4.0.6 or before
                     list = res.asJSONArray();
                     int size = list.length();
                     directMessages = new DirectMessageListImpl(size, res);
 
-                }else{
+                } else {
                   throw  te;
                 }
             }
@@ -227,7 +227,7 @@ import java.util.List;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -272,19 +272,19 @@ import java.util.List;
 
     @Override
     public String toString() {
-        return "DirectMessageJSONImpl{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                ", senderId=" + senderId +
-                ", recipientId=" + recipientId +
-                ", createdAt=" + createdAt +
-                ", userMentionEntities=" + Arrays.toString(userMentionEntities) +
-                ", urlEntities=" + Arrays.toString(urlEntities) +
-                ", hashtagEntities=" + Arrays.toString(hashtagEntities) +
-                ", mediaEntities=" + Arrays.toString(mediaEntities) +
-                ", symbolEntities=" + Arrays.toString(symbolEntities) +
-                ", quickReplies=" + Arrays.toString(quickReplies) +
-                ", quickReplyResponse='" + quickReplyResponse + '\'' +
-                '}';
+        return "DirectMessageJSONImpl{"
+                + "id=" + id
+                + ", text='" + text + '\''
+                + ", senderId=" + senderId
+                + ", recipientId=" + recipientId
+                + ", createdAt=" + createdAt
+                + ", userMentionEntities=" + Arrays.toString(userMentionEntities)
+                + ", urlEntities=" + Arrays.toString(urlEntities)
+                + ", hashtagEntities=" + Arrays.toString(hashtagEntities)
+                + ", mediaEntities=" + Arrays.toString(mediaEntities)
+                + ", symbolEntities=" + Arrays.toString(symbolEntities)
+                + ", quickReplies=" + Arrays.toString(quickReplies)
+                + ", quickReplyResponse='" + quickReplyResponse + '\''
+                + '}';
     }
 }

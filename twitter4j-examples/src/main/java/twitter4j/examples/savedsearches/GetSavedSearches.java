@@ -34,7 +34,7 @@ public final class GetSavedSearches {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Twitter twitter = new TwitterFactory().getInstance();
             List<SavedSearch> savedSearches = twitter.getSavedSearches();

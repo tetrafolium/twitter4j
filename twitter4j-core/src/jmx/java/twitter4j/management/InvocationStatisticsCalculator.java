@@ -34,12 +34,12 @@ public class InvocationStatisticsCalculator implements InvocationStatistics {
      * @param name        the name of this API method
      * @param historySize the number of calls to track (for invocation time averaging)
      */
-    public InvocationStatisticsCalculator(String name, int historySize) {
+    public InvocationStatisticsCalculator(final String name, final int historySize) {
         this.name = name;
         times = new long[historySize];
     }
 
-    void increment(long time, boolean success) {
+    void increment(final long time, final boolean success) {
         callCount++;
         errorCount += success ? 0 : 1;
         totalTime += time;

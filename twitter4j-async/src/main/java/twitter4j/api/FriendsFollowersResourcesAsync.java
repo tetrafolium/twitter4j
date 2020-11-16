@@ -206,7 +206,7 @@ public interface FriendsFollowersResourcesAsync {
      * @since Twitter4J 2.1.9
      */
     void updateFriendship(long userId, boolean enableDeviceNotification
-            , boolean retweets);
+, boolean retweets);
 
     /**
      * Allows you to enable or disable retweets and device notifications from the specified user.
@@ -220,7 +220,7 @@ public interface FriendsFollowersResourcesAsync {
      * @since Twitter4J 2.1.9
      */
     void updateFriendship(String screenName, boolean enableDeviceNotification
-            , boolean retweets);
+, boolean retweets);
 
     /**
      * Returns detailed information about the relationship between two users.

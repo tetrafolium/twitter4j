@@ -23,7 +23,7 @@ package twitter4j;
 final class Log4JLogger extends Logger {
     private final org.apache.log4j.Logger LOGGER;
 
-    Log4JLogger(org.apache.log4j.Logger logger) {
+    Log4JLogger(final org.apache.log4j.Logger logger) {
         LOGGER = logger;
     }
 
@@ -48,47 +48,47 @@ final class Log4JLogger extends Logger {
     }
 
     @Override
-    public void debug(String message) {
+    public void debug(final String message) {
         LOGGER.debug(message);
     }
 
     @Override
-    public void debug(String message, String message2) {
+    public void debug(final String message, final String message2) {
         debug(message + message2);
     }
 
     @Override
-    public void info(String message) {
+    public void info(final String message) {
         LOGGER.info(message);
     }
 
     @Override
-    public void info(String message, String message2) {
+    public void info(final String message, final String message2) {
         info(message + message2);
     }
 
     @Override
-    public void warn(String message) {
+    public void warn(final String message) {
         LOGGER.warn(message);
     }
 
     @Override
-    public void warn(String message, String message2) {
+    public void warn(final String message, final String message2) {
         warn(message + message2);
     }
 
     @Override
-    public void warn(String message, Throwable th) {
+    public void warn(final String message, final Throwable th) {
         LOGGER.warn(message, th);
     }
 
     @Override
-    public void error(String message) {
+    public void error(final String message) {
         LOGGER.error(message);
     }
 
     @Override
-    public void error(String message, Throwable th) {
+    public void error(final String message, final Throwable th) {
         LOGGER.error(message, th);
     }
 }

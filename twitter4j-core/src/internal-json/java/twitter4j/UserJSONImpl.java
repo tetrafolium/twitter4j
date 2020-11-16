@@ -73,7 +73,7 @@ import java.util.Date;
     private boolean isFollowRequestSent;
     private String[] withheldInCountries;
 
-    /*package*/UserJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/UserJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         if (conf.isJSONStoreEnabled()) {
             TwitterObjectFactory.clearThreadLocalMap();
@@ -85,7 +85,7 @@ import java.util.Date;
         }
     }
 
-    /*package*/UserJSONImpl(JSONObject json) throws TwitterException {
+    /*package*/UserJSONImpl(final JSONObject json) throws TwitterException {
         super();
         init(json);
     }
@@ -95,7 +95,7 @@ import java.util.Date;
 
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         try {
             id = ParseUtil.getLong("id", json);
             name = ParseUtil.getRawString("name", json);
@@ -158,7 +158,7 @@ import java.util.Date;
                 JSONArray withheld_in_countries = json.getJSONArray("withheld_in_countries");
                 int length = withheld_in_countries.length();
                 withheldInCountries = new String[length];
-                for (int i = 0 ; i < length; i ++) {
+                for (int i = 0; i < length; i++) {
                     withheldInCountries[i] = withheld_in_countries.getString(i);
                 }
             }
@@ -177,7 +177,7 @@ import java.util.Date;
      * @throws JSONException
      * @throws TwitterException
      */
-    private static URLEntity[] getURLEntitiesFromJSON(JSONObject json, String category) throws JSONException, TwitterException {
+    private static URLEntity[] getURLEntitiesFromJSON(final JSONObject json, final String category) throws JSONException, TwitterException {
         if (!json.isNull("entities")) {
             JSONObject entitiesJSON = json.getJSONObject("entities");
             if (!entitiesJSON.isNull(category)) {
@@ -197,7 +197,7 @@ import java.util.Date;
     }
 
     @Override
-    public int compareTo(User that) {
+    public int compareTo(final User that) {
         return (int) (this.id - that.getId());
     }
 
@@ -261,7 +261,7 @@ import java.util.Date;
         return toResizedURL(profileImageUrl, "_400x400");
     }
 
-    private String toResizedURL(String originalURL, String sizeSuffix) {
+    private String toResizedURL(final String originalURL, final String sizeSuffix) {
         if (null != originalURL && originalURL.length() >= 1) {
             int index = originalURL.lastIndexOf("_");
             int suffixIndex = originalURL.lastIndexOf(".");
@@ -512,7 +512,7 @@ import java.util.Date;
     }
 
     /*package*/
-    static PagableResponseList<User> createPagableUserList(HttpResponse res, Configuration conf) throws TwitterException {
+    static PagableResponseList<User> createPagableUserList(final HttpResponse res, final Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 TwitterObjectFactory.clearThreadLocalMap();
@@ -540,12 +540,12 @@ import java.util.Date;
     }
 
     /*package*/
-    static ResponseList<User> createUserList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<User> createUserList(final HttpResponse res, final Configuration conf) throws TwitterException {
         return createUserList(res.asJSONArray(), res, conf);
     }
 
     /*package*/
-    static ResponseList<User> createUserList(JSONArray list, HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<User> createUserList(final JSONArray list, final HttpResponse res, final Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 TwitterObjectFactory.clearThreadLocalMap();
@@ -576,7 +576,7 @@ import java.util.Date;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (null == obj) {
             return false;
         }
@@ -588,46 +588,46 @@ import java.util.Date;
 
     @Override
     public String toString() {
-        return "UserJSONImpl{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", screenName='" + screenName + '\'' +
-                ", location='" + location + '\'' +
-                ", description='" + description + '\'' +
-                ", isContributorsEnabled=" + isContributorsEnabled +
-                ", profileImageUrl='" + profileImageUrl + '\'' +
-                ", profileImageUrlHttps='" + profileImageUrlHttps + '\'' +
-                ", isDefaultProfileImage=" + isDefaultProfileImage +
-                ", url='" + url + '\'' +
-                ", isProtected=" + isProtected +
-                ", followersCount=" + followersCount +
-                ", status=" + status +
-                ", profileBackgroundColor='" + profileBackgroundColor + '\'' +
-                ", profileTextColor='" + profileTextColor + '\'' +
-                ", profileLinkColor='" + profileLinkColor + '\'' +
-                ", profileSidebarFillColor='" + profileSidebarFillColor + '\'' +
-                ", profileSidebarBorderColor='" + profileSidebarBorderColor + '\'' +
-                ", profileUseBackgroundImage=" + profileUseBackgroundImage +
-                ", isDefaultProfile=" + isDefaultProfile +
-                ", showAllInlineMedia=" + showAllInlineMedia +
-                ", friendsCount=" + friendsCount +
-                ", createdAt=" + createdAt +
-                ", favouritesCount=" + favouritesCount +
-                ", utcOffset=" + utcOffset +
-                ", timeZone='" + timeZone + '\'' +
-                ", profileBackgroundImageUrl='" + profileBackgroundImageUrl + '\'' +
-                ", profileBackgroundImageUrlHttps='" + profileBackgroundImageUrlHttps + '\'' +
-                ", profileBackgroundTiled=" + profileBackgroundTiled +
-                ", lang='" + lang + '\'' +
-                ", statusesCount=" + statusesCount +
-                ", isGeoEnabled=" + isGeoEnabled +
-                ", isVerified=" + isVerified +
-                ", translator=" + translator +
-                ", listedCount=" + listedCount +
-                ", isFollowRequestSent=" + isFollowRequestSent +
-                ", withheldInCountries=" + Arrays.toString(withheldInCountries) +
-                '}';
+        return "UserJSONImpl{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", email='" + email + '\''
+                + ", screenName='" + screenName + '\''
+                + ", location='" + location + '\''
+                + ", description='" + description + '\''
+                + ", isContributorsEnabled=" + isContributorsEnabled
+                + ", profileImageUrl='" + profileImageUrl + '\''
+                + ", profileImageUrlHttps='" + profileImageUrlHttps + '\''
+                + ", isDefaultProfileImage=" + isDefaultProfileImage
+                + ", url='" + url + '\''
+                + ", isProtected=" + isProtected
+                + ", followersCount=" + followersCount
+                + ", status=" + status
+                + ", profileBackgroundColor='" + profileBackgroundColor + '\''
+                + ", profileTextColor='" + profileTextColor + '\''
+                + ", profileLinkColor='" + profileLinkColor + '\''
+                + ", profileSidebarFillColor='" + profileSidebarFillColor + '\''
+                + ", profileSidebarBorderColor='" + profileSidebarBorderColor + '\''
+                + ", profileUseBackgroundImage=" + profileUseBackgroundImage
+                + ", isDefaultProfile=" + isDefaultProfile
+                + ", showAllInlineMedia=" + showAllInlineMedia
+                + ", friendsCount=" + friendsCount
+                + ", createdAt=" + createdAt
+                + ", favouritesCount=" + favouritesCount
+                + ", utcOffset=" + utcOffset
+                + ", timeZone='" + timeZone + '\''
+                + ", profileBackgroundImageUrl='" + profileBackgroundImageUrl + '\''
+                + ", profileBackgroundImageUrlHttps='" + profileBackgroundImageUrlHttps + '\''
+                + ", profileBackgroundTiled=" + profileBackgroundTiled
+                + ", lang='" + lang + '\''
+                + ", statusesCount=" + statusesCount
+                + ", isGeoEnabled=" + isGeoEnabled
+                + ", isVerified=" + isVerified
+                + ", translator=" + translator
+                + ", listedCount=" + listedCount
+                + ", isFollowRequestSent=" + isFollowRequestSent
+                + ", withheldInCountries=" + Arrays.toString(withheldInCountries)
+                + '}';
     }
 
 }

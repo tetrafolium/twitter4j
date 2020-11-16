@@ -40,7 +40,7 @@ final class PlaceJSONImpl extends TwitterResponseImpl implements Place, java.io.
     private GeoLocation[][] geometryCoordinates;
     private Place[] containedWithIn;
 
-    /*package*/ PlaceJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/ PlaceJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         JSONObject json = res.asJSONObject();
         init(json);
@@ -50,7 +50,7 @@ final class PlaceJSONImpl extends TwitterResponseImpl implements Place, java.io.
         }
     }
 
-    PlaceJSONImpl(JSONObject json) throws TwitterException {
+    PlaceJSONImpl(final JSONObject json) throws TwitterException {
         super();
         init(json);
     }
@@ -60,7 +60,7 @@ final class PlaceJSONImpl extends TwitterResponseImpl implements Place, java.io.
 
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         try {
             name = ParseUtil.getUnescapedString("name", json);
             streetAddress = ParseUtil.getUnescapedString("street_address", json);
@@ -118,12 +118,12 @@ final class PlaceJSONImpl extends TwitterResponseImpl implements Place, java.io.
     }
 
     @Override
-    public int compareTo(Place that) {
+    public int compareTo(final Place that) {
         return this.id.compareTo(that.getId());
     }
 
     /*package*/
-    static ResponseList<Place> createPlaceList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<Place> createPlaceList(final HttpResponse res, final Configuration conf) throws TwitterException {
         JSONObject json = null;
         try {
             json = res.asJSONObject();
@@ -134,8 +134,8 @@ final class PlaceJSONImpl extends TwitterResponseImpl implements Place, java.io.
     }
 
     /*package*/
-    static ResponseList<Place> createPlaceList(JSONArray list, HttpResponse res
-            , Configuration conf) throws TwitterException {
+    static ResponseList<Place> createPlaceList(final JSONArray list, final HttpResponse res
+, final Configuration conf) throws TwitterException {
         if (conf.isJSONStoreEnabled()) {
             TwitterObjectFactory.clearThreadLocalMap();
         }
@@ -227,7 +227,7 @@ final class PlaceJSONImpl extends TwitterResponseImpl implements Place, java.io.
 
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (null == obj) {
             return false;
         }
@@ -244,20 +244,20 @@ final class PlaceJSONImpl extends TwitterResponseImpl implements Place, java.io.
 
     @Override
     public String toString() {
-        return "PlaceJSONImpl{" +
-                "name='" + name + '\'' +
-                ", streetAddress='" + streetAddress + '\'' +
-                ", countryCode='" + countryCode + '\'' +
-                ", id='" + id + '\'' +
-                ", country='" + country + '\'' +
-                ", placeType='" + placeType + '\'' +
-                ", url='" + url + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", boundingBoxType='" + boundingBoxType + '\'' +
-                ", boundingBoxCoordinates=" + (boundingBoxCoordinates == null ? null : Arrays.asList(boundingBoxCoordinates)) +
-                ", geometryType='" + geometryType + '\'' +
-                ", geometryCoordinates=" + (geometryCoordinates == null ? null : Arrays.asList(geometryCoordinates)) +
-                ", containedWithIn=" + (containedWithIn == null ? null : Arrays.asList(containedWithIn)) +
-                '}';
+        return "PlaceJSONImpl{"
+                + "name='" + name + '\''
+                + ", streetAddress='" + streetAddress + '\''
+                + ", countryCode='" + countryCode + '\''
+                + ", id='" + id + '\''
+                + ", country='" + country + '\''
+                + ", placeType='" + placeType + '\''
+                + ", url='" + url + '\''
+                + ", fullName='" + fullName + '\''
+                + ", boundingBoxType='" + boundingBoxType + '\''
+                + ", boundingBoxCoordinates=" + (boundingBoxCoordinates == null ? null : Arrays.asList(boundingBoxCoordinates))
+                + ", geometryType='" + geometryType + '\''
+                + ", geometryCoordinates=" + (geometryCoordinates == null ? null : Arrays.asList(geometryCoordinates))
+                + ", containedWithIn=" + (containedWithIn == null ? null : Arrays.asList(containedWithIn))
+                + '}';
     }
 }

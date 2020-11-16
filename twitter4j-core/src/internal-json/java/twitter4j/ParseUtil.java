@@ -37,11 +37,11 @@ final class ParseUtil {
         throw new AssertionError();
     }
 
-    static String getUnescapedString(String str, JSONObject json) {
+    static String getUnescapedString(final String str, final JSONObject json) {
         return HTMLEntity.unescape(getRawString(str, json));
     }
 
-    public static String getRawString(String name, JSONObject json) {
+    public static String getRawString(final String name, final JSONObject json) {
         try {
             if (json.isNull(name)) {
                 return null;
@@ -55,7 +55,7 @@ final class ParseUtil {
         }
     }
 
-    static String getURLDecodedString(String name, JSONObject json) {
+    static String getURLDecodedString(final String name, final JSONObject json) {
         String returnValue = getRawString(name, json);
         if (returnValue != null) {
             try {
@@ -66,7 +66,7 @@ final class ParseUtil {
         return returnValue;
     }
 
-    public static Date parseTrendsDate(String asOfStr) throws TwitterException {
+    public static Date parseTrendsDate(final String asOfStr) throws TwitterException {
         Date parsed;
         switch (asOfStr.length()) {
             case 10:
@@ -82,11 +82,11 @@ final class ParseUtil {
     }
 
 
-    public static Date getDate(String name, JSONObject json) throws TwitterException {
+    public static Date getDate(final String name, final JSONObject json) throws TwitterException {
         return getDate(name, json, "EEE MMM d HH:mm:ss z yyyy");
     }
 
-    public static Date getDate(String name, JSONObject json, String format) throws TwitterException {
+    public static Date getDate(final String name, final JSONObject json, final String format) throws TwitterException {
         String dateStr = getUnescapedString(name, json);
         if ("null".equals(dateStr) || null == dateStr) {
             return null;
@@ -98,7 +98,7 @@ final class ParseUtil {
     private final static Map<String, LinkedBlockingQueue<SimpleDateFormat>> formatMapQueue = new HashMap<String,
             LinkedBlockingQueue<SimpleDateFormat>>();
 
-    public static Date getDate(String dateString, String format) throws TwitterException {
+    public static Date getDate(final String dateString, final String format) throws TwitterException {
         LinkedBlockingQueue<SimpleDateFormat> simpleDateFormats = formatMapQueue.get(format);
         if (simpleDateFormats == null) {
             simpleDateFormats = new LinkedBlockingQueue<SimpleDateFormat>();
@@ -123,11 +123,11 @@ final class ParseUtil {
         }
     }
 
-    public static int getInt(String name, JSONObject json) {
+    public static int getInt(final String name, final JSONObject json) {
         return getInt(getRawString(name, json));
     }
 
-    public static int getInt(String str) {
+    public static int getInt(final String str) {
         if (null == str || "".equals(str) || "null".equals(str)) {
             return -1;
         } else {
@@ -140,11 +140,11 @@ final class ParseUtil {
         }
     }
 
-    public static long getLong(String name, JSONObject json) {
+    public static long getLong(final String name, final JSONObject json) {
         return getLong(getRawString(name, json));
     }
 
-    public static long getLong(String str) {
+    public static long getLong(final String str) {
         if (null == str || "".equals(str) || "null".equals(str)) {
             return -1;
         } else {
@@ -157,7 +157,7 @@ final class ParseUtil {
         }
     }
 
-    public static double getDouble(String name, JSONObject json) {
+    public static double getDouble(final String name, final JSONObject json) {
         String str2 = getRawString(name, json);
         if (null == str2 || "".equals(str2) || "null".equals(str2)) {
             return -1;
@@ -166,7 +166,7 @@ final class ParseUtil {
         }
     }
 
-    public static boolean getBoolean(String name, JSONObject json) {
+    public static boolean getBoolean(final String name, final JSONObject json) {
         String str = getRawString(name, json);
         if (null == str || "null".equals(str)) {
             return false;
@@ -175,7 +175,7 @@ final class ParseUtil {
     }
 
 
-    public static int toAccessLevel(HttpResponse res) {
+    public static int toAccessLevel(final HttpResponse res) {
         if (null == res) {
             return -1;
         }

@@ -32,7 +32,7 @@ final class LazyTwitterAPIConfiguration implements twitter4j.TwitterAPIConfigura
     private final ObjectFactory factory;
     private TwitterAPIConfiguration target = null;
 
-    LazyTwitterAPIConfiguration(HttpResponse res, ObjectFactory factory) {
+    LazyTwitterAPIConfiguration(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -97,7 +97,7 @@ final class LazyTwitterAPIConfiguration implements twitter4j.TwitterAPIConfigura
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof TwitterAPIConfiguration)) return false;
         return getTarget().equals(o);
@@ -110,8 +110,8 @@ final class LazyTwitterAPIConfiguration implements twitter4j.TwitterAPIConfigura
 
     @Override
     public String toString() {
-        return "LazyTwitterAPIConfiguration{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyTwitterAPIConfiguration{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

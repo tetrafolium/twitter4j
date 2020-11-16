@@ -24,7 +24,7 @@ import twitter4j.TwitterFactory;
  * example code to explain lambda expression for handling rate limits
  */
 public class RateLimitLambda {
-    public static void main(String... args) {
+    public static void main(final String... args) {
         Twitter twitter = TwitterFactory.getSingleton();
         twitter.onRateLimitStatus(e -> System.out.println("rate limit remaining: " + e.getRateLimitStatus().getRemaining()));
         for (int i = 0; i < 20; i++) {

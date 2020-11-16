@@ -188,12 +188,12 @@ class MBeansTest {
     // Helper methods
     // *****************
 
-    private void checkMethodStats(APIStatistics apiStats,
-                                  String methodName,
-                                  long callCount,
-                                  long errorCount,
-                                  long totalTime,
-                                  long avgTime) {
+    private void checkMethodStats(final APIStatistics apiStats,
+                                  final String methodName,
+                                  final long callCount,
+                                  final long errorCount,
+                                  final long totalTime,
+                                  final long avgTime) {
         InvocationStatistics methodStats = null;
 
         for (InvocationStatistics s : apiStats.getInvocationStatistics()) {
@@ -210,11 +210,11 @@ class MBeansTest {
         }
     }
 
-    private void checkCalculator(InvocationStatistics calc,
-                                 long callCount,
-                                 long errorCount,
-                                 long totalTime,
-                                 long avgTime) {
+    private void checkCalculator(final InvocationStatistics calc,
+                                 final long callCount,
+                                 final long errorCount,
+                                 final long totalTime,
+                                 final long avgTime) {
         assertEquals(callCount, calc.getCallCount());
         assertEquals(errorCount, calc.getErrorCount());
         assertEquals(totalTime, calc.getTotalTime());

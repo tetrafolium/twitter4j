@@ -29,7 +29,7 @@ final class DispatcherFactory {
     private final String dispatcherImpl;
     private final Configuration conf;
 
-    public DispatcherFactory(Configuration conf) {
+    public DispatcherFactory(final Configuration conf) {
         dispatcherImpl = conf.getDispatcherImpl();
         this.conf = conf;
     }

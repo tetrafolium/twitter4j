@@ -30,7 +30,7 @@ public class GetMentions {
      *
      * @param args String[]
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         // gets Twitter instance with default credentials
         Twitter twitter = new TwitterFactory().getInstance();
         try {

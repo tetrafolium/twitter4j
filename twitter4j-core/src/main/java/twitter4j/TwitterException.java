@@ -34,30 +34,30 @@ public class TwitterException extends Exception implements TwitterResponse, Http
     private HttpResponse response;
     private String errorMessage = null;
 
-    public TwitterException(String message, Throwable cause) {
+    public TwitterException(final String message, final Throwable cause) {
         super(message, cause);
         decode(message);
     }
 
-    public TwitterException(String message) {
+    public TwitterException(final String message) {
         this(message, (Throwable) null);
     }
 
 
-    public TwitterException(Exception cause) {
+    public TwitterException(final Exception cause) {
         this(cause.getMessage(), cause);
         if (cause instanceof TwitterException) {
             ((TwitterException) cause).setNested();
         }
     }
 
-    public TwitterException(String message, HttpResponse res) {
+    public TwitterException(final String message, final HttpResponse res) {
         this(message);
         response = res;
         this.statusCode = res.getStatusCode();
     }
 
-    public TwitterException(String message, Exception cause, int statusCode) {
+    public TwitterException(final String message, final Exception cause, final int statusCode) {
         this(message, cause);
         this.statusCode = statusCode;
     }
@@ -80,7 +80,7 @@ public class TwitterException extends Exception implements TwitterResponse, Http
         }
     }
 
-    private void decode(String str) {
+    private void decode(final String str) {
         if (str != null && str.startsWith("{")) {
             try {
                 JSONObject json = new JSONObject(str);
@@ -102,7 +102,7 @@ public class TwitterException extends Exception implements TwitterResponse, Http
         return this.errorCode;
     }
 
-    public String getResponseHeader(String name) {
+    public String getResponseHeader(final String name) {
         String value = null;
         if (response != null) {
             List<String> header = response.getResponseHeaderFields().get(name);
@@ -241,7 +241,7 @@ public class TwitterException extends Exception implements TwitterResponse, Http
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -274,17 +274,17 @@ public class TwitterException extends Exception implements TwitterResponse, Http
         return getMessage() + (nested ? "" : "\nRelevant discussions can be found on the Internet at:\n"
                 + "\thttp://www.google.co.jp/search?q=" + getExceptionDiagnosis().getStackLineHashAsHex()
                 + " or\n\thttp://www.google.co.jp/search?q=" + getExceptionDiagnosis().getLineNumberHashAsHex())
-                + "\nTwitterException{" + (nested ? "" : "exceptionCode=[" + getExceptionCode() + "], ") +
-                "statusCode=" + statusCode +
-                ", message=" + errorMessage +
-                ", code=" + errorCode +
-                ", retryAfter=" + getRetryAfter() +
-                ", rateLimitStatus=" + getRateLimitStatus() +
-                ", version=" + Version.getVersion() +
-                '}';
+                + "\nTwitterException{" + (nested ? "" : "exceptionCode=[" + getExceptionCode() + "], ")
+                + "statusCode=" + statusCode
+                + ", message=" + errorMessage
+                + ", code=" + errorCode
+                + ", retryAfter=" + getRetryAfter()
+                + ", rateLimitStatus=" + getRateLimitStatus()
+                + ", version=" + Version.getVersion()
+                + '}';
     }
 
-    private static String getCause(int statusCode) {
+    private static String getCause(final int statusCode) {
         String cause;
         // https://dev.twitter.com/docs/error-codes-responses
         switch (statusCode) {
@@ -304,17 +304,17 @@ public class TwitterException extends Exception implements TwitterResponse, Http
                 cause = "The URI requested is invalid or the resource requested, such as a user, does not exists. Also returned when the requested format is not supported by the requested method.";
                 break;
             case NOT_ACCEPTABLE:
-                cause = "Returned by the Search API when an invalid format is specified in the request.\n" +
-                        "Returned by the Streaming API when one or more of the parameters are not suitable for the resource. The track parameter, for example, would throw this error if:\n" +
-                        " The track keyword is too long or too short.\n" +
-                        " The bounding box specified is invalid.\n" +
-                        " No predicates defined for filtered resource, for example, neither track nor follow parameter defined.\n" +
-                        " Follow userid cannot be read.";
+                cause = "Returned by the Search API when an invalid format is specified in the request.\n"
+                        + "Returned by the Streaming API when one or more of the parameters are not suitable for the resource. The track parameter, for example, would throw this error if:\n"
+                        + " The track keyword is too long or too short.\n"
+                        + " The bounding box specified is invalid.\n"
+                        + " No predicates defined for filtered resource, for example, neither track nor follow parameter defined.\n"
+                        + " Follow userid cannot be read.";
                 break;
             case ENHANCE_YOUR_CLAIM:
                 cause = "Returned by the Search and Trends API when you are being rate limited (https://dev.twitter.com/docs/rate-limiting).\n"
-                        + "Returned by the Streaming API:\n Too many login attempts in a short period of time.\n" +
-                        " Running too many copies of the same application authenticating with the same account name.";
+                        + "Returned by the Streaming API:\n Too many login attempts in a short period of time.\n"
+                        + " Running too many copies of the same application authenticating with the same account name.";
                 break;
             case UNPROCESSABLE_ENTITY:
                 cause = "Returned when an image uploaded to POST account/update_profile_banner(https://dev.twitter.com/docs/api/1/post/account/update_profile_banner) is unable to be processed.";

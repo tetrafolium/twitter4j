@@ -31,18 +31,18 @@ class TimeSpanConverterTest {
 
     TimeSpanConverter converter;
 
-    private void assertTimeSpanString(String expected, long time) {
+    private void assertTimeSpanString(final String expected, final long time) {
         assertEquals(expected, converter.toTimeSpanString(time));
 
     }
 
     // Beware the 'month' argument follows the Java Calendar standard and is 0-based.
-    private long getSpecificLocalDateInMillis(int month, int day) {
+    private long getSpecificLocalDateInMillis(final int month, final int day) {
         return this.getSpecificLocalDateInMillis((int) this.getCurrentYear(), month, day);
     }
 
     // Beware the 'month' argument follows the Java Calendar standard and is 0-based.
-    private long getSpecificLocalDateInMillis(int year, int month, int day) {
+    private long getSpecificLocalDateInMillis(final int year, final int month, final int day) {
         // Re-create the instance in case these tests are multi-threaded.
         Calendar cal = Calendar.getInstance();
         cal.set(year, month, day);

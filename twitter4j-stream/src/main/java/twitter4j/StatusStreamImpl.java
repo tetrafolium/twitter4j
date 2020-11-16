@@ -30,12 +30,12 @@ import java.io.InputStream;
 class StatusStreamImpl extends StatusStreamBase {
     /*package*/
 
-    StatusStreamImpl(Dispatcher dispatcher, InputStream stream, Configuration conf) throws IOException {
+    StatusStreamImpl(final Dispatcher dispatcher, final InputStream stream, final Configuration conf) throws IOException {
         super(dispatcher, stream, conf);
     }
     /*package*/
 
-    StatusStreamImpl(Dispatcher dispatcher, HttpResponse response, Configuration conf) throws IOException {
+    StatusStreamImpl(final Dispatcher dispatcher, final HttpResponse response, final Configuration conf) throws IOException {
         super(dispatcher, response, conf);
     }
 
@@ -44,40 +44,40 @@ class StatusStreamImpl extends StatusStreamBase {
     static final RawStreamListener[] EMPTY = new RawStreamListener[0];
 
     @Override
-    protected void onClose(){}
+    protected void onClose() { }
 
     @Override
-    public void next(StatusListener listener) throws TwitterException {
+    public void next(final StatusListener listener) throws TwitterException {
         handleNextElement(new StatusListener[]{listener}, EMPTY);
     }
 
     @Override
-    public void next(StreamListener[] listeners, RawStreamListener[] rawStreamListeners) throws TwitterException {
+    public void next(final StreamListener[] listeners, final RawStreamListener[] rawStreamListeners) throws TwitterException {
         handleNextElement(listeners, rawStreamListeners);
     }
 
     @Override
-    protected String parseLine(String line) {
+    protected String parseLine(final String line) {
         this.line = line;
         return line;
     }
 
     @Override
-    protected void onMessage(String rawString, RawStreamListener[] listeners) throws TwitterException {
+    protected void onMessage(final String rawString, final RawStreamListener[] listeners) throws TwitterException {
         for (RawStreamListener listener : listeners) {
             listener.onMessage(rawString);
         }
     }
 
     @Override
-    protected void onStatus(JSONObject json, StreamListener[] listeners) throws TwitterException {
+    protected void onStatus(final JSONObject json, final StreamListener[] listeners) throws TwitterException {
         for (StreamListener listener : listeners) {
             ((StatusListener) listener).onStatus(asStatus(json));
         }
     }
 
     @Override
-    protected void onDelete(JSONObject json, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onDelete(final JSONObject json, final StreamListener[] listeners) throws TwitterException, JSONException {
         for (StreamListener listener : listeners) {
             JSONObject deletionNotice = json.getJSONObject("delete");
             if (deletionNotice.has("status")) {
@@ -85,37 +85,37 @@ class StatusStreamImpl extends StatusStreamBase {
             } else {
                 JSONObject directMessage = deletionNotice.getJSONObject("direct_message");
                 ((UserStreamListener) listener).onDeletionNotice(ParseUtil.getLong("id", directMessage)
-                        , ParseUtil.getLong("user_id", directMessage));
+, ParseUtil.getLong("user_id", directMessage));
             }
         }
     }
 
     @Override
-    protected void onLimit(JSONObject json, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onLimit(final JSONObject json, final StreamListener[] listeners) throws TwitterException, JSONException {
         for (StreamListener listener : listeners) {
             ((StatusListener) listener).onTrackLimitationNotice(ParseUtil.getInt("track", json.getJSONObject("limit")));
         }
     }
 
     @Override
-    protected void onStallWarning(JSONObject json, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onStallWarning(final JSONObject json, final StreamListener[] listeners) throws TwitterException, JSONException {
         for (StreamListener listener : listeners) {
             ((StatusListener) listener).onStallWarning(new StallWarning(json));
         }
     }
 
     @Override
-    protected void onScrubGeo(JSONObject json, StreamListener[] listeners) throws TwitterException, JSONException {
+    protected void onScrubGeo(final JSONObject json, final StreamListener[] listeners) throws TwitterException, JSONException {
         JSONObject scrubGeo = json.getJSONObject("scrub_geo");
         for (StreamListener listener : listeners) {
             ((StatusListener) listener).onScrubGeo(ParseUtil.getLong("user_id", scrubGeo)
-                    , ParseUtil.getLong("up_to_status_id", scrubGeo));
+, ParseUtil.getLong("up_to_status_id", scrubGeo));
         }
 
     }
 
     @Override
-    public void onException(Exception e, StreamListener[] listeners) {
+    public void onException(final Exception e, final StreamListener[] listeners) {
         for (StreamListener listener : listeners) {
             listener.onException(e);
         }

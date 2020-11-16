@@ -31,21 +31,21 @@ import java.util.Set;
  */
 public class OkHttpResponse extends HttpResponse {
 
-	private OkHttpClient okHttpClient;
-	private Call call;
-	private Response response;
-	private HashMap<String,List<String>> headerFields;
+        private OkHttpClient okHttpClient;
+        private Call call;
+        private Response response;
+        private HashMap<String, List<String>> headerFields;
 
-	OkHttpResponse() {
-		super();
-	}
+        OkHttpResponse() {
+                super();
+        }
 
-	public OkHttpResponse(HttpClientConfiguration conf) {
-		super(conf);
-	}
+        public OkHttpResponse(final HttpClientConfiguration conf) {
+                super(conf);
+        }
 
 	// for test purpose
-	public OkHttpResponse(Call call, OkHttpClient okHttpClient, HttpClientConfiguration conf) throws IOException {
+	public OkHttpResponse(final Call call, final OkHttpClient okHttpClient, final HttpClientConfiguration conf) throws IOException {
 		super(conf);
 		this.okHttpClient = okHttpClient;
 		this.call = call;
@@ -53,31 +53,31 @@ public class OkHttpResponse extends HttpResponse {
 
 		Headers headers = response.headers();
 		Set<String> names = headers.names();
-		HashMap<String,List<String>> headerFields = new HashMap<String,List<String>>();
-		for(String name:names){
-			headerFields.put(name,headers.values(name));
+		HashMap<String, List<String>> headerFields = new HashMap<String, List<String>>();
+		for (String name:names) {
+			headerFields.put(name, headers.values(name));
 		}
 		this.headerFields = headerFields;
 
 		is = response.body().byteStream();
-		if(is!=null && "gzip".equals(response.header("Content-Encoding"))){
+		if (is != null && "gzip".equals(response.header("Content-Encoding"))) {
 			is = new StreamingGZIPInputStream(is);
 		}
 
 		statusCode = response.code();
 	}
 
-	/*package*/ OkHttpResponse(String content) {
+	/*package*/ OkHttpResponse(final String content) {
 		super();
 		this.responseAsString = content;
 	}
 
-	public Protocol getProtocol(){
+	public Protocol getProtocol() {
 		return response.protocol();
 	}
 
 	@Override
-	public String getResponseHeader(String name) {
+	public String getResponseHeader(final String name) {
 		return this.response.header(name);
 	}
 

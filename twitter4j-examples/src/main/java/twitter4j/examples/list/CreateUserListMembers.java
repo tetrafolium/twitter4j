@@ -31,7 +31,7 @@ public final class CreateUserListMembers {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 2) {
             System.out.println("Usage: java twitter4j.examples.list.CreateUserListMembers [list id] [screen name[,screen name..]]");
             System.exit(-1);

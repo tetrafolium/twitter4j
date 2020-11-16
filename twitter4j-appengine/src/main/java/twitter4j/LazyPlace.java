@@ -16,7 +16,7 @@ final class LazyPlace implements twitter4j.Place {
     private final ObjectFactory factory;
     private Place target = null;
 
-    LazyPlace(HttpResponse res, ObjectFactory factory) {
+    LazyPlace(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -104,12 +104,12 @@ final class LazyPlace implements twitter4j.Place {
         return getTarget().getAccessLevel();
     }
 
-    public int compareTo(Place target) {
+    public int compareTo(final Place target) {
         return getTarget().compareTo(target);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Place)) return false;
         return getTarget().equals(o);
@@ -122,8 +122,8 @@ final class LazyPlace implements twitter4j.Place {
 
     @Override
     public String toString() {
-        return "LazyPlace{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyPlace{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

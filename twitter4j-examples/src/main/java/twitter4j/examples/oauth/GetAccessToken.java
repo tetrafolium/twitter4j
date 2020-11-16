@@ -38,7 +38,7 @@ public class GetAccessToken {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         File file = new File("twitter4j.properties");
         Properties prop = new Properties();
         InputStream is = null;

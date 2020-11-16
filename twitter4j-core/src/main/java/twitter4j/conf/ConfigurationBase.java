@@ -96,14 +96,14 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
 
     protected ConfigurationBase() {
         httpConf = new MyHttpClientConfiguration(null // proxy host
-                , null // proxy user
-                , null // proxy password
-                , -1 // proxy port
-                , false // proxy socks
-                , 20000 // connection timeout
-                , 120000 // read timeout
-                , false // pretty debug
-                , true // gzip enabled
+, null // proxy user
+, null // proxy password
+, -1 // proxy port
+, false // proxy socks
+, 20000 // connection timeout
+, 120000 // read timeout
+, false // pretty debug
+, true // gzip enabled
         );
     }
 
@@ -119,7 +119,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         private boolean prettyDebug = false;
         private boolean gzipEnabled = true;
 
-        MyHttpClientConfiguration(String httpProxyHost, String httpProxyUser, String httpProxyPassword, int httpProxyPort, boolean httpProxySocks, int httpConnectionTimeout, int httpReadTimeout, boolean prettyDebug, boolean gzipEnabled) {
+        MyHttpClientConfiguration(final String httpProxyHost, final String httpProxyUser, final String httpProxyPassword, final int httpProxyPort, final boolean httpProxySocks, final int httpConnectionTimeout, final int httpReadTimeout, final boolean prettyDebug, final boolean gzipEnabled) {
             this.httpProxyHost = httpProxyHost;
             this.httpProxyUser = httpProxyUser;
             this.httpProxyPassword = httpProxyPassword;
@@ -187,7 +187,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         }
 
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(final Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
@@ -226,17 +226,17 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
 
         @Override
         public String toString() {
-            return "MyHttpClientConfiguration{" +
-                    "httpProxyHost='" + httpProxyHost + '\'' +
-                    ", httpProxyUser='" + httpProxyUser + '\'' +
-                    ", httpProxyPassword='" + httpProxyPassword + '\'' +
-                    ", httpProxyPort=" + httpProxyPort +
-                    ", proxyType=" + (httpProxySocks ? Proxy.Type.SOCKS : Proxy.Type.HTTP) +
-                    ", httpConnectionTimeout=" + httpConnectionTimeout +
-                    ", httpReadTimeout=" + httpReadTimeout +
-                    ", prettyDebug=" + prettyDebug +
-                    ", gzipEnabled=" + gzipEnabled +
-                    '}';
+            return "MyHttpClientConfiguration{"
+                    + "httpProxyHost='" + httpProxyHost + '\''
+                    + ", httpProxyUser='" + httpProxyUser + '\''
+                    + ", httpProxyPassword='" + httpProxyPassword + '\''
+                    + ", httpProxyPort=" + httpProxyPort
+                    + ", proxyType=" + (httpProxySocks ? Proxy.Type.SOCKS : Proxy.Type.HTTP)
+                    + ", httpConnectionTimeout=" + httpConnectionTimeout
+                    + ", httpReadTimeout=" + httpReadTimeout
+                    + ", prettyDebug=" + prettyDebug
+                    + ", gzipEnabled=" + gzipEnabled
+                    + '}';
         }
     }
 
@@ -264,7 +264,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return debug;
     }
 
-    protected final void setDebug(boolean debug) {
+    protected final void setDebug(final boolean debug) {
         this.debug = debug;
     }
 
@@ -273,7 +273,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return user;
     }
 
-    protected final void setUser(String user) {
+    protected final void setUser(final String user) {
         this.user = user;
     }
 
@@ -287,117 +287,117 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return httpConf;
     }
 
-    protected final void setPassword(String password) {
+    protected final void setPassword(final String password) {
         this.password = password;
     }
 
-    protected final void setPrettyDebugEnabled(boolean prettyDebug) {
+    protected final void setPrettyDebugEnabled(final boolean prettyDebug) {
         httpConf = new MyHttpClientConfiguration(httpConf.getHttpProxyHost()
-                , httpConf.getHttpProxyUser()
-                , httpConf.getHttpProxyPassword()
-                , httpConf.getHttpProxyPort()
-                , httpConf.isHttpProxySocks()
-                , httpConf.getHttpConnectionTimeout()
-                , httpConf.getHttpReadTimeout()
-                , prettyDebug, httpConf.isGZIPEnabled()
+, httpConf.getHttpProxyUser()
+, httpConf.getHttpProxyPassword()
+, httpConf.getHttpProxyPort()
+, httpConf.isHttpProxySocks()
+, httpConf.getHttpConnectionTimeout()
+, httpConf.getHttpReadTimeout()
+, prettyDebug, httpConf.isGZIPEnabled()
         );
     }
 
-    protected final void setGZIPEnabled(boolean gzipEnabled) {
+    protected final void setGZIPEnabled(final boolean gzipEnabled) {
         httpConf = new MyHttpClientConfiguration(httpConf.getHttpProxyHost()
-                , httpConf.getHttpProxyUser()
-                , httpConf.getHttpProxyPassword()
-                , httpConf.getHttpProxyPort()
-                , httpConf.isHttpProxySocks()
-                , httpConf.getHttpConnectionTimeout()
-                , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled(), gzipEnabled
+, httpConf.getHttpProxyUser()
+, httpConf.getHttpProxyPassword()
+, httpConf.getHttpProxyPort()
+, httpConf.isHttpProxySocks()
+, httpConf.getHttpConnectionTimeout()
+, httpConf.getHttpReadTimeout()
+, httpConf.isPrettyDebugEnabled(), gzipEnabled
         );
     }
 
     // methods for HttpClientConfiguration
 
-    protected final void setHttpProxyHost(String proxyHost) {
+    protected final void setHttpProxyHost(final String proxyHost) {
         httpConf = new MyHttpClientConfiguration(proxyHost
-                , httpConf.getHttpProxyUser()
-                , httpConf.getHttpProxyPassword()
-                , httpConf.getHttpProxyPort()
-                , httpConf.isHttpProxySocks()
-                , httpConf.getHttpConnectionTimeout()
-                , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
+, httpConf.getHttpProxyUser()
+, httpConf.getHttpProxyPassword()
+, httpConf.getHttpProxyPort()
+, httpConf.isHttpProxySocks()
+, httpConf.getHttpConnectionTimeout()
+, httpConf.getHttpReadTimeout()
+, httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
-    protected final void setHttpProxyUser(String proxyUser) {
+    protected final void setHttpProxyUser(final String proxyUser) {
         httpConf = new MyHttpClientConfiguration(httpConf.getHttpProxyHost()
-                , proxyUser
-                , httpConf.getHttpProxyPassword()
-                , httpConf.getHttpProxyPort()
-                , httpConf.isHttpProxySocks()
-                , httpConf.getHttpConnectionTimeout()
-                , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
+, proxyUser
+, httpConf.getHttpProxyPassword()
+, httpConf.getHttpProxyPort()
+, httpConf.isHttpProxySocks()
+, httpConf.getHttpConnectionTimeout()
+, httpConf.getHttpReadTimeout()
+, httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
-    protected final void setHttpProxyPassword(String proxyPassword) {
+    protected final void setHttpProxyPassword(final String proxyPassword) {
         httpConf = new MyHttpClientConfiguration(httpConf.getHttpProxyHost()
-                , httpConf.getHttpProxyUser()
-                , proxyPassword
-                , httpConf.getHttpProxyPort()
-                , httpConf.isHttpProxySocks()
-                , httpConf.getHttpConnectionTimeout()
-                , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
+, httpConf.getHttpProxyUser()
+, proxyPassword
+, httpConf.getHttpProxyPort()
+, httpConf.isHttpProxySocks()
+, httpConf.getHttpConnectionTimeout()
+, httpConf.getHttpReadTimeout()
+, httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
-    protected final void setHttpProxyPort(int proxyPort) {
+    protected final void setHttpProxyPort(final int proxyPort) {
         httpConf = new MyHttpClientConfiguration(httpConf.getHttpProxyHost()
-                , httpConf.getHttpProxyUser()
-                , httpConf.getHttpProxyPassword()
-                , proxyPort
-                , httpConf.isHttpProxySocks()
-                , httpConf.getHttpConnectionTimeout()
-                , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
+, httpConf.getHttpProxyUser()
+, httpConf.getHttpProxyPassword()
+, proxyPort
+, httpConf.isHttpProxySocks()
+, httpConf.getHttpConnectionTimeout()
+, httpConf.getHttpReadTimeout()
+, httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
-    protected final void setHttpProxySocks(boolean isSocksProxy) {
+    protected final void setHttpProxySocks(final boolean isSocksProxy) {
         httpConf = new MyHttpClientConfiguration(httpConf.getHttpProxyHost()
-                , httpConf.getHttpProxyUser()
-                , httpConf.getHttpProxyPassword()
-                , httpConf.getHttpProxyPort()
-                , isSocksProxy
-                , httpConf.getHttpConnectionTimeout()
-                , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
+, httpConf.getHttpProxyUser()
+, httpConf.getHttpProxyPassword()
+, httpConf.getHttpProxyPort()
+, isSocksProxy
+, httpConf.getHttpConnectionTimeout()
+, httpConf.getHttpReadTimeout()
+, httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
-    protected final void setHttpConnectionTimeout(int connectionTimeout) {
+    protected final void setHttpConnectionTimeout(final int connectionTimeout) {
         httpConf = new MyHttpClientConfiguration(httpConf.getHttpProxyHost()
-                , httpConf.getHttpProxyUser()
-                , httpConf.getHttpProxyPassword()
-                , httpConf.getHttpProxyPort()
-                , httpConf.isHttpProxySocks()
-                , connectionTimeout
-                , httpConf.getHttpReadTimeout()
-                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
+, httpConf.getHttpProxyUser()
+, httpConf.getHttpProxyPassword()
+, httpConf.getHttpProxyPort()
+, httpConf.isHttpProxySocks()
+, connectionTimeout
+, httpConf.getHttpReadTimeout()
+, httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
-    protected final void setHttpReadTimeout(int readTimeout) {
+    protected final void setHttpReadTimeout(final int readTimeout) {
         httpConf = new MyHttpClientConfiguration(httpConf.getHttpProxyHost()
-                , httpConf.getHttpProxyUser()
-                , httpConf.getHttpProxyPassword()
-                , httpConf.getHttpProxyPort()
-                , httpConf.isHttpProxySocks()
-                , httpConf.getHttpConnectionTimeout()
-                , readTimeout
-                , httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
+, httpConf.getHttpProxyUser()
+, httpConf.getHttpProxyPassword()
+, httpConf.getHttpProxyPort()
+, httpConf.isHttpProxySocks()
+, httpConf.getHttpConnectionTimeout()
+, readTimeout
+, httpConf.isPrettyDebugEnabled(), httpConf.isGZIPEnabled()
         );
     }
 
@@ -406,15 +406,15 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return httpStreamingReadTimeout;
     }
 
-    protected final void setHttpStreamingReadTimeout(int httpStreamingReadTimeout) {
+    protected final void setHttpStreamingReadTimeout(final int httpStreamingReadTimeout) {
         this.httpStreamingReadTimeout = httpStreamingReadTimeout;
     }
 
-    protected final void setHttpRetryCount(int retryCount) {
+    protected final void setHttpRetryCount(final int retryCount) {
         this.httpRetryCount = retryCount;
     }
 
-    protected final void setHttpRetryIntervalSeconds(int retryIntervalSeconds) {
+    protected final void setHttpRetryIntervalSeconds(final int retryIntervalSeconds) {
         this.httpRetryIntervalSeconds = retryIntervalSeconds;
     }
 
@@ -425,7 +425,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuthConsumerKey;
     }
 
-    protected final void setOAuthConsumerKey(String oAuthConsumerKey) {
+    protected final void setOAuthConsumerKey(final String oAuthConsumerKey) {
         this.oAuthConsumerKey = oAuthConsumerKey;
     }
 
@@ -434,7 +434,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuthConsumerSecret;
     }
 
-    protected final void setOAuthConsumerSecret(String oAuthConsumerSecret) {
+    protected final void setOAuthConsumerSecret(final String oAuthConsumerSecret) {
         this.oAuthConsumerSecret = oAuthConsumerSecret;
     }
 
@@ -443,7 +443,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuthAccessToken;
     }
 
-    protected final void setOAuthAccessToken(String oAuthAccessToken) {
+    protected final void setOAuthAccessToken(final String oAuthAccessToken) {
         this.oAuthAccessToken = oAuthAccessToken;
     }
 
@@ -452,7 +452,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuthAccessTokenSecret;
     }
 
-    protected final void setOAuthAccessTokenSecret(String oAuthAccessTokenSecret) {
+    protected final void setOAuthAccessTokenSecret(final String oAuthAccessTokenSecret) {
         this.oAuthAccessTokenSecret = oAuthAccessTokenSecret;
     }
 
@@ -461,7 +461,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuth2TokenType;
     }
 
-    protected final void setOAuth2TokenType(String oAuth2TokenType) {
+    protected final void setOAuth2TokenType(final String oAuth2TokenType) {
         this.oAuth2TokenType = oAuth2TokenType;
     }
 
@@ -475,11 +475,11 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuth2Scope;
     }
 
-    protected final void setOAuth2AccessToken(String oAuth2AccessToken) {
+    protected final void setOAuth2AccessToken(final String oAuth2AccessToken) {
         this.oAuth2AccessToken = oAuth2AccessToken;
     }
 
-    protected final void setOAuth2Scope(String oAuth2Scope) {
+    protected final void setOAuth2Scope(final String oAuth2Scope) {
         this.oAuth2Scope = oAuth2Scope;
     }
 
@@ -488,7 +488,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return asyncNumThreads;
     }
 
-    protected final void setAsyncNumThreads(int asyncNumThreads) {
+    protected final void setAsyncNumThreads(final int asyncNumThreads) {
         this.asyncNumThreads = asyncNumThreads;
     }
 
@@ -497,7 +497,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return contributingTo;
     }
 
-    protected final void setContributingTo(long contributingTo) {
+    protected final void setContributingTo(final long contributingTo) {
         this.contributingTo = contributingTo;
     }
 
@@ -506,7 +506,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return restBaseURL;
     }
 
-    protected final void setRestBaseURL(String restBaseURL) {
+    protected final void setRestBaseURL(final String restBaseURL) {
         this.restBaseURL = restBaseURL;
     }
 
@@ -515,7 +515,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return uploadBaseURL;
     }
 
-    protected final void setUploadBaseURL(String uploadBaseURL) {
+    protected final void setUploadBaseURL(final String uploadBaseURL) {
         this.uploadBaseURL = uploadBaseURL;
     }
 
@@ -524,7 +524,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return streamBaseURL;
     }
 
-    protected final void setStreamBaseURL(String streamBaseURL) {
+    protected final void setStreamBaseURL(final String streamBaseURL) {
         this.streamBaseURL = streamBaseURL;
     }
 
@@ -533,7 +533,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return userStreamBaseURL;
     }
 
-    protected final void setUserStreamBaseURL(String siteStreamBaseURL) {
+    protected final void setUserStreamBaseURL(final String siteStreamBaseURL) {
         this.userStreamBaseURL = siteStreamBaseURL;
     }
 
@@ -542,7 +542,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return siteStreamBaseURL;
     }
 
-    protected final void setSiteStreamBaseURL(String siteStreamBaseURL) {
+    protected final void setSiteStreamBaseURL(final String siteStreamBaseURL) {
         this.siteStreamBaseURL = siteStreamBaseURL;
     }
 
@@ -551,7 +551,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuthRequestTokenURL;
     }
 
-    protected final void setOAuthRequestTokenURL(String oAuthRequestTokenURL) {
+    protected final void setOAuthRequestTokenURL(final String oAuthRequestTokenURL) {
         this.oAuthRequestTokenURL = oAuthRequestTokenURL;
     }
 
@@ -560,7 +560,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuthAuthorizationURL;
     }
 
-    protected final void setOAuthAuthorizationURL(String oAuthAuthorizationURL) {
+    protected final void setOAuthAuthorizationURL(final String oAuthAuthorizationURL) {
         this.oAuthAuthorizationURL = oAuthAuthorizationURL;
     }
 
@@ -569,7 +569,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuthAccessTokenURL;
     }
 
-    protected final void setOAuthAccessTokenURL(String oAuthAccessTokenURL) {
+    protected final void setOAuthAccessTokenURL(final String oAuthAccessTokenURL) {
         this.oAuthAccessTokenURL = oAuthAccessTokenURL;
     }
 
@@ -578,7 +578,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuthAuthenticationURL;
     }
 
-    protected final void setOAuthAuthenticationURL(String oAuthAuthenticationURL) {
+    protected final void setOAuthAuthenticationURL(final String oAuthAuthenticationURL) {
         this.oAuthAuthenticationURL = oAuthAuthenticationURL;
     }
 
@@ -587,7 +587,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuth2TokenURL;
     }
 
-    protected final void setOAuth2TokenURL(String oAuth2TokenURL) {
+    protected final void setOAuth2TokenURL(final String oAuth2TokenURL) {
         this.oAuth2TokenURL = oAuth2TokenURL;
     }
 
@@ -596,7 +596,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return oAuth2InvalidateTokenURL;
     }
 
-    protected final void setOAuth2InvalidateTokenURL(String oAuth2InvalidateTokenURL) {
+    protected final void setOAuth2InvalidateTokenURL(final String oAuth2InvalidateTokenURL) {
         this.oAuth2InvalidateTokenURL = oAuth2InvalidateTokenURL;
     }
 
@@ -605,7 +605,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return dispatcherImpl;
     }
 
-    protected final void setDispatcherImpl(String dispatcherImpl) {
+    protected final void setDispatcherImpl(final String dispatcherImpl) {
         this.dispatcherImpl = dispatcherImpl;
     }
 
@@ -619,11 +619,11 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return includeEntitiesEnabled;
     }
 
-    protected void setIncludeEntitiesEnabled(boolean includeEntitiesEnabled) {
+    protected void setIncludeEntitiesEnabled(final boolean includeEntitiesEnabled) {
         this.includeEntitiesEnabled = includeEntitiesEnabled;
     }
 
-    protected final void setLoggerFactory(String loggerImpl) {
+    protected final void setLoggerFactory(final String loggerImpl) {
         this.loggerFactory = loggerImpl;
     }
 
@@ -632,7 +632,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return this.includeMyRetweetEnabled;
     }
 
-    public void setIncludeMyRetweetEnabled(boolean enabled) {
+    public void setIncludeMyRetweetEnabled(final boolean enabled) {
         this.includeMyRetweetEnabled = enabled;
     }
 
@@ -656,7 +656,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return daemonEnabled;
     }
 
-    protected void setDaemonEnabled(boolean daemonEnabled) {
+    protected void setDaemonEnabled(final boolean daemonEnabled) {
         this.daemonEnabled = daemonEnabled;
     }
 
@@ -665,19 +665,19 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return includeEmailEnabled;
     }
 
-    protected void setIncludeEmailEnabled(boolean includeEmailEnabled) {
+    protected void setIncludeEmailEnabled(final boolean includeEmailEnabled) {
         this.includeEmailEnabled = includeEmailEnabled;
     }
 
-    public void setTrimUserEnabled(boolean enabled) {
+    public void setTrimUserEnabled(final boolean enabled) {
         this.trimUserEnabled = enabled;
     }
 
-    public void setIncludeExtAltTextEnabled(boolean enabled) {
+    public void setIncludeExtAltTextEnabled(final boolean enabled) {
         this.includeExtAltTextEnabled = enabled;
     }
 
-    public void setTweetModeExtended(boolean enabled) {
+    public void setTweetModeExtended(final boolean enabled) {
         this.tweetModeExtended = enabled;
     }
 
@@ -686,7 +686,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return this.jsonStoreEnabled;
     }
 
-    protected final void setJSONStoreEnabled(boolean enabled) {
+    protected final void setJSONStoreEnabled(final boolean enabled) {
         this.jsonStoreEnabled = enabled;
     }
 
@@ -695,7 +695,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return this.mbeanEnabled;
     }
 
-    protected final void setMBeanEnabled(boolean enabled) {
+    protected final void setMBeanEnabled(final boolean enabled) {
         this.mbeanEnabled = enabled;
     }
 
@@ -709,11 +709,11 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return this.userStreamWithFollowingsEnabled;
     }
 
-    protected final void setUserStreamRepliesAllEnabled(boolean enabled) {
+    protected final void setUserStreamRepliesAllEnabled(final boolean enabled) {
         this.userStreamRepliesAllEnabled = enabled;
     }
 
-    protected final void setUserStreamWithFollowingsEnabled(boolean enabled) {
+    protected final void setUserStreamWithFollowingsEnabled(final boolean enabled) {
         this.userStreamWithFollowingsEnabled = enabled;
     }
 
@@ -722,7 +722,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return stallWarningsEnabled;
     }
 
-    protected final void setStallWarningsEnabled(boolean stallWarningsEnabled) {
+    protected final void setStallWarningsEnabled(final boolean stallWarningsEnabled) {
         this.stallWarningsEnabled = stallWarningsEnabled;
     }
 
@@ -731,7 +731,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return applicationOnlyAuthEnabled;
     }
 
-    protected final void setApplicationOnlyAuthEnabled(boolean applicationOnlyAuthEnabled) {
+    protected final void setApplicationOnlyAuthEnabled(final boolean applicationOnlyAuthEnabled) {
         this.applicationOnlyAuthEnabled = applicationOnlyAuthEnabled;
     }
 
@@ -740,7 +740,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return this.mediaProvider;
     }
 
-    protected final void setMediaProvider(String mediaProvider) {
+    protected final void setMediaProvider(final String mediaProvider) {
         this.mediaProvider = mediaProvider;
     }
 
@@ -749,7 +749,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return this.mediaProviderAPIKey;
     }
 
-    protected final void setMediaProviderAPIKey(String mediaProviderAPIKey) {
+    protected final void setMediaProviderAPIKey(final String mediaProviderAPIKey) {
         this.mediaProviderAPIKey = mediaProviderAPIKey;
     }
 
@@ -758,7 +758,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return this.mediaProviderParameters;
     }
 
-    protected final void setMediaProviderParameters(Properties props) {
+    protected final void setMediaProviderParameters(final Properties props) {
         this.mediaProviderParameters = props;
     }
 
@@ -767,11 +767,11 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         return this.streamThreadName;
     }
 
-    protected final void setStreamThreadName(String streamThreadName) {
+    protected final void setStreamThreadName(final String streamThreadName) {
         this.streamThreadName = streamThreadName;
     }
 
-    static String fixURL(boolean useSSL, String url) {
+    static String fixURL(final boolean useSSL, final String url) {
         if (null == url) {
             return null;
         }
@@ -788,7 +788,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -917,59 +917,59 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
 
     @Override
     public String toString() {
-        return "ConfigurationBase{" +
-                "debug=" + debug +
-                ", user='" + user + '\'' +
-                ", password='" + password + '\'' +
-                ", httpConf=" + httpConf +
-                ", httpStreamingReadTimeout=" + httpStreamingReadTimeout +
-                ", httpRetryCount=" + httpRetryCount +
-                ", httpRetryIntervalSeconds=" + httpRetryIntervalSeconds +
-                ", oAuthConsumerKey='" + oAuthConsumerKey + '\'' +
-                ", oAuthConsumerSecret='" + oAuthConsumerSecret + '\'' +
-                ", oAuthAccessToken='" + oAuthAccessToken + '\'' +
-                ", oAuthAccessTokenSecret='" + oAuthAccessTokenSecret + '\'' +
-                ", oAuth2TokenType='" + oAuth2TokenType + '\'' +
-                ", oAuth2AccessToken='" + oAuth2AccessToken + '\'' +
-                ", oAuth2Scope='" + oAuth2Scope + '\'' +
-                ", oAuthRequestTokenURL='" + oAuthRequestTokenURL + '\'' +
-                ", oAuthAuthorizationURL='" + oAuthAuthorizationURL + '\'' +
-                ", oAuthAccessTokenURL='" + oAuthAccessTokenURL + '\'' +
-                ", oAuthAuthenticationURL='" + oAuthAuthenticationURL + '\'' +
-                ", oAuth2TokenURL='" + oAuth2TokenURL + '\'' +
-                ", oAuth2InvalidateTokenURL='" + oAuth2InvalidateTokenURL + '\'' +
-                ", restBaseURL='" + restBaseURL + '\'' +
-                ", streamBaseURL='" + streamBaseURL + '\'' +
-                ", userStreamBaseURL='" + userStreamBaseURL + '\'' +
-                ", siteStreamBaseURL='" + siteStreamBaseURL + '\'' +
-                ", uploadBaseURL='" + uploadBaseURL + '\'' +
-                ", dispatcherImpl='" + dispatcherImpl + '\'' +
-                ", asyncNumThreads=" + asyncNumThreads +
-                ", loggerFactory='" + loggerFactory + '\'' +
-                ", contributingTo=" + contributingTo +
-                ", includeMyRetweetEnabled=" + includeMyRetweetEnabled +
-                ", includeEntitiesEnabled=" + includeEntitiesEnabled +
-                ", trimUserEnabled=" + trimUserEnabled +
-                ", includeExtAltTextEnabled=" + includeExtAltTextEnabled +
-                ", tweetModeExtended=" + tweetModeExtended +
-                ", includeEmailEnabled=" + includeEmailEnabled +
-                ", jsonStoreEnabled=" + jsonStoreEnabled +
-                ", mbeanEnabled=" + mbeanEnabled +
-                ", userStreamRepliesAllEnabled=" + userStreamRepliesAllEnabled +
-                ", userStreamWithFollowingsEnabled=" + userStreamWithFollowingsEnabled +
-                ", stallWarningsEnabled=" + stallWarningsEnabled +
-                ", applicationOnlyAuthEnabled=" + applicationOnlyAuthEnabled +
-                ", mediaProvider='" + mediaProvider + '\'' +
-                ", mediaProviderAPIKey='" + mediaProviderAPIKey + '\'' +
-                ", mediaProviderParameters=" + mediaProviderParameters +
-                ", daemonEnabled=" + daemonEnabled +
-                ", streamThreadName='" + streamThreadName + '\'' +
-                '}';
+        return "ConfigurationBase{"
+                + "debug=" + debug
+                + ", user='" + user + '\''
+                + ", password='" + password + '\''
+                + ", httpConf=" + httpConf
+                + ", httpStreamingReadTimeout=" + httpStreamingReadTimeout
+                + ", httpRetryCount=" + httpRetryCount
+                + ", httpRetryIntervalSeconds=" + httpRetryIntervalSeconds
+                + ", oAuthConsumerKey='" + oAuthConsumerKey + '\''
+                + ", oAuthConsumerSecret='" + oAuthConsumerSecret + '\''
+                + ", oAuthAccessToken='" + oAuthAccessToken + '\''
+                + ", oAuthAccessTokenSecret='" + oAuthAccessTokenSecret + '\''
+                + ", oAuth2TokenType='" + oAuth2TokenType + '\''
+                + ", oAuth2AccessToken='" + oAuth2AccessToken + '\''
+                + ", oAuth2Scope='" + oAuth2Scope + '\''
+                + ", oAuthRequestTokenURL='" + oAuthRequestTokenURL + '\''
+                + ", oAuthAuthorizationURL='" + oAuthAuthorizationURL + '\''
+                + ", oAuthAccessTokenURL='" + oAuthAccessTokenURL + '\''
+                + ", oAuthAuthenticationURL='" + oAuthAuthenticationURL + '\''
+                + ", oAuth2TokenURL='" + oAuth2TokenURL + '\''
+                + ", oAuth2InvalidateTokenURL='" + oAuth2InvalidateTokenURL + '\''
+                + ", restBaseURL='" + restBaseURL + '\''
+                + ", streamBaseURL='" + streamBaseURL + '\''
+                + ", userStreamBaseURL='" + userStreamBaseURL + '\''
+                + ", siteStreamBaseURL='" + siteStreamBaseURL + '\''
+                + ", uploadBaseURL='" + uploadBaseURL + '\''
+                + ", dispatcherImpl='" + dispatcherImpl + '\''
+                + ", asyncNumThreads=" + asyncNumThreads
+                + ", loggerFactory='" + loggerFactory + '\''
+                + ", contributingTo=" + contributingTo
+                + ", includeMyRetweetEnabled=" + includeMyRetweetEnabled
+                + ", includeEntitiesEnabled=" + includeEntitiesEnabled
+                + ", trimUserEnabled=" + trimUserEnabled
+                + ", includeExtAltTextEnabled=" + includeExtAltTextEnabled
+                + ", tweetModeExtended=" + tweetModeExtended
+                + ", includeEmailEnabled=" + includeEmailEnabled
+                + ", jsonStoreEnabled=" + jsonStoreEnabled
+                + ", mbeanEnabled=" + mbeanEnabled
+                + ", userStreamRepliesAllEnabled=" + userStreamRepliesAllEnabled
+                + ", userStreamWithFollowingsEnabled=" + userStreamWithFollowingsEnabled
+                + ", stallWarningsEnabled=" + stallWarningsEnabled
+                + ", applicationOnlyAuthEnabled=" + applicationOnlyAuthEnabled
+                + ", mediaProvider='" + mediaProvider + '\''
+                + ", mediaProviderAPIKey='" + mediaProviderAPIKey + '\''
+                + ", mediaProviderParameters=" + mediaProviderParameters
+                + ", daemonEnabled=" + daemonEnabled
+                + ", streamThreadName='" + streamThreadName + '\''
+                + '}';
     }
 
     private static final List<ConfigurationBase> instances = new ArrayList<ConfigurationBase>();
 
-    private static void cacheInstance(ConfigurationBase conf) {
+    private static void cacheInstance(final ConfigurationBase conf) {
         if (!instances.contains(conf)) {
             instances.add(conf);
         }
@@ -979,7 +979,7 @@ class ConfigurationBase implements Configuration, java.io.Serializable {
         cacheInstance(this);
     }
 
-    private static ConfigurationBase getInstance(ConfigurationBase configurationBase) {
+    private static ConfigurationBase getInstance(final ConfigurationBase configurationBase) {
         int index;
         if ((index = instances.indexOf(configurationBase)) == -1) {
             instances.add(configurationBase);

@@ -37,42 +37,42 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
     private File file = null;
     private InputStream fileBody = null;
 
-    public HttpParameter(String name, String value) {
+    public HttpParameter(final String name, final String value) {
         this.name = name;
         this.value = value;
     }
 
-    public HttpParameter(JSONObject jsonObject) {
+    public HttpParameter(final JSONObject jsonObject) {
         this.jsonObject = jsonObject;
     }
 
-    public HttpParameter(String name, File file) {
+    public HttpParameter(final String name, final File file) {
         this.name = name;
         this.file = file;
     }
 
-    public HttpParameter(String name, String fileName, InputStream fileBody) {
+    public HttpParameter(final String name, final String fileName, final InputStream fileBody) {
         this.name = name;
         this.file = new File(fileName);
         this.fileBody = fileBody;
     }
 
-    public HttpParameter(String name, int value) {
+    public HttpParameter(final String name, final int value) {
         this.name = name;
         this.value = String.valueOf(value);
     }
 
-    public HttpParameter(String name, long value) {
+    public HttpParameter(final String name, final long value) {
         this.name = name;
         this.value = String.valueOf(value);
     }
 
-    public HttpParameter(String name, double value) {
+    public HttpParameter(final String name, final double value) {
         this.name = name;
         this.value = String.valueOf(value);
     }
 
-    public HttpParameter(String name, boolean value) {
+    public HttpParameter(final String name, final boolean value) {
         this.name = name;
         this.value = String.valueOf(value);
     }
@@ -153,7 +153,7 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -167,11 +167,11 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
 
     }
 
-    public static boolean containsJson(HttpParameter[] params) {
+    public static boolean containsJson(final HttpParameter[] params) {
         return params.length == 1 && params[0].isJson();
     }
 
-    public static boolean containsFile(HttpParameter[] params) {
+    public static boolean containsFile(final HttpParameter[] params) {
         boolean containsFile = false;
         if (null == params) {
             return false;
@@ -186,7 +186,7 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
     }
 
     /*package*/
-    static boolean containsFile(List<HttpParameter> params) {
+    static boolean containsFile(final List<HttpParameter> params) {
         boolean containsFile = false;
         for (HttpParameter param : params) {
             if (param.isFile()) {
@@ -197,22 +197,22 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
         return containsFile;
     }
 
-    public static HttpParameter[] getParameterArray(String name, String value) {
+    public static HttpParameter[] getParameterArray(final String name, final String value) {
         return new HttpParameter[]{new HttpParameter(name, value)};
     }
 
-    public static HttpParameter[] getParameterArray(String name, int value) {
+    public static HttpParameter[] getParameterArray(final String name, final int value) {
         return getParameterArray(name, String.valueOf(value));
     }
 
-    public static HttpParameter[] getParameterArray(String name1, String value1
-            , String name2, String value2) {
+    public static HttpParameter[] getParameterArray(final String name1, final String value1
+, final String name2, final String value2) {
         return new HttpParameter[]{new HttpParameter(name1, value1)
-                , new HttpParameter(name2, value2)};
+, new HttpParameter(name2, value2)};
     }
 
-    public static HttpParameter[] getParameterArray(String name1, int value1
-            , String name2, int value2) {
+    public static HttpParameter[] getParameterArray(final String name1, final int value1
+, final String name2, final int value2) {
         return getParameterArray(name1, String.valueOf(value1), name2, String.valueOf(value2));
     }
 
@@ -228,17 +228,17 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
 
     @Override
     public String toString() {
-        return "HttpParameter{" +
-                "name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                ", jsonObject=" + jsonObject +
-                ", file=" + file +
-                ", fileBody=" + fileBody +
-                '}';
+        return "HttpParameter{"
+                + "name='" + name + '\''
+                + ", value='" + value + '\''
+                + ", jsonObject=" + jsonObject
+                + ", file=" + file
+                + ", fileBody=" + fileBody
+                + '}';
     }
 
     @Override
-    public int compareTo(HttpParameter o) {
+    public int compareTo(final HttpParameter o) {
         int compared = 0;
         if (name != null) {
             compared = name.compareTo(o.name);
@@ -251,7 +251,7 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
         return compared;
     }
 
-    public static String encodeParameters(HttpParameter[] httpParams) {
+    public static String encodeParameters(final HttpParameter[] httpParams) {
         if (null == httpParams) {
             return "";
         }
@@ -276,7 +276,7 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
      * @see <a href="http://groups.google.com/group/oauth/browse_thread/thread/a8398d0521f4ae3d/9d79b698ab217df2?hl=en&lnk=gst&q=space+encoding#9d79b698ab217df2">Space encoding - OAuth | Google Groups</a>
      * @see <a href="http://tools.ietf.org/html/rfc3986#section-2.1">RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax - 2.1. Percent-Encoding</a>
      */
-    public static String encode(String value) {
+    public static String encode(final String value) {
         String encoded = null;
         try {
             encoded = URLEncoder.encode(value, "UTF-8");
@@ -308,16 +308,15 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
      * @see <a href="http://groups.google.com/group/oauth/browse_thread/thread/a8398d0521f4ae3d/9d79b698ab217df2?hl=en&lnk=gst&q=space+encoding#9d79b698ab217df2">Space encoding - OAuth | Google Groups</a>
      * @see <a href="http://tools.ietf.org/html/rfc3986#section-2.1">RFC 3986 - Uniform Resource Identifier (URI): Generic Syntax - 2.1. Percent-Encoding</a>
      */
-    public static String decode(String value) {
+    public static String decode(final String value) {
         value = value.replace("%2A", "*");
         value = value.replace("%2a", "*");
         value = value.replace("%20", " ");
         
-        String decoded=null;
+        String decoded = null;
         try {
             decoded = URLDecoder.decode(value, "UTF-8");
-        }
-        catch(UnsupportedEncodingException ignore) {
+        } catch (UnsupportedEncodingException ignore) {
         }
         
         return decoded;
@@ -329,14 +328,14 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
      * @param queryParameters a query parameter string, like a=hello&amp;b=world
      * @return decoded parameters
      */
-    public static List<HttpParameter> decodeParameters(String queryParameters) {
-        List<HttpParameter> result=new ArrayList<HttpParameter>();
+    public static List<HttpParameter> decodeParameters(final String queryParameters) {
+        List<HttpParameter> result = new ArrayList<HttpParameter>();
         for (String pair : queryParameters.split("&")) {
-            String[] parts=pair.split("=", 2);
-            if(parts.length == 2) {
-                String name=decode(parts[0]);
-                String value=decode(parts[1]);
-                if(!name.equals("") && !value.equals(""))
+            String[] parts = pair.split("=", 2);
+            if (parts.length == 2) {
+                String name = decode(parts[0]);
+                String value = decode(parts[1]);
+                if (!name.equals("") && !value.equals(""))
                     result.add(new HttpParameter(name, value));
             }
         }

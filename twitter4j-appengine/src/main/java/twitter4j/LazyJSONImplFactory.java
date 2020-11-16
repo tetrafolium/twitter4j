@@ -14,33 +14,33 @@ class LazyJSONImplFactory implements ObjectFactory {
     private final ObjectFactory factory;
     private final Configuration conf;
 
-    public LazyJSONImplFactory(Configuration conf) {
+    public LazyJSONImplFactory(final Configuration conf) {
         factory = new JSONImplFactory(conf);
         this.conf = conf;
     }
 
     @Override
-    public Status createStatus(JSONObject json) throws TwitterException {
+    public Status createStatus(final JSONObject json) throws TwitterException {
         return new StatusJSONImpl(json);
     }
 
     @Override
-    public User createUser(JSONObject json) throws TwitterException {
+    public User createUser(final JSONObject json) throws TwitterException {
         return new UserJSONImpl(json);
     }
 
     @Override
-    public UserList createAUserList(JSONObject json) throws TwitterException {
+    public UserList createAUserList(final JSONObject json) throws TwitterException {
         return new UserListJSONImpl(json);
     }
 
     @Override
-    public Map<String, RateLimitStatus> createRateLimitStatuses(HttpResponse res) throws TwitterException {
+    public Map<String, RateLimitStatus> createRateLimitStatuses(final HttpResponse res) throws TwitterException {
         return factory.createRateLimitStatuses(res);
     }
 
     @Override
-    public Status createStatus(HttpResponse res) throws TwitterException {
+    public Status createStatus(final HttpResponse res) throws TwitterException {
         return new LazyStatus(res, factory);
     }
 
@@ -58,7 +58,7 @@ class LazyJSONImplFactory implements ObjectFactory {
 
 
     @Override
-    public Trends createTrends(HttpResponse res) throws TwitterException {
+    public Trends createTrends(final HttpResponse res) throws TwitterException {
         return new LazyTrends(res, factory);
     }
 
@@ -74,7 +74,7 @@ class LazyJSONImplFactory implements ObjectFactory {
     }
 
     @Override
-    public User createUser(HttpResponse res) throws TwitterException {
+    public User createUser(final HttpResponse res) throws TwitterException {
         return new LazyUser(res, factory);
     }
 
@@ -119,12 +119,12 @@ class LazyJSONImplFactory implements ObjectFactory {
     }
 
     @Override
-    public QueryResult createQueryResult(HttpResponse res, Query query) throws TwitterException {
+    public QueryResult createQueryResult(final HttpResponse res, final Query query) throws TwitterException {
         return new LazyQueryResult(res, factory, query);
     }
 
     @Override
-    public IDs createIDs(HttpResponse res) throws TwitterException {
+    public IDs createIDs(final HttpResponse res) throws TwitterException {
         return new LazyIDs(res, factory);
     }
 
@@ -141,7 +141,7 @@ class LazyJSONImplFactory implements ObjectFactory {
     }
 
     @Override
-    public UserList createAUserList(HttpResponse res) throws TwitterException {
+    public UserList createAUserList(final HttpResponse res) throws TwitterException {
         return new LazyUserList(res, factory);
     }
 
@@ -182,7 +182,7 @@ class LazyJSONImplFactory implements ObjectFactory {
     }
 
     @Override
-    public DirectMessage createDirectMessage(HttpResponse res) throws TwitterException {
+    public DirectMessage createDirectMessage(final HttpResponse res) throws TwitterException {
         return new LazyDirectMessage(res, factory);
     }
 
@@ -192,7 +192,7 @@ class LazyJSONImplFactory implements ObjectFactory {
     }
 
     @Override
-    public Relationship createRelationship(HttpResponse res) throws TwitterException {
+    public Relationship createRelationship(final HttpResponse res) throws TwitterException {
         return new LazyRelationship(res, factory);
     }
 
@@ -209,17 +209,17 @@ class LazyJSONImplFactory implements ObjectFactory {
     }
 
     @Override
-    public AccountTotals createAccountTotals(HttpResponse res) throws TwitterException {
+    public AccountTotals createAccountTotals(final HttpResponse res) throws TwitterException {
         return new LazyAccountTotals(res, factory);
     }
 
     @Override
-    public AccountSettings createAccountSettings(HttpResponse res) throws TwitterException {
+    public AccountSettings createAccountSettings(final HttpResponse res) throws TwitterException {
         return new LazyAccountSettings(res, factory);
     }
 
     @Override
-    public SavedSearch createSavedSearch(HttpResponse res) throws TwitterException {
+    public SavedSearch createSavedSearch(final HttpResponse res) throws TwitterException {
         return new LazySavedSearch(res, factory);
     }
 
@@ -248,7 +248,7 @@ class LazyJSONImplFactory implements ObjectFactory {
     }
 
     @Override
-    public Place createPlace(HttpResponse res) throws TwitterException {
+    public Place createPlace(final HttpResponse res) throws TwitterException {
         return new LazyPlace(res, factory);
     }
 
@@ -270,12 +270,12 @@ class LazyJSONImplFactory implements ObjectFactory {
     }
 
     @Override
-    public OEmbed createOEmbed(HttpResponse res) throws TwitterException {
+    public OEmbed createOEmbed(final HttpResponse res) throws TwitterException {
         return new LazyOEmbed(res, factory);
     }
 
     @Override
-    public TwitterAPIConfiguration createTwitterAPIConfiguration(HttpResponse res) throws TwitterException {
+    public TwitterAPIConfiguration createTwitterAPIConfiguration(final HttpResponse res) throws TwitterException {
         return new LazyTwitterAPIConfiguration(res, factory);
     }
 
@@ -292,7 +292,7 @@ class LazyJSONImplFactory implements ObjectFactory {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof LazyJSONImplFactory)) return false;
 
@@ -311,8 +311,8 @@ class LazyJSONImplFactory implements ObjectFactory {
 
     @Override
     public String toString() {
-        return "LazyFactory{" +
-                "factory=" + factory +
-                '}';
+        return "LazyFactory{"
+                + "factory=" + factory
+                + '}';
     }
 }

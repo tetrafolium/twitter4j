@@ -33,7 +33,7 @@ public class GetDirectMessages {
      *
      * @param args String[]
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         Twitter twitter = new TwitterFactory().getInstance();
         try {
             String cursor = null;

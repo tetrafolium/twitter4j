@@ -37,7 +37,7 @@ class TwitterAPIConfigurationJSONImpl extends TwitterResponseImpl implements Twi
     private String[] nonUsernamePaths;
     private int maxMediaPerUpload;
 
-    TwitterAPIConfigurationJSONImpl(HttpResponse res, Configuration conf)
+    TwitterAPIConfigurationJSONImpl(final HttpResponse res, final Configuration conf)
             throws TwitterException {
         super(res);
         try {
@@ -117,7 +117,7 @@ class TwitterAPIConfigurationJSONImpl extends TwitterResponseImpl implements Twi
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof TwitterAPIConfigurationJSONImpl)) return false;
 
@@ -153,15 +153,15 @@ class TwitterAPIConfigurationJSONImpl extends TwitterResponseImpl implements Twi
 
     @Override
     public String toString() {
-        return "TwitterAPIConfigurationJSONImpl{" +
-                "photoSizeLimit=" + photoSizeLimit +
-                ", shortURLLength=" + shortURLLength +
-                ", shortURLLengthHttps=" + shortURLLengthHttps +
-                ", charactersReservedPerMedia=" + charactersReservedPerMedia +
-                ", dmTextCharacterLimit=" + dmTextCharacterLimit +
-                ", photoSizes=" + photoSizes +
-                ", nonUsernamePaths=" + (nonUsernamePaths == null ? null : Arrays.asList(nonUsernamePaths)) +
-                ", maxMediaPerUpload=" + maxMediaPerUpload +
-                '}';
+        return "TwitterAPIConfigurationJSONImpl{"
+                + "photoSizeLimit=" + photoSizeLimit
+                + ", shortURLLength=" + shortURLLength
+                + ", shortURLLengthHttps=" + shortURLLengthHttps
+                + ", charactersReservedPerMedia=" + charactersReservedPerMedia
+                + ", dmTextCharacterLimit=" + dmTextCharacterLimit
+                + ", photoSizes=" + photoSizes
+                + ", nonUsernamePaths=" + (nonUsernamePaths == null ? null : Arrays.asList(nonUsernamePaths))
+                + ", maxMediaPerUpload=" + maxMediaPerUpload
+                + '}';
     }
 }

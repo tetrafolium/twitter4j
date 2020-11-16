@@ -37,7 +37,7 @@ public final class VersionHTTP2 {
      *
      * @param args will be just ignored.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         System.out.println(TITLE + " " + VERSION);
     }
 }

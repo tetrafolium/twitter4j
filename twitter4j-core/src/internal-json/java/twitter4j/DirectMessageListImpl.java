@@ -24,16 +24,16 @@ class DirectMessageListImpl extends ResponseListImpl<DirectMessage> implements D
     private static final long serialVersionUID = 8150060768287194508L;
     private final String nextCursor;
 
-    DirectMessageListImpl(RateLimitStatus rateLimitStatus, int accessLevel) {
+    DirectMessageListImpl(final RateLimitStatus rateLimitStatus, final int accessLevel) {
         super(rateLimitStatus, accessLevel);
         nextCursor = null;
     }
 
-    DirectMessageListImpl(int size, JSONObject json, HttpResponse res) {
+    DirectMessageListImpl(final int size, final JSONObject json, final HttpResponse res) {
         super(size, res);
         this.nextCursor = ParseUtil.getRawString("next_cursor", json);
     }
-    DirectMessageListImpl(int size, HttpResponse res) {
+    DirectMessageListImpl(final int size, final HttpResponse res) {
         super(size, res);
         this.nextCursor = null;
     }

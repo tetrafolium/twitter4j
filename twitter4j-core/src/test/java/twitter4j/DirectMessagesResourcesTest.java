@@ -27,11 +27,11 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class DirectMessagesResourcesTest extends TwitterTestBase {
     @Test
-    void testQuickResponse() throws Exception{
+    void testQuickResponse() throws Exception {
         String message = "hello " + new Date().toString();
         DirectMessage sent = rwPrivateMessage.sendDirectMessage(id1.id, message,
-                new QuickReply("label1", "description1","metadata1"),
-                new QuickReply("label2", "description2","metadata2"));
+                new QuickReply("label1", "description1", "metadata1"),
+                new QuickReply("label2", "description2", "metadata2"));
         assertEquals(rwPrivate.id, sent.getSenderId());
         assertEquals(id1.id, sent.getRecipientId());
         assertEquals(2,    sent.getQuickReplies().length);
@@ -74,8 +74,8 @@ class DirectMessagesResourcesTest extends TwitterTestBase {
         // message with quick reply
 
         DirectMessage directMessageWithQuickReplies = twitter1.sendDirectMessage(rwPrivate.id, "hello" + new Date(), new QuickReply("らべる１", "説明1", "めたでーた1")
-                , new QuickReply("label2", "description 2", "metadata 2")
-                , new QuickReply("label3", "description 3", null));
+, new QuickReply("label2", "description 2", "metadata 2")
+, new QuickReply("label3", "description 3", null));
         QuickReply[] quickReplies = directMessageWithQuickReplies.getQuickReplies();
         assertEquals(3, quickReplies.length);
         assertEquals(new QuickReply("らべる１", "説明1", "めたでーた1"), quickReplies[0]);

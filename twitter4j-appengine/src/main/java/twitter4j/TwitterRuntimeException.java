@@ -23,7 +23,7 @@ public class TwitterRuntimeException extends RuntimeException {
 
     private static final long serialVersionUID = 4476620514268902834L;
 
-    public TwitterRuntimeException(Throwable th) {
+    public TwitterRuntimeException(final Throwable th) {
         super(th);
     }
 }

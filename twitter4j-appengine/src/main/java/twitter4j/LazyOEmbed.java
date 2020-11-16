@@ -32,7 +32,7 @@ final class LazyOEmbed implements twitter4j.OEmbed {
     private final ObjectFactory factory;
     private OEmbed target = null;
 
-    LazyOEmbed(HttpResponse res, ObjectFactory factory) {
+    LazyOEmbed(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -127,7 +127,7 @@ final class LazyOEmbed implements twitter4j.OEmbed {
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof OEmbed)) return false;
         return getTarget().equals(o);
@@ -140,8 +140,8 @@ final class LazyOEmbed implements twitter4j.OEmbed {
 
     @Override
     public String toString() {
-        return "LazyOEmbed{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyOEmbed{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

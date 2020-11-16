@@ -34,7 +34,7 @@ public final class UploadedMedia implements java.io.Serializable {
     private int processingCheckAfterSecs;
     private int progressPercent;
 
-    /*package*/ UploadedMedia(JSONObject json) throws TwitterException {
+    /*package*/ UploadedMedia(final JSONObject json) throws TwitterException {
         init(json);
     }
 
@@ -59,18 +59,18 @@ public final class UploadedMedia implements java.io.Serializable {
     }
     
     public String getProcessingState() {
-    	return processingState;
+        return processingState;
     }
     
     public int getProcessingCheckAfterSecs() {
-    	return processingCheckAfterSecs;
+        return processingCheckAfterSecs;
     }
   
     public int getProgressPercent() {
-    	return progressPercent;
+        return progressPercent;
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         mediaId = ParseUtil.getLong("media_id", json);
         size = ParseUtil.getLong("size", json);
         try {
@@ -82,11 +82,11 @@ public final class UploadedMedia implements java.io.Serializable {
             }
             
             if (!json.isNull("processing_info")) {
-            	JSONObject processingInfo = json.getJSONObject("processing_info");
-            	processingState = ParseUtil.getUnescapedString("state", processingInfo);
-            	processingCheckAfterSecs = ParseUtil.getInt("check_after_secs", processingInfo);
-            	progressPercent = ParseUtil.getInt("progress_percent", processingInfo);
-            	
+                JSONObject processingInfo = json.getJSONObject("processing_info");
+                processingState = ParseUtil.getUnescapedString("state", processingInfo);
+                processingCheckAfterSecs = ParseUtil.getInt("check_after_secs", processingInfo);
+                progressPercent = ParseUtil.getInt("progress_percent", processingInfo);
+                
             }
             
         } catch (JSONException jsone) {
@@ -95,7 +95,7 @@ public final class UploadedMedia implements java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -116,18 +116,18 @@ public final class UploadedMedia implements java.io.Serializable {
         result = 31 * result + imageWidth;
         result = 31 * result + imageHeight;
         result = 31 * result + (imageType != null ? imageType.hashCode() : 0);
-        result = 31 * result + (int)(size ^ (size >>> 32));
+        result = 31 * result + (int) (size ^ (size >>> 32));
         return result;
     }
 
     @Override
     public String toString() {
-        return "UploadedMedia{" +
-                "mediaId=" + mediaId +
-                ", imageWidth=" + imageWidth + 
-                ", imageHeight=" + imageHeight +
-                ", imageType='" + imageType + '\'' +
-                ", size=" + size +
-                '}';
+        return "UploadedMedia{"
+                + "mediaId=" + mediaId
+                + ", imageWidth=" + imageWidth
+                + ", imageHeight=" + imageHeight
+                + ", imageType='" + imageType + '\''
+                + ", size=" + size
+                + '}';
     }
 }

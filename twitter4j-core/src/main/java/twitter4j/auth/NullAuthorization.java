@@ -38,7 +38,7 @@ public class NullAuthorization implements Authorization, java.io.Serializable {
     }
 
     @Override
-    public String getAuthorizationHeader(HttpRequest req) {
+    public String getAuthorizationHeader(final HttpRequest req) {
         return null;
     }
 
@@ -48,7 +48,7 @@ public class NullAuthorization implements Authorization, java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         return SINGLETON == o;
     }
 

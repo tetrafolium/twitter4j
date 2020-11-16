@@ -35,7 +35,7 @@ public abstract class HttpResponse {
         this.CONF = ConfigurationContext.getInstance().getHttpClientConfiguration();
     }
 
-    public HttpResponse(HttpClientConfiguration conf) {
+    public HttpResponse(final HttpClientConfiguration conf) {
         this.CONF = conf;
     }
 
@@ -132,8 +132,8 @@ public abstract class HttpResponse {
                 if (CONF.isPrettyDebugEnabled()) {
                     logger.debug(json.toString(1));
                 } else {
-                    logger.debug(responseAsString != null ? responseAsString :
-                        json.toString());
+                    logger.debug(responseAsString != null ? responseAsString
+                        : json.toString());
                 }
             } catch (JSONException jsone) {
                 if (responseAsString == null) {
@@ -164,8 +164,8 @@ public abstract class HttpResponse {
                 if (CONF.isPrettyDebugEnabled()) {
                     logger.debug(jsonArray.toString(1));
                 } else {
-                    logger.debug(responseAsString != null ? responseAsString :
-                        jsonArray.toString());
+                    logger.debug(responseAsString != null ? responseAsString
+                        : jsonArray.toString());
                 }
             } catch (JSONException jsone) {
                 if (logger.isDebugEnabled()) {
@@ -199,11 +199,11 @@ public abstract class HttpResponse {
 
     @Override
     public String toString() {
-        return "HttpResponse{" +
-            "statusCode=" + statusCode +
-            ", responseAsString='" + responseAsString + '\'' +
-            ", is=" + is +
-            ", streamConsumed=" + streamConsumed +
-            '}';
+        return "HttpResponse{"
+            + "statusCode=" + statusCode
+            + ", responseAsString='" + responseAsString + '\''
+            + ", is=" + is
+            + ", streamConsumed=" + streamConsumed
+            + '}';
     }
 }

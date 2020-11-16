@@ -35,7 +35,7 @@ class PagingTest {
 
         // setter validation test
         try {
-            paging.setSinceId(-1l);
+            paging.setSinceId(-1L);
             fail("sinceId should not accept negative value");
         } catch (IllegalArgumentException ignore) {
         }
@@ -47,10 +47,10 @@ class PagingTest {
         }
         params = paging.asPostParameterList();
         assertEquals(0, params.size());
-        paging.setSinceId(2000l);
+        paging.setSinceId(2000L);
         params = paging.asPostParameterList();
         assertEquals(1, params.size());
-        assertContains(params, "since_id", 2000l);
+        assertContains(params, "since_id", 2000L);
 
         // setter validation test
         try {
@@ -62,11 +62,11 @@ class PagingTest {
         params = paging.asPostParameterList();
         assertEquals(2, params.size());
         assertContains(params, "page", 10);
-        assertContains(params, "since_id", 2000l);
+        assertContains(params, "since_id", 2000L);
 
         // setter validation test
         try {
-            paging.setMaxId(-1l);
+            paging.setMaxId(-1L);
             fail("maxId should not accept negative value");
         } catch (IllegalArgumentException ignore) {
         }
@@ -78,12 +78,12 @@ class PagingTest {
         }
         params = paging.asPostParameterList();
         assertEquals(2, params.size());
-        paging.setMaxId(1000l);
+        paging.setMaxId(1000L);
         params = paging.asPostParameterList();
         assertEquals(3, params.size());
         assertContains(params, "page", 10);
-        assertContains(params, "max_id", 1000l);
-        assertContains(params, "since_id", 2000l);
+        assertContains(params, "max_id", 1000L);
+        assertContains(params, "since_id", 2000L);
 
 
         // setter validation test
@@ -104,13 +104,13 @@ class PagingTest {
         params = paging.asPostParameterList();
         assertEquals(4, params.size());
         assertContains(params, "page", 10);
-        assertContains(params, "max_id", 1000l);
-        assertContains(params, "since_id", 2000l);
+        assertContains(params, "max_id", 1000L);
+        assertContains(params, "since_id", 2000L);
         assertContains(params, "count", 3000);
 
     }
 
-    private void assertContains(java.util.List<HttpParameter> params, String name, long value) {
+    private void assertContains(final java.util.List<HttpParameter> params, final String name, final long value) {
         boolean contains = false;
         for (HttpParameter param : params) {
             if (param.getName().equals(name) && param.getValue().equals(String.valueOf(value))) {

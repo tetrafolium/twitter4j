@@ -59,7 +59,7 @@ public final class Paging implements java.io.Serializable {
         return list.toArray(new HttpParameter[list.size()]);
     }
 
-    /*package*/ List<HttpParameter> asPostParameterList(char[] supportedParams) {
+    /*package*/ List<HttpParameter> asPostParameterList(final char[] supportedParams) {
         return asPostParameterList(supportedParams, COUNT);
     }
 
@@ -75,7 +75,7 @@ public final class Paging implements java.io.Serializable {
      * @param perPageParamName name used for per-page parameter. getUserListStatuses() requires "per_page" instead of "count".
      * @return list of PostParameter
      */
-    /*package*/ List<HttpParameter> asPostParameterList(char[] supportedParams, String perPageParamName) {
+    /*package*/ List<HttpParameter> asPostParameterList(final char[] supportedParams, final String perPageParamName) {
         java.util.List<HttpParameter> pagingParams = new ArrayList<HttpParameter>(supportedParams.length);
         addPostParameter(supportedParams, 's', pagingParams, "since_id", getSinceId());
         addPostParameter(supportedParams, 'm', pagingParams, "max_id", getMaxId());
@@ -97,7 +97,7 @@ public final class Paging implements java.io.Serializable {
      * @param perPageParamName name used for per-page parameter. getUserListStatuses() requires "per_page" instead of "count".
      * @return list of PostParameter
      */
-    /*package*/ HttpParameter[] asPostParameterArray(char[] supportedParams, String perPageParamName) {
+    /*package*/ HttpParameter[] asPostParameterArray(final char[] supportedParams, final String perPageParamName) {
         java.util.List<HttpParameter> pagingParams = new ArrayList<HttpParameter>(supportedParams.length);
         addPostParameter(supportedParams, 's', pagingParams, "since_id", getSinceId());
         addPostParameter(supportedParams, 'm', pagingParams, "max_id", getMaxId());
@@ -110,8 +110,8 @@ public final class Paging implements java.io.Serializable {
         }
     }
 
-    private void addPostParameter(char[] supportedParams, char paramKey
-            , List<HttpParameter> pagingParams, String paramName, long paramValue) {
+    private void addPostParameter(final char[] supportedParams, final char paramKey
+, final List<HttpParameter> pagingParams, final String paramName, final long paramValue) {
         boolean supported = false;
         for (char supportedParam : supportedParams) {
             if (supportedParam == paramKey) {
@@ -131,30 +131,30 @@ public final class Paging implements java.io.Serializable {
     public Paging() {
     }
 
-    public Paging(int page) {
+    public Paging(final int page) {
         setPage(page);
     }
 
-    public Paging(long sinceId) {
+    public Paging(final long sinceId) {
         setSinceId(sinceId);
     }
 
-    public Paging(int page, int count) {
+    public Paging(final int page, final int count) {
         this(page);
         setCount(count);
     }
 
-    public Paging(int page, long sinceId) {
+    public Paging(final int page, final long sinceId) {
         this(page);
         setSinceId(sinceId);
     }
 
-    public Paging(int page, int count, long sinceId) {
+    public Paging(final int page, final int count, final long sinceId) {
         this(page, count);
         setSinceId(sinceId);
     }
 
-    public Paging(int page, int count, long sinceId, long maxId) {
+    public Paging(final int page, final int count, final long sinceId, final long maxId) {
         this(page, count, sinceId);
         setMaxId(maxId);
     }
@@ -163,7 +163,7 @@ public final class Paging implements java.io.Serializable {
         return page;
     }
 
-    public void setPage(int page) {
+    public void setPage(final int page) {
         if (page < 1) {
             throw new IllegalArgumentException("page should be positive integer. passed:" + page);
         }
@@ -174,14 +174,14 @@ public final class Paging implements java.io.Serializable {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(final int count) {
         if (count < 1) {
             throw new IllegalArgumentException("count should be positive integer. passed:" + count);
         }
         this.count = count;
     }
 
-    public Paging count(int count) {
+    public Paging count(final int count) {
         setCount(count);
         return this;
     }
@@ -190,14 +190,14 @@ public final class Paging implements java.io.Serializable {
         return sinceId;
     }
 
-    public void setSinceId(long sinceId) {
+    public void setSinceId(final long sinceId) {
         if (sinceId < 1) {
             throw new IllegalArgumentException("since_id should be positive integer. passed:" + sinceId);
         }
         this.sinceId = sinceId;
     }
 
-    public Paging sinceId(long sinceId) {
+    public Paging sinceId(final long sinceId) {
         setSinceId(sinceId);
         return this;
     }
@@ -206,20 +206,20 @@ public final class Paging implements java.io.Serializable {
         return maxId;
     }
 
-    public void setMaxId(long maxId) {
+    public void setMaxId(final long maxId) {
         if (maxId < 1) {
             throw new IllegalArgumentException("max_id should be positive integer. passed:" + maxId);
         }
         this.maxId = maxId;
     }
 
-    public Paging maxId(long maxId) {
+    public Paging maxId(final long maxId) {
         setMaxId(maxId);
         return this;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Paging)) return false;
 
@@ -244,11 +244,11 @@ public final class Paging implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Paging{" +
-                "page=" + page +
-                ", count=" + count +
-                ", sinceId=" + sinceId +
-                ", maxId=" + maxId +
-                '}';
+        return "Paging{"
+                + "page=" + page
+                + ", count=" + count
+                + ", sinceId=" + sinceId
+                + ", maxId=" + maxId
+                + '}';
     }
 }

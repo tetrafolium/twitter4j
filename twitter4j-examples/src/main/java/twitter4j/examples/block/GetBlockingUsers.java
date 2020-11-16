@@ -34,7 +34,7 @@ public final class GetBlockingUsers {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Twitter twitter = new TwitterFactory().getInstance();
             int page = 1;

@@ -35,7 +35,7 @@ import java.util.Date;
     private String name;
     private long id;
 
-    /*package*/ SavedSearchJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/ SavedSearchJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         if (conf.isJSONStoreEnabled()) {
             TwitterObjectFactory.clearThreadLocalMap();
@@ -47,12 +47,12 @@ import java.util.Date;
         }
     }
 
-    /*package*/ SavedSearchJSONImpl(JSONObject savedSearch) throws TwitterException {
+    /*package*/ SavedSearchJSONImpl(final JSONObject savedSearch) throws TwitterException {
         init(savedSearch);
     }
 
     /*package*/
-    static ResponseList<SavedSearch> createSavedSearchList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<SavedSearch> createSavedSearchList(final HttpResponse res, final Configuration conf) throws TwitterException {
         if (conf.isJSONStoreEnabled()) {
             TwitterObjectFactory.clearThreadLocalMap();
         }
@@ -77,7 +77,7 @@ import java.util.Date;
         }
     }
 
-    private void init(JSONObject savedSearch) throws TwitterException {
+    private void init(final JSONObject savedSearch) throws TwitterException {
         createdAt = ParseUtil.getDate("created_at", savedSearch, "EEE MMM dd HH:mm:ss z yyyy");
         query = ParseUtil.getUnescapedString("query", savedSearch);
         position = ParseUtil.getInt("position", savedSearch);
@@ -86,8 +86,8 @@ import java.util.Date;
     }
 
     @Override
-    public int compareTo(SavedSearch that) {
-        return (int)(this.id - that.getId());
+    public int compareTo(final SavedSearch that) {
+        return (int) (this.id - that.getId());
     }
 
     @Override
@@ -116,7 +116,7 @@ import java.util.Date;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof SavedSearch)) return false;
 
@@ -133,18 +133,18 @@ import java.util.Date;
         result = 31 * result + query.hashCode();
         result = 31 * result + position;
         result = 31 * result + name.hashCode();
-        result = 31 * result + (int)id;
+        result = 31 * result + (int) id;
         return result;
     }
 
     @Override
     public String toString() {
-        return "SavedSearchJSONImpl{" +
-                "createdAt=" + createdAt +
-                ", query='" + query + '\'' +
-                ", position=" + position +
-                ", name='" + name + '\'' +
-                ", id=" + id +
-                '}';
+        return "SavedSearchJSONImpl{"
+                + "createdAt=" + createdAt
+                + ", query='" + query + '\''
+                + ", position=" + position
+                + ", name='" + name + '\''
+                + ", id=" + id
+                + '}';
     }
 }

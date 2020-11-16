@@ -19,14 +19,14 @@ class JSON {
     /**
      * Returns the input if it is a JSON-permissible value; throws otherwise.
      */
-    static double checkDouble(double d) throws JSONException {
+    static double checkDouble(final double d) throws JSONException {
         if (Double.isInfinite(d) || Double.isNaN(d)) {
             throw new JSONException("Forbidden numeric value: " + d);
         }
         return d;
     }
 
-    static Boolean toBoolean(Object value) {
+    static Boolean toBoolean(final Object value) {
         if (value instanceof Boolean) {
             return (Boolean) value;
         } else if (value instanceof String) {
@@ -40,7 +40,7 @@ class JSON {
         return null;
     }
 
-    static Double toDouble(Object value) {
+    static Double toDouble(final Object value) {
         if (value instanceof Double) {
             return (Double) value;
         } else if (value instanceof Number) {
@@ -54,7 +54,7 @@ class JSON {
         return null;
     }
 
-    static Integer toInteger(Object value) {
+    static Integer toInteger(final Object value) {
         if (value instanceof Integer) {
             return (Integer) value;
         } else if (value instanceof Number) {
@@ -68,7 +68,7 @@ class JSON {
         return null;
     }
 
-    static Long toLong(Object value) {
+    static Long toLong(final Object value) {
         if (value instanceof Long) {
             return (Long) value;
         } else if (value instanceof Number) {
@@ -82,7 +82,7 @@ class JSON {
         return null;
     }
 
-    static String toString(Object value) {
+    static String toString(final Object value) {
         if (value instanceof String) {
             return (String) value;
         } else if (value != null) {
@@ -91,8 +91,8 @@ class JSON {
         return null;
     }
 
-    public static JSONException typeMismatch(Object indexOrName, Object actual,
-                                             String requiredType) throws JSONException {
+    public static JSONException typeMismatch(final Object indexOrName, final Object actual,
+                                             final String requiredType) throws JSONException {
         if (actual == null) {
             throw new JSONException("Value at " + indexOrName + " is null.");
         } else {
@@ -102,7 +102,7 @@ class JSON {
         }
     }
 
-    public static JSONException typeMismatch(Object actual, String requiredType)
+    public static JSONException typeMismatch(final Object actual, final String requiredType)
             throws JSONException {
         if (actual == null) {
             throw new JSONException("Value is null.");

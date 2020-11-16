@@ -51,13 +51,13 @@ class HttpClientImpl extends HttpClientBase implements HttpResponseCode, java.io
         super(ConfigurationContext.getInstance().getHttpClientConfiguration());
     }
 
-    public HttpClientImpl(HttpClientConfiguration conf) {
+    public HttpClientImpl(final HttpClientConfiguration conf) {
         super(conf);
     }
 
     private static final Map<HttpClientConfiguration, HttpClient> instanceMap = new HashMap<HttpClientConfiguration, HttpClient>(1);
 
-    public static HttpClient getInstance(HttpClientConfiguration conf) {
+    public static HttpClient getInstance(final HttpClientConfiguration conf) {
         HttpClient client = instanceMap.get(conf);
         if (null == client) {
             client = new HttpClientImpl(conf);
@@ -67,16 +67,16 @@ class HttpClientImpl extends HttpClientBase implements HttpResponseCode, java.io
     }
 
     @Override
-    public HttpResponse get(String url) throws TwitterException {
+    public HttpResponse get(final String url) throws TwitterException {
         return request(new HttpRequest(RequestMethod.GET, url, null, null, null));
     }
 
-    public HttpResponse post(String url, HttpParameter[] params) throws TwitterException {
+    public HttpResponse post(final String url, final HttpParameter[] params) throws TwitterException {
         return request(new HttpRequest(RequestMethod.POST, url, params, null, null));
     }
 
     @Override
-    public HttpResponse handleRequest(HttpRequest req) throws TwitterException {
+    public HttpResponse handleRequest(final HttpRequest req) throws TwitterException {
         int retriedCount;
         int retry = CONF.getHttpRetryCount() + 1;
         HttpResponse res = null;
@@ -163,10 +163,10 @@ class HttpClientImpl extends HttpClientBase implements HttpResponseCode, java.io
                         }
                     }
                     if (responseCode < OK || (responseCode != FOUND && MULTIPLE_CHOICES <= responseCode)) {
-                        if (responseCode == ENHANCE_YOUR_CLAIM ||
-                                responseCode == BAD_REQUEST ||
-                                responseCode < INTERNAL_SERVER_ERROR ||
-                                retriedCount == CONF.getHttpRetryCount()) {
+                        if (responseCode == ENHANCE_YOUR_CLAIM
+                                || responseCode == BAD_REQUEST
+                                || responseCode < INTERNAL_SERVER_ERROR
+                                || retriedCount == CONF.getHttpRetryCount()) {
                             throw new TwitterException(res.asString(), res);
                         }
                         // will retry if the status code is INTERNAL_SERVER_ERROR
@@ -204,7 +204,7 @@ class HttpClientImpl extends HttpClientBase implements HttpResponseCode, java.io
      * @param req        The request
      * @param connection HttpURLConnection
      */
-    private void setHeaders(HttpRequest req, HttpURLConnection connection) {
+    private void setHeaders(final HttpRequest req, final HttpURLConnection connection) {
         if (logger.isDebugEnabled()) {
             logger.debug("Request: ");
             logger.debug(req.getMethod().name() + " ", req.getURL());
@@ -225,7 +225,7 @@ class HttpClientImpl extends HttpClientBase implements HttpResponseCode, java.io
         }
     }
 
-    HttpURLConnection getConnection(String url) throws IOException {
+    HttpURLConnection getConnection(final String url) throws IOException {
         HttpURLConnection con;
         if (isProxyConfigured()) {
             if (CONF.getHttpProxyUser() != null && !CONF.getHttpProxyUser().equals("")) {

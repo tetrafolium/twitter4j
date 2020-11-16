@@ -46,7 +46,7 @@ public class TwitterTestBase {
         public final String accessToken;
         public final String accessTokenSecret;
 
-        TestUserInfo(String screenName) {
+        TestUserInfo(final String screenName) {
 
             this.screenName = p.getProperty(screenName + ".user");
             this.password = p.getProperty(screenName + ".password");

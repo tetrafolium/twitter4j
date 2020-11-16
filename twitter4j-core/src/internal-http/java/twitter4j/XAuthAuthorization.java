@@ -30,12 +30,12 @@ public class XAuthAuthorization implements Authorization, java.io.Serializable {
     private String consumerKey;
     private String consumerSecret;
 
-    public XAuthAuthorization(BasicAuthorization basic) {
+    public XAuthAuthorization(final BasicAuthorization basic) {
         this.basic = basic;
     }
 
     @Override
-    public String getAuthorizationHeader(HttpRequest req) {
+    public String getAuthorizationHeader(final HttpRequest req) {
         return basic.getAuthorizationHeader(req);
     }
 
@@ -55,7 +55,7 @@ public class XAuthAuthorization implements Authorization, java.io.Serializable {
         return consumerSecret;
     }
 
-    public synchronized void setOAuthConsumer(String consumerKey, String consumerSecret) {
+    public synchronized void setOAuthConsumer(final String consumerKey, final String consumerSecret) {
         this.consumerKey = consumerKey;
         this.consumerSecret = consumerSecret;
     }

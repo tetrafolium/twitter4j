@@ -66,7 +66,7 @@ public final class HttpClientFactory {
         return getInstance(ConfigurationContext.getInstance().getHttpClientConfiguration());
     }
 
-    public static HttpClient getInstance(HttpClientConfiguration conf) {
+    public static HttpClient getInstance(final HttpClientConfiguration conf) {
         HttpClient client = confClientMap.get(conf);
         try {
             if (client == null) {

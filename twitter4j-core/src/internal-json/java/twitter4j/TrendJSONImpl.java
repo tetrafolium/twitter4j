@@ -29,7 +29,7 @@ package twitter4j;
     private String query = null;
     private int tweetVolume = -1;
 
-    /*package*/ TrendJSONImpl(JSONObject json, boolean storeJSON) {
+    /*package*/ TrendJSONImpl(final JSONObject json, final boolean storeJSON) {
         this.name = ParseUtil.getRawString("name", json);
         this.url = ParseUtil.getRawString("url", json);
         this.query = ParseUtil.getRawString("query", json);
@@ -39,7 +39,7 @@ package twitter4j;
         }
     }
 
-    /*package*/ TrendJSONImpl(JSONObject json) {
+    /*package*/ TrendJSONImpl(final JSONObject json) {
         this(json, false);
     }
 
@@ -64,7 +64,7 @@ package twitter4j;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Trend)) return false;
 
@@ -92,11 +92,11 @@ package twitter4j;
 
     @Override
     public String toString() {
-        return "TrendJSONImpl{" +
-                "name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", query='" + query + '\'' +
-                ", tweet_volume=" + tweetVolume +
-                '}';
+        return "TrendJSONImpl{"
+                + "name='" + name + '\''
+                + ", url='" + url + '\''
+                + ", query='" + query + '\''
+                + ", tweet_volume=" + tweetVolume
+                + '}';
     }
 }

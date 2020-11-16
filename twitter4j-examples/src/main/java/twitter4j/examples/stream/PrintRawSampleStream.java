@@ -34,15 +34,15 @@ public class PrintRawSampleStream {
      * @param args arguments doesn't take effect with this example
      * @throws TwitterException when Twitter service or network is unavailable
      */
-    public static void main(String[] args) throws TwitterException {
+    public static void main(final String[] args) throws TwitterException {
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance().addListener(new RawStreamListener() {
             @Override
-            public void onMessage(String rawJSON) {
+            public void onMessage(final String rawJSON) {
                 System.out.println(rawJSON);
             }
 
             @Override
-            public void onException(Exception ex) {
+            public void onException(final Exception ex) {
                 ex.printStackTrace();
             }
         }).sample();

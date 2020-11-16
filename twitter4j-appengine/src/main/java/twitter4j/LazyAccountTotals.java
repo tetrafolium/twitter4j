@@ -32,7 +32,7 @@ final class LazyAccountTotals implements twitter4j.AccountTotals {
     private final ObjectFactory factory;
     private AccountTotals target = null;
 
-    LazyAccountTotals(HttpResponse res, ObjectFactory factory) {
+    LazyAccountTotals(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -97,7 +97,7 @@ final class LazyAccountTotals implements twitter4j.AccountTotals {
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof AccountTotals)) return false;
         return getTarget().equals(o);
@@ -110,8 +110,8 @@ final class LazyAccountTotals implements twitter4j.AccountTotals {
 
     @Override
     public String toString() {
-        return "LazyAccountTotals{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyAccountTotals{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

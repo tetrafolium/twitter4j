@@ -65,7 +65,7 @@ public class TwitterExceptionTest {
     @Test
     void testGetLong() throws Exception {
         JSONObject json = new JSONObject("{\"value\":\"13857270119014401\"}");
-        assertEquals(13857270119014401l, json.getLong("value"));
+        assertEquals(13857270119014401L, json.getLong("value"));
     }
 
 

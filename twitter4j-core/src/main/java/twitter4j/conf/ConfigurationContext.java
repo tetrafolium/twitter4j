@@ -53,7 +53,7 @@ public final class ConfigurationContext {
         return factory.getInstance();
     }
 
-    public static Configuration getInstance(String configTreePath) {
+    public static Configuration getInstance(final String configTreePath) {
         return factory.getInstance(configTreePath);
     }
 }

@@ -92,23 +92,23 @@ public final class PropertyConfiguration extends ConfigurationBase implements ja
 
 
     @SuppressWarnings("unused")
-    public PropertyConfiguration(InputStream is) {
+    public PropertyConfiguration(final InputStream is) {
         super();
         Properties props = new Properties();
         loadProperties(props, is);
         setFieldsWithTreePath(props, "/");
     }
 
-    public PropertyConfiguration(Properties props) {
+    public PropertyConfiguration(final Properties props) {
         this(props, "/");
     }
 
-    public PropertyConfiguration(Properties props, String treePath) {
+    public PropertyConfiguration(final Properties props, final String treePath) {
         super();
         setFieldsWithTreePath(props, treePath);
     }
 
-    PropertyConfiguration(String treePath) {
+    PropertyConfiguration(final String treePath) {
         super();
         Properties props;
         // load from system properties
@@ -150,11 +150,11 @@ public final class PropertyConfiguration extends ConfigurationBase implements ja
         this("/");
     }
 
-    private boolean notNull(Properties props, String prefix, String name) {
+    private boolean notNull(final Properties props, final String prefix, final String name) {
         return props.getProperty(prefix + name) != null;
     }
 
-    private boolean loadProperties(Properties props, String path) {
+    private boolean loadProperties(final Properties props, final String path) {
         FileInputStream fis = null;
         try {
             File file = new File(path);
@@ -177,7 +177,7 @@ public final class PropertyConfiguration extends ConfigurationBase implements ja
         return false;
     }
 
-    private boolean loadProperties(Properties props, InputStream is) {
+    private boolean loadProperties(final Properties props, final InputStream is) {
         try {
             props.load(is);
             normalize(props);
@@ -187,7 +187,7 @@ public final class PropertyConfiguration extends ConfigurationBase implements ja
         return false;
     }
 
-    private void normalize(Properties props) {
+    private void normalize(final Properties props) {
         ArrayList<String> toBeNormalized = new ArrayList<String>(10);
         for (Object key : props.keySet()) {
             String keyStr = (String) key;
@@ -212,7 +212,7 @@ public final class PropertyConfiguration extends ConfigurationBase implements ja
      * @param props    properties to be loaded
      * @param treePath the path
      */
-    private void setFieldsWithTreePath(Properties props, String treePath) {
+    private void setFieldsWithTreePath(final Properties props, final String treePath) {
         setFieldsWithPrefix(props, "");
         String[] splitArray = treePath.split("/");
         String prefix = null;
@@ -228,7 +228,7 @@ public final class PropertyConfiguration extends ConfigurationBase implements ja
         }
     }
 
-    private void setFieldsWithPrefix(Properties props, String prefix) {
+    private void setFieldsWithPrefix(final Properties props, final String prefix) {
         if (notNull(props, prefix, DEBUG)) {
             setDebug(getBoolean(props, prefix, DEBUG));
         }
@@ -404,12 +404,12 @@ public final class PropertyConfiguration extends ConfigurationBase implements ja
         cacheInstance();
     }
 
-    private boolean getBoolean(Properties props, String prefix, String name) {
+    private boolean getBoolean(final Properties props, final String prefix, final String name) {
         String value = props.getProperty(prefix + name);
         return Boolean.valueOf(value);
     }
 
-    private int getIntProperty(Properties props, String prefix, String name) {
+    private int getIntProperty(final Properties props, final String prefix, final String name) {
         String value = props.getProperty(prefix + name);
         try {
             return Integer.parseInt(value);
@@ -418,7 +418,7 @@ public final class PropertyConfiguration extends ConfigurationBase implements ja
         }
     }
 
-    private long getLongProperty(Properties props, String prefix, String name) {
+    private long getLongProperty(final Properties props, final String prefix, final String name) {
         String value = props.getProperty(prefix + name);
         try {
             return Long.parseLong(value);
@@ -427,7 +427,7 @@ public final class PropertyConfiguration extends ConfigurationBase implements ja
         }
     }
 
-    private String getString(Properties props, String prefix, String name) {
+    private String getString(final Properties props, final String prefix, final String name) {
         return props.getProperty(prefix + name);
     }
 

@@ -31,7 +31,7 @@ public final class UpdateProfile {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 4) {
             System.out.println("Usage: java twitter4j.examples.account.UpdateProfile [name] [url] [location] [description]");
             System.exit(-1);

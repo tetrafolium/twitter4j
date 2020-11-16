@@ -29,7 +29,7 @@ package twitter4j;
     private String expandedURL;
     private String displayURL;
 
-    /* package */ QuotedStatusPermalinkJSONImpl(JSONObject json) throws TwitterException {
+    /* package */ QuotedStatusPermalinkJSONImpl(final JSONObject json) throws TwitterException {
         super();
         init(json);
     }
@@ -38,7 +38,7 @@ package twitter4j;
     /* package */ QuotedStatusPermalinkJSONImpl() {
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         try {
             if (!json.isNull("url")) {
                 this.url = json.getString("url");
@@ -91,7 +91,7 @@ package twitter4j;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -112,10 +112,10 @@ package twitter4j;
 
     @Override
     public String toString() {
-        return "QuotedStatusPermalinkJSONImpl{" +
-                "url='" + url + '\'' +
-                ", expandedURL='" + expandedURL + '\'' +
-                ", displayURL='" + displayURL + '\'' +
-                '}';
+        return "QuotedStatusPermalinkJSONImpl{"
+                + "url='" + url + '\''
+                + ", expandedURL='" + expandedURL + '\''
+                + ", displayURL='" + displayURL + '\''
+                + '}';
     }
 }

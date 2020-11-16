@@ -15,7 +15,7 @@
  */
 package twitter4j;
 
-public final class QuickReply implements java.io.Serializable{
+public final class QuickReply implements java.io.Serializable {
     private static final long serialVersionUID = 2928983476392757806L;
     private final String label;
     private final String description;
@@ -26,7 +26,7 @@ public final class QuickReply implements java.io.Serializable{
      * @param description Optional description text displayed under label text. All options must have this property defined if property is present in any option. Text is auto-wrapped and will display on a max of two lines and supports n for controling line breaks. Description text is not include in the user’s message response. String, max length of 72 characters including spaces.
      * @param metadata Metadata that will be sent back in the webhook request. String, max length of 1,000 characters including spaces.
      */
-    public QuickReply(String label, String description, String metadata) {
+    public QuickReply(final String label, final String description, final String metadata) {
         this.label = label;
         this.description = description;
         this.metadata = metadata;
@@ -45,7 +45,7 @@ public final class QuickReply implements java.io.Serializable{
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -66,10 +66,10 @@ public final class QuickReply implements java.io.Serializable{
 
     @Override
     public String toString() {
-        return "QuickReply{" +
-                "label='" + label + '\'' +
-                ", description='" + description + '\'' +
-                ", metadata='" + metadata + '\'' +
-                '}';
+        return "QuickReply{"
+                + "label='" + label + '\''
+                + ", description='" + description + '\''
+                + ", metadata='" + metadata + '\''
+                + '}';
     }
 }

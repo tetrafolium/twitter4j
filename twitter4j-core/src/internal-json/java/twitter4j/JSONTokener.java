@@ -85,7 +85,7 @@ public class JSONTokener {
      *           tokener that throws {@code NullPointerExceptions} when methods are
      *           called.
      */
-    public JSONTokener(String in) {
+    public JSONTokener(final String in) {
         // consume an optional byte order mark (BOM) if it exists
         if (in != null && in.startsWith("\ufeff")) {
             in = in.substring(1);
@@ -93,7 +93,7 @@ public class JSONTokener {
         this.in = in;
     }
 
-    public JSONTokener(Reader input) {
+    public JSONTokener(final Reader input) {
         try {
             StringBuilder s = new StringBuilder();
             char[] readBuf = new char[102400];
@@ -109,7 +109,7 @@ public class JSONTokener {
         }
     }
 
-    public JSONTokener(InputStream is) {
+    public JSONTokener(final InputStream is) {
         this(new InputStreamReader(is, Charset.forName("UTF8")));
     }
 
@@ -221,7 +221,7 @@ public class JSONTokener {
      * @return The unescaped string.
      * @throws JSONException if the string isn't terminated by a closing quote correctly.
      */
-    public String nextString(char quote) throws JSONException {
+    public String nextString(final char quote) throws JSONException {
         /*
          * For strings that are free of escape sequences, we can just extract
          * the result as a substring of the input. But if we encounter an escape
@@ -365,7 +365,7 @@ public class JSONTokener {
      * Returns the string up to but not including any of the given characters or
      * a newline character. This does not consume the excluded character.
      */
-    private String nextToInternal(String excluded) {
+    private String nextToInternal(final String excluded) {
         int start = pos;
         for (; pos < in.length(); pos++) {
             char c = in.charAt(pos);
@@ -482,7 +482,7 @@ public class JSONTokener {
      * @param message The message we want to include.
      * @return An exception that we can throw.
      */
-    public JSONException syntaxError(String message) {
+    public JSONException syntaxError(final String message) {
         return new JSONException(message + this);
     }
 
@@ -531,7 +531,7 @@ public class JSONTokener {
      * @return the next character.
      * @throws JSONException If the next character isn't {@code c}
      */
-    public char next(char c) throws JSONException {
+    public char next(final char c) throws JSONException {
         char result = next();
         if (result != c) {
             throw syntaxError("Expected " + c + " but was " + result);
@@ -566,7 +566,7 @@ public class JSONTokener {
      * @throws JSONException if the remaining input is not long enough to
      *                       satisfy this request.
      */
-    public String next(int length) throws JSONException {
+    public String next(final int length) throws JSONException {
         if (pos + length > in.length()) {
             throw syntaxError(length + " is out of bounds");
         }
@@ -592,7 +592,7 @@ public class JSONTokener {
      * @param excluded The limiting string where the search should stop.
      * @return a possibly-empty string
      */
-    public String nextTo(String excluded) {
+    public String nextTo(final String excluded) {
         if (excluded == null) {
             throw new NullPointerException("excluded == null");
         }
@@ -605,7 +605,7 @@ public class JSONTokener {
      * @param excluded The limiting character.
      * @return a possibly-empty string
      */
-    public String nextTo(char excluded) {
+    public String nextTo(final char excluded) {
         return nextToInternal(String.valueOf(excluded)).trim();
     }
 
@@ -616,7 +616,7 @@ public class JSONTokener {
      *
      * @param thru The string to skip over.
      */
-    public void skipPast(String thru) {
+    public void skipPast(final String thru) {
         int thruStart = in.indexOf(thru, pos);
         pos = thruStart == -1 ? in.length() : (thruStart + thru.length());
     }
@@ -629,7 +629,7 @@ public class JSONTokener {
      * @param to The character we want to skip to.
      * @return The value of {@code to} or null.
      */
-    public char skipTo(char to) {
+    public char skipTo(final char to) {
         int index = in.indexOf(to, pos);
         if (index != -1) {
             pos = index;
@@ -657,7 +657,7 @@ public class JSONTokener {
      *            character will yield a -1 result.
      * @return The decoded integer.
      */
-    public static int dehexchar(char hex) {
+    public static int dehexchar(final char hex) {
         if (hex >= '0' && hex <= '9') {
             return hex - '0';
         } else if (hex >= 'A' && hex <= 'F') {

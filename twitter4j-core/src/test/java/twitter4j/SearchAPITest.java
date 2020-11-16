@@ -40,7 +40,7 @@ class SearchAPITest extends TwitterTestBase {
         assertTrue(findParameter(params, "until"));
     }
 
-    private boolean findParameter(HttpParameter[] params, String paramName) {
+    private boolean findParameter(final HttpParameter[] params, final String paramName) {
         boolean found = false;
         for (HttpParameter param : params) {
             if (paramName.equals(param.getName())) {

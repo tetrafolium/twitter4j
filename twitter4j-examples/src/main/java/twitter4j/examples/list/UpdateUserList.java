@@ -31,7 +31,7 @@ public final class UpdateUserList {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 3) {
             System.out.println("Usage: java twitter4j.examples.list.UpdateUserList [list id] [new list name] [new description]");
             System.exit(-1);

@@ -40,7 +40,7 @@ import twitter4j.conf.Configuration;
     private final String sourceUserScreenName;
     private boolean wantRetweets;
 
-    /*package*/ RelationshipJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/ RelationshipJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         this(res, res.asJSONObject());
         if (conf.isJSONStoreEnabled()) {
             TwitterObjectFactory.clearThreadLocalMap();
@@ -48,11 +48,11 @@ import twitter4j.conf.Configuration;
         }
     }
 
-    /*package*/ RelationshipJSONImpl(JSONObject json) throws TwitterException {
+    /*package*/ RelationshipJSONImpl(final JSONObject json) throws TwitterException {
         this(null, json);
     }
 
-    /*package*/ RelationshipJSONImpl(HttpResponse res, JSONObject json) throws TwitterException {
+    /*package*/ RelationshipJSONImpl(final HttpResponse res, final JSONObject json) throws TwitterException {
         super(res);
         try {
             JSONObject relationship = json.getJSONObject("relationship");
@@ -75,7 +75,7 @@ import twitter4j.conf.Configuration;
     }
 
     /*package*/
-    static ResponseList<Relationship> createRelationshipList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<Relationship> createRelationshipList(final HttpResponse res, final Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 TwitterObjectFactory.clearThreadLocalMap();
@@ -167,7 +167,7 @@ import twitter4j.conf.Configuration;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -208,18 +208,18 @@ import twitter4j.conf.Configuration;
 
     @Override
     public String toString() {
-        return "RelationshipJSONImpl{" +
-                "targetUserId=" + targetUserId +
-                ", targetUserScreenName='" + targetUserScreenName + '\'' +
-                ", sourceBlockingTarget=" + sourceBlockingTarget +
-                ", sourceNotificationsEnabled=" + sourceNotificationsEnabled +
-                ", sourceFollowingTarget=" + sourceFollowingTarget +
-                ", sourceFollowedByTarget=" + sourceFollowedByTarget +
-                ", sourceCanDm=" + sourceCanDm +
-                ", sourceMutingTarget=" + sourceMutingTarget +
-                ", sourceUserId=" + sourceUserId +
-                ", sourceUserScreenName='" + sourceUserScreenName + '\'' +
-                ", wantRetweets=" + wantRetweets +
-                '}';
+        return "RelationshipJSONImpl{"
+                + "targetUserId=" + targetUserId
+                + ", targetUserScreenName='" + targetUserScreenName + '\''
+                + ", sourceBlockingTarget=" + sourceBlockingTarget
+                + ", sourceNotificationsEnabled=" + sourceNotificationsEnabled
+                + ", sourceFollowingTarget=" + sourceFollowingTarget
+                + ", sourceFollowedByTarget=" + sourceFollowedByTarget
+                + ", sourceCanDm=" + sourceCanDm
+                + ", sourceMutingTarget=" + sourceMutingTarget
+                + ", sourceUserId=" + sourceUserId
+                + ", sourceUserScreenName='" + sourceUserScreenName + '\''
+                + ", wantRetweets=" + wantRetweets
+                + '}';
     }
 }

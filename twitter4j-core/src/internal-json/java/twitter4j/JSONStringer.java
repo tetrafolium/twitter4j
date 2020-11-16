@@ -125,7 +125,7 @@ public class JSONStringer {
         indent = null;
     }
 
-    JSONStringer(int indentSpaces) {
+    JSONStringer(final int indentSpaces) {
         char[] indentChars = new char[indentSpaces];
         Arrays.fill(indentChars, ' ');
         indent = new String(indentChars);
@@ -177,7 +177,7 @@ public class JSONStringer {
      * Enters a new scope by appending any necessary whitespace and the given
      * bracket.
      */
-    JSONStringer open(Scope empty, String openBracket) throws JSONException {
+    JSONStringer open(final Scope empty, final String openBracket) throws JSONException {
         if (stack.isEmpty() && out.length() > 0) {
             throw new JSONException("Nesting problem: multiple top-level roots");
         }
@@ -191,7 +191,7 @@ public class JSONStringer {
      * Closes the current scope by appending any necessary whitespace and the
      * given bracket.
      */
-    JSONStringer close(Scope empty, Scope nonempty, String closeBracket) throws JSONException {
+    JSONStringer close(final Scope empty, final Scope nonempty, final String closeBracket) throws JSONException {
         Scope context = peek();
         if (context != nonempty && context != empty) {
             throw new JSONException("Nesting problem");
@@ -218,7 +218,7 @@ public class JSONStringer {
     /**
      * Replace the value on the top of the stack with the given value.
      */
-    private void replaceTop(Scope topOfStack) {
+    private void replaceTop(final Scope topOfStack) {
         stack.set(stack.size() - 1, topOfStack);
     }
 
@@ -231,7 +231,7 @@ public class JSONStringer {
      * @return this stringer.
      * @throws JSONException On internal errors. Shouldn't happen.
      */
-    public JSONStringer value(Object value) throws JSONException {
+    public JSONStringer value(final Object value) throws JSONException {
         if (stack.isEmpty()) {
             throw new JSONException("Nesting problem");
         }
@@ -269,7 +269,7 @@ public class JSONStringer {
      * @return this stringer.
      * @throws JSONException On internal errors. Shouldn't happen.
      */
-    public JSONStringer value(boolean value) throws JSONException {
+    public JSONStringer value(final boolean value) throws JSONException {
         if (stack.isEmpty()) {
             throw new JSONException("Nesting problem");
         }
@@ -286,7 +286,7 @@ public class JSONStringer {
      * @return this stringer.
      * @throws JSONException On internal errors. Shouldn't happen.
      */
-    public JSONStringer value(double value) throws JSONException {
+    public JSONStringer value(final double value) throws JSONException {
         if (stack.isEmpty()) {
             throw new JSONException("Nesting problem");
         }
@@ -302,7 +302,7 @@ public class JSONStringer {
      * @return this stringer.
      * @throws JSONException If we have an internal error. Shouldn't happen.
      */
-    public JSONStringer value(long value) throws JSONException {
+    public JSONStringer value(final long value) throws JSONException {
         if (stack.isEmpty()) {
             throw new JSONException("Nesting problem");
         }
@@ -311,7 +311,7 @@ public class JSONStringer {
         return this;
     }
 
-    private void string(String value) {
+    private void string(final String value) {
         out.append("\"");
         for (int i = 0, length = value.length(); i < length; i++) {
             char c = value.charAt(i);
@@ -380,7 +380,7 @@ public class JSONStringer {
      * @return this stringer.
      * @throws JSONException on internal errors, shouldn't happen.
      */
-    public JSONStringer key(String name) throws JSONException {
+    public JSONStringer key(final String name) throws JSONException {
         if (name == null) {
             throw new JSONException("Names must be non-null");
         }

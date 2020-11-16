@@ -43,7 +43,7 @@ import java.util.Date;
     private boolean following;
     private Date createdAt;
 
-    /*package*/ UserListJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/ UserListJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         if (conf.isJSONStoreEnabled()) {
             TwitterObjectFactory.clearThreadLocalMap();
@@ -55,12 +55,12 @@ import java.util.Date;
         }
     }
 
-    /*package*/ UserListJSONImpl(JSONObject json) throws TwitterException {
+    /*package*/ UserListJSONImpl(final JSONObject json) throws TwitterException {
         super();
         init(json);
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         id = ParseUtil.getLong("id", json);
         name = ParseUtil.getRawString("name", json);
         fullName = ParseUtil.getRawString("full_name", json);
@@ -83,7 +83,7 @@ import java.util.Date;
     }
 
     @Override
-    public int compareTo(UserList that) {
+    public int compareTo(final UserList that) {
         long delta = this.id - that.getId();
         if (delta < Integer.MIN_VALUE) {
             return Integer.MIN_VALUE;
@@ -158,7 +158,7 @@ import java.util.Date;
     }
 
     /*package*/
-    static PagableResponseList<UserList> createPagableUserListList(HttpResponse res, Configuration conf) throws TwitterException {
+    static PagableResponseList<UserList> createPagableUserListList(final HttpResponse res, final Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 TwitterObjectFactory.clearThreadLocalMap();
@@ -186,7 +186,7 @@ import java.util.Date;
     }
 
     /*package*/
-    static ResponseList<UserList> createUserListList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<UserList> createUserListList(final HttpResponse res, final Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 TwitterObjectFactory.clearThreadLocalMap();
@@ -218,7 +218,7 @@ import java.util.Date;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (null == obj) {
             return false;
         }
@@ -230,18 +230,18 @@ import java.util.Date;
 
     @Override
     public String toString() {
-        return "UserListJSONImpl{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", slug='" + slug + '\'' +
-                ", description='" + description + '\'' +
-                ", subscriberCount=" + subscriberCount +
-                ", memberCount=" + memberCount +
-                ", uri='" + uri + '\'' +
-                ", mode=" + mode +
-                ", user=" + user +
-                ", following=" + following +
-                '}';
+        return "UserListJSONImpl{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", fullName='" + fullName + '\''
+                + ", slug='" + slug + '\''
+                + ", description='" + description + '\''
+                + ", subscriberCount=" + subscriberCount
+                + ", memberCount=" + memberCount
+                + ", uri='" + uri + '\''
+                + ", mode=" + mode
+                + ", user=" + user
+                + ", following=" + following
+                + '}';
     }
 }

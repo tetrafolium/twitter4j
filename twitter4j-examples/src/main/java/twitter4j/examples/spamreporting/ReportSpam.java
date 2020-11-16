@@ -30,7 +30,7 @@ public class ReportSpam {
      *
      * @param args String[]
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 1) {
             System.out.println("java twitter4j.examples.spamreporting.ReportSpam [screen name]");
             System.exit(-1);

@@ -30,7 +30,7 @@ public final class SendDirectMessage {
      *
      * @param args String[]
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 2) {
             System.out.println("Usage: java twitter4j.examples.directmessage.SendDirectMessage [recipient id] [message]");
             System.exit(-1);

@@ -36,7 +36,7 @@ final class LazyTrends implements twitter4j.Trends {
     private final ObjectFactory factory;
     private Trends target = null;
 
-    LazyTrends(HttpResponse res, ObjectFactory factory) {
+    LazyTrends(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -88,12 +88,12 @@ final class LazyTrends implements twitter4j.Trends {
         return getTarget().getAccessLevel();
     }
 
-    public int compareTo(Trends target) {
+    public int compareTo(final Trends target) {
         return getTarget().compareTo(target);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Trends)) return false;
         return getTarget().equals(o);
@@ -106,8 +106,8 @@ final class LazyTrends implements twitter4j.Trends {
 
     @Override
     public String toString() {
-        return "LazyTrends{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyTrends{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

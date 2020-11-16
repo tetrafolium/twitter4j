@@ -68,7 +68,7 @@ public final class JSONObjectType {
      * @param json the JSONObject whose type should be determined
      * @return the determined JSONObjectType, or null if not recognized
      */
-    public static Type determine(JSONObject json) {
+    public static Type determine(final JSONObject json) {
         // This code originally lived in AbstractStreamImplementation.
         // I've moved it in here to expose it as a public encapsulation of
         // the object type determination logic.
@@ -126,15 +126,15 @@ public final class JSONObjectType {
                     return Type.BLOCK;
                 } else if ("unblock".equals(event)) {
                     return Type.UNBLOCK;
-                } else if("retweeted_retweet".equals(event)){
+                } else if ("retweeted_retweet".equals(event)) {
                     return Type.RETWEETED_RETWEET;
-                } else if("favorited_retweet".equals(event)){
+                } else if ("favorited_retweet".equals(event)) {
                     return Type.FAVORITED_RETWEET;
-                } else if("quoted_tweet".equals(event)){
+                } else if ("quoted_tweet".equals(event)) {
                     return Type.QUOTED_TWEET;
-                } else if("mute".equals(event)) {
+                } else if ("mute".equals(event)) {
                     return Type.MUTE;
-                } else if("unmute".equals(event)) {
+                } else if ("unmute".equals(event)) {
                     return Type.UNMUTE;
                 }
 

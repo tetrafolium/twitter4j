@@ -122,7 +122,7 @@ class UsersResourcesTest extends TwitterTestBase {
         assertNotNull(TwitterObjectFactory.getRawJSON(users));
     }
 
-    private void assertContains(ResponseList<User> users, TestUserInfo user) {
+    private void assertContains(final ResponseList<User> users, final TestUserInfo user) {
         boolean found = false;
         for (User aUser : users) {
             if (aUser.getId() == user.id && aUser.getScreenName().equals(user.screenName)) {
@@ -234,7 +234,7 @@ class UsersResourcesTest extends TwitterTestBase {
         return getRandomlyChosenFile(profileImages);
     }
 
-    private static File getRandomlyChosenFile(String[] files) {
+    private static File getRandomlyChosenFile(final String[] files) {
         int rand = (int) (System.currentTimeMillis() % files.length);
         File file = new File(files[rand]);
         if (!file.exists()) {

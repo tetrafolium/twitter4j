@@ -38,7 +38,7 @@ public final class GeoQuery implements java.io.Serializable {
      *
      * @param location geo location
      */
-    public GeoQuery(GeoLocation location) {
+    public GeoQuery(final GeoLocation location) {
         this.location = location;
     }
 
@@ -47,7 +47,7 @@ public final class GeoQuery implements java.io.Serializable {
      *
      * @param ip IP address
      */
-    public GeoQuery(String ip) {
+    public GeoQuery(final String ip) {
         this.ip = ip;
     }
 
@@ -57,7 +57,7 @@ public final class GeoQuery implements java.io.Serializable {
      * @param ip IP address
      * @param location geo location
      */
-    public GeoQuery(String query, String ip, GeoLocation location) {
+    public GeoQuery(final String query, final String ip, final GeoLocation location) {
         this.query = query;
         this.ip = ip;
         this.location = location;
@@ -75,7 +75,7 @@ public final class GeoQuery implements java.io.Serializable {
         return query;
     }
 
-    public void setQuery(String query) {
+    public void setQuery(final String query) {
         this.query = query;
     }
 
@@ -92,11 +92,11 @@ public final class GeoQuery implements java.io.Serializable {
      *
      * @param accuracy a hint on the "region" in which to search.
      */
-    public void setAccuracy(String accuracy) {
+    public void setAccuracy(final String accuracy) {
         this.accuracy = accuracy;
     }
 
-    public GeoQuery accuracy(String accuracy) {
+    public GeoQuery accuracy(final String accuracy) {
         setAccuracy(accuracy);
         return this;
     }
@@ -110,11 +110,11 @@ public final class GeoQuery implements java.io.Serializable {
      *
      * @param granularity the minimal granularity of data to return
      */
-    public void setGranularity(String granularity) {
+    public void setGranularity(final String granularity) {
         this.granularity = granularity;
     }
 
-    public GeoQuery granularity(String granularity) {
+    public GeoQuery granularity(final String granularity) {
         setGranularity(granularity);
         return this;
     }
@@ -128,11 +128,11 @@ public final class GeoQuery implements java.io.Serializable {
      *
      * @param maxResults A hint as to the number of results to return.
      */
-    public void setMaxResults(int maxResults) {
+    public void setMaxResults(final int maxResults) {
         this.maxResults = maxResults;
     }
 
-    public GeoQuery maxResults(int maxResults) {
+    public GeoQuery maxResults(final int maxResults) {
         setMaxResults(maxResults);
         return this;
     }
@@ -156,24 +156,24 @@ public final class GeoQuery implements java.io.Serializable {
         return params.toArray(paramArray);
     }
 
-    private void appendParameter(String name, String value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final String value, final List<HttpParameter> params) {
         if (value != null) {
             params.add(new HttpParameter(name, value));
         }
     }
 
-    private void appendParameter(String name, int value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final int value, final List<HttpParameter> params) {
         if (0 < value) {
             params.add(new HttpParameter(name, String.valueOf(value)));
         }
     }
 
-    private void appendParameter(String name, double value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final double value, final List<HttpParameter> params) {
         params.add(new HttpParameter(name, String.valueOf(value)));
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -204,13 +204,13 @@ public final class GeoQuery implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "GeoQuery{" +
-                "location=" + location +
-                ", query='" + query + '\'' +
-                ", ip='" + ip + '\'' +
-                ", accuracy='" + accuracy + '\'' +
-                ", granularity='" + granularity + '\'' +
-                ", maxResults=" + maxResults +
-                '}';
+        return "GeoQuery{"
+                + "location=" + location
+                + ", query='" + query + '\''
+                + ", ip='" + ip + '\''
+                + ", accuracy='" + accuracy + '\''
+                + ", granularity='" + granularity + '\''
+                + ", maxResults=" + maxResults
+                + '}';
     }
 }

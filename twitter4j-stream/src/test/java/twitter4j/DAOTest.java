@@ -334,13 +334,13 @@ class DAOTest extends TwitterTestBase {
         User user = new UserJSONImpl(validateJSONObjectSchema(url, schema));
     }
 
-    private JSONObject validateJSONObjectSchema(String url, String[] knownNames) throws Exception {
+    private JSONObject validateJSONObjectSchema(final String url, final String[] knownNames) throws Exception {
         JSONObject json = getJSONObjectFromGetURL(url);
         validateJSONObjectSchema(json, knownNames);
         return json;
     }
 
-    private static JSONObject validateJSONObjectSchema(JSONObject json, String[] knownNames) throws JSONException {
+    private static JSONObject validateJSONObjectSchema(final JSONObject json, final String[] knownNames) throws JSONException {
         boolean debug = false;
         Map<String, String[]> schemaMap = new HashMap<String, String[]>();
         List<String> names = new ArrayList<String>();
@@ -403,11 +403,11 @@ class DAOTest extends TwitterTestBase {
         return json;
     }
 
-    private JSONArray validateJSONArraySchema(String url, String[] knownNames) throws Exception {
+    private JSONArray validateJSONArraySchema(final String url, final String[] knownNames) throws Exception {
         return validateJSONArraySchema(getJSONArrayFromGetURL(url), knownNames);
     }
 
-    private static void validateJSONSchema(Object json, String[] knownNames) throws JSONException {
+    private static void validateJSONSchema(final Object json, final String[] knownNames) throws JSONException {
         if (json instanceof JSONArray) {
             validateJSONArraySchema((JSONArray) json, knownNames);
         } else if (json instanceof JSONObject) {
@@ -417,7 +417,7 @@ class DAOTest extends TwitterTestBase {
         }
     }
 
-    private static JSONArray validateJSONArraySchema(JSONArray array, String[] knownNames) throws JSONException {
+    private static JSONArray validateJSONArraySchema(final JSONArray array, final String[] knownNames) throws JSONException {
         for (int i = 0; i < array.length(); i++) {
             Object obj = array.get(i);
             if (obj instanceof JSONObject) {
@@ -428,39 +428,39 @@ class DAOTest extends TwitterTestBase {
         return array;
     }
 
-    private static JSONArray getJSONArrayFromClassPath(String path) throws Exception {
+    private static JSONArray getJSONArrayFromClassPath(final String path) throws Exception {
         return new JSONArray(getStringFromClassPath(path));
     }
 
-    private static JSONObject getJSONObjectFromClassPath(String path) throws Exception {
+    private static JSONObject getJSONObjectFromClassPath(final String path) throws Exception {
         return new JSONObject(getStringFromClassPath(path));
     }
 
-    private JSONObject getJSONObjectFromGetURL(String url) throws Exception {
+    private JSONObject getJSONObjectFromGetURL(final String url) throws Exception {
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.setUser(id1.screenName);
         builder.setPassword(id1.password);
         return getJSONObjectFromGetURL(url, builder.build());
     }
 
-    private static JSONObject getJSONObjectFromPostURL(String url, Configuration conf) throws Exception {
+    private static JSONObject getJSONObjectFromPostURL(final String url, final Configuration conf) throws Exception {
         HttpClient http = HttpClientFactory.getInstance(conf.getHttpClientConfiguration());
         return http.post(url).asJSONObject();
     }
 
-    private JSONObject getJSONObjectFromPostURL(String url) throws Exception {
+    private JSONObject getJSONObjectFromPostURL(final String url) throws Exception {
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.setUser(id1.screenName);
         builder.setPassword(id1.password);
         return getJSONObjectFromPostURL(url, builder.build());
     }
 
-    private JSONObject getJSONObjectFromGetURL(String url, Configuration conf) throws Exception {
+    private JSONObject getJSONObjectFromGetURL(final String url, final Configuration conf) throws Exception {
         HttpClient http = HttpClientFactory.getInstance(conf.getHttpClientConfiguration());
         return http.get(url, null, getOAuthOuthorization(conf), null).asJSONObject();
     }
 
-    private JSONArray getJSONArrayFromGetURL(String url) throws Exception {
+    private JSONArray getJSONArrayFromGetURL(final String url) throws Exception {
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.setUser(id1.screenName);
         builder.setPassword(id1.password);
@@ -468,19 +468,19 @@ class DAOTest extends TwitterTestBase {
     }
 
 
-    private JSONArray getJSONArrayFromGetURL(String url, Configuration conf) throws Exception {
+    private JSONArray getJSONArrayFromGetURL(final String url, final Configuration conf) throws Exception {
         HttpClient http = HttpClientFactory.getInstance(conf.getHttpClientConfiguration());
         return http.get(url, null, getOAuthOuthorization(conf), null).asJSONArray();
     }
 
-    private OAuthAuthorization getOAuthOuthorization(Configuration conf) {
+    private OAuthAuthorization getOAuthOuthorization(final Configuration conf) {
         OAuthAuthorization oauth = new OAuthAuthorization(conf);
         oauth.setOAuthConsumer(desktopConsumerKey, desktopConsumerSecret);
         oauth.setOAuthAccessToken(new AccessToken(id1.accessToken, id1.accessTokenSecret));
         return oauth;
     }
 
-    private static String getStringFromClassPath(String path) throws Exception {
+    private static String getStringFromClassPath(final String path) throws Exception {
         InputStream is = null;
         InputStreamReader isr = null;
         BufferedReader br = null;
@@ -563,10 +563,10 @@ class DAOTest extends TwitterTestBase {
         HttpClientImpl http = new HttpClientImpl();
         List<Status> statuses = StatusJSONImpl.createStatusList(http.get("http://twitter4j.org/en/testcases/statuses/public_timeline.json"), conf);
         Status status = statuses.get(0);
-        assertEquals(new Date(1259041785000l), status.getCreatedAt());
-        assertEquals(6000554383l, status.getId());
+        assertEquals(new Date(1259041785000L), status.getCreatedAt());
+        assertEquals(6000554383L, status.getId());
         assertEquals("G_Shock22", status.getInReplyToScreenName());
-        assertEquals(6000444309l, status.getInReplyToStatusId());
+        assertEquals(6000444309L, status.getInReplyToStatusId());
         assertEquals(20159829, status.getInReplyToUserId());
         assertNull(status.getGeoLocation());
         assertEquals("web", status.getSource());
@@ -581,10 +581,10 @@ class DAOTest extends TwitterTestBase {
         // single Status
         HttpClientImpl http = new HttpClientImpl();
         Status status = new StatusJSONImpl(http.get("http://twitter4j.org/en/testcases/statuses/retweet/6010814202.json"), conf);
-        assertEquals(new Date(1259078050000l), status.getCreatedAt());
-        assertEquals(6011259778l, status.getId());
+        assertEquals(new Date(1259078050000L), status.getCreatedAt());
+        assertEquals(6011259778L, status.getId());
         assertEquals(null, status.getInReplyToScreenName());
-        assertEquals(-1l, status.getInReplyToStatusId());
+        assertEquals(-1L, status.getInReplyToStatusId());
         assertEquals(-1, status.getInReplyToUserId());
         assertNull(status.getGeoLocation());
         assertEquals("<a href=\"http://apiwiki.twitter.com/\" rel=\"nofollow\">API</a>", status.getSource());
@@ -682,7 +682,7 @@ class DAOTest extends TwitterTestBase {
         HttpClientImpl http = new HttpClientImpl();
         List<DirectMessage> directMessages = DirectMessageJSONImpl.createDirectMessageList(http.get("http://twitter4j.org/en/testcases/direct_messages.json"), conf);
         DirectMessage dm = directMessages.get(0);
-        assertEquals(new java.util.Date(1248177356000l), dm.getCreatedAt());
+        assertEquals(new java.util.Date(1248177356000L), dm.getCreatedAt());
         assertEquals(246928323, dm.getId());
         assertEquals(6358482, dm.getRecipientId());
         assertEquals(6377362, dm.getSenderId());
@@ -701,7 +701,7 @@ class DAOTest extends TwitterTestBase {
      * @return the deserialized object
      * @throws Exception in the case the object is not (de)serializable
      */
-    private static Object assertDeserializedFormIsEqual(Object obj) throws Exception {
+    private static Object assertDeserializedFormIsEqual(final Object obj) throws Exception {
         ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(byteOutputStream);
         oos.writeObject(obj);
@@ -721,7 +721,7 @@ class DAOTest extends TwitterTestBase {
      * @return the deserialized object
      * @throws Exception in the case the object is not (de)serializable
      */
-    private static Object assertDeserializedFormIsSingleton(Object obj) throws Exception {
+    private static Object assertDeserializedFormIsSingleton(final Object obj) throws Exception {
         Object that = assertDeserializedFormIsEqual(obj);
         assertTrue(obj == that);
         return that;

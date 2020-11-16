@@ -33,11 +33,11 @@ public final class LoadRawJSON {
      *
      * @param args String[]
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             File[] files = new File("statuses").listFiles(new FilenameFilter() {
                 @Override
-                public boolean accept(File dir, String name) {
+                public boolean accept(final File dir, final String name) {
                     return name.endsWith(".json");
                 }
             });
@@ -57,7 +57,7 @@ public final class LoadRawJSON {
         }
     }
 
-    private static String readFirstLine(File fileName) throws IOException {
+    private static String readFirstLine(final File fileName) throws IOException {
         FileInputStream fis = null;
         InputStreamReader isr = null;
         BufferedReader br = null;

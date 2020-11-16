@@ -29,7 +29,7 @@ public final class ReverseGeoCode {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 2) {
             System.out.println("Usage: java twitter4j.examples.geo.ReverseGeoCode [latitude] [longitude]");
             System.exit(-1);

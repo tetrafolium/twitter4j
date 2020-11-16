@@ -35,18 +35,18 @@ public class StreamController {
     private final Authorization AUTH;
     private static final Logger logger = Logger.getLogger(StreamController.class);
 
-    /*package*/ StreamController(HttpClient http, Authorization auth) {
+    /*package*/ StreamController(final HttpClient http, final Authorization auth) {
         this.http = http;
         AUTH = auth;
     }
 
-    /*package*/ StreamController(Configuration conf) {
+    /*package*/ StreamController(final Configuration conf) {
         this.http = HttpClientFactory.getInstance(conf.getHttpClientConfiguration());
         AUTH = AuthorizationFactory.getInstance(conf);
     }
 
-    void setControlURI(String controlURI) {
-        this.controlURI = (controlURI!=null) ?controlURI.replace("/1.1//1.1/", "/1.1/") : null;
+    void setControlURI(final String controlURI) {
+        this.controlURI = (controlURI != null) ? controlURI.replace("/1.1//1.1/", "/1.1/") : null;
         synchronized (lock) {
             lock.notifyAll();
         }
@@ -61,7 +61,7 @@ public class StreamController {
     void ensureControlURISet() throws TwitterException {
         synchronized (lock) {
             try {
-		int waits = 0;
+                int waits = 0;
                 while (controlURI == null) {
                     lock.wait(1000);
                     waits++;
@@ -79,7 +79,7 @@ public class StreamController {
         return new ControlStreamInfo(this, res.asJSONObject());
     }
 
-    public String addUsers(long... userIds) throws TwitterException {
+    public String addUsers(final long... userIds) throws TwitterException {
         ensureControlURISet();
         HttpParameter param = new HttpParameter("user_id",
                 StringUtil.join(userIds));
@@ -88,7 +88,7 @@ public class StreamController {
         return res.asString();
     }
 
-    public String removeUsers(long... userIds) throws TwitterException {
+    public String removeUsers(final long... userIds) throws TwitterException {
         ensureControlURISet();
         HttpParameter param = new HttpParameter("user_id",
                 StringUtil.join(userIds));
@@ -98,7 +98,7 @@ public class StreamController {
     }
 
 
-    public FriendsIDs getFriendsIDs(long userId, long cursor) throws TwitterException {
+    public FriendsIDs getFriendsIDs(final long userId, final long cursor) throws TwitterException {
         ensureControlURISet();
         HttpResponse res = http.post(controlURI + "/friends/ids.json",
                 new HttpParameter[]{new HttpParameter("user_id", userId),
@@ -114,11 +114,11 @@ public class StreamController {
         private long nextCursor = -1;
         private User user;
 
-        /*package*/ FriendsIDs(HttpResponse res) throws TwitterException {
+        /*package*/ FriendsIDs(final HttpResponse res) throws TwitterException {
             init(res.asJSONObject());
         }
 
-        private void init(JSONObject json) throws TwitterException {
+        private void init(final JSONObject json) throws TwitterException {
             try {
                 JSONObject follow = json.getJSONObject("follow");
                 JSONArray idList = follow.getJSONArray("friends");
@@ -167,7 +167,7 @@ public class StreamController {
         }
 
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(final Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
@@ -192,16 +192,16 @@ public class StreamController {
 
         @Override
         public String toString() {
-            return "FriendsIDs{" +
-                    "ids=" + Arrays.toString(ids) +
-                    ", previousCursor=" + previousCursor +
-                    ", nextCursor=" + nextCursor +
-                    ", user=" + user +
-                    '}';
+            return "FriendsIDs{"
+                    + "ids=" + Arrays.toString(ids)
+                    + ", previousCursor=" + previousCursor
+                    + ", nextCursor=" + nextCursor
+                    + ", user=" + user
+                    + '}';
         }
     }
 
-    /*package*/ User createUser(JSONObject json) {
+    /*package*/ User createUser(final JSONObject json) {
         return new User(json);
     }
 
@@ -211,7 +211,7 @@ public class StreamController {
         private final String name;
         private final boolean dm;
 
-        /*package*/ User(JSONObject json) {
+        /*package*/ User(final JSONObject json) {
             id = getLong("id", json);
             name = getRawString("name", json);
             dm = getBoolean("dm", json);
@@ -230,7 +230,7 @@ public class StreamController {
         }
 
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(final Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
@@ -253,11 +253,11 @@ public class StreamController {
 
         @Override
         public String toString() {
-            return "User{" +
-                    "id=" + id +
-                    ", name='" + name + '\'' +
-                    ", dm=" + dm +
-                    '}';
+            return "User{"
+                    + "id=" + id
+                    + ", name='" + name + '\''
+                    + ", dm=" + dm
+                    + '}';
         }
     }
 }

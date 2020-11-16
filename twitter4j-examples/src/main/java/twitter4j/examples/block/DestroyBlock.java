@@ -31,7 +31,7 @@ public final class DestroyBlock {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         if (args.length < 1) {
             System.out.println("Usage: java twitter4j.examples.block.DestroyBlock [screen name]");
             System.exit(-1);

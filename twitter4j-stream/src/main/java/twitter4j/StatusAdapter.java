@@ -22,26 +22,26 @@ package twitter4j;
  */
 public class StatusAdapter implements StatusListener {
     @Override
-    public void onStatus(Status status) {
+    public void onStatus(final Status status) {
     }
 
     @Override
-    public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+    public void onDeletionNotice(final StatusDeletionNotice statusDeletionNotice) {
     }
 
     @Override
-    public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
+    public void onTrackLimitationNotice(final int numberOfLimitedStatuses) {
     }
 
     @Override
-    public void onScrubGeo(long userId, long upToStatusId) {
+    public void onScrubGeo(final long userId, final long upToStatusId) {
     }
 
     @Override
-    public void onException(Exception ex) {
+    public void onException(final Exception ex) {
     }
 
     @Override
-    public void onStallWarning(StallWarning warning) {
+    public void onStallWarning(final StallWarning warning) {
     }
 }

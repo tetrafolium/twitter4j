@@ -28,7 +28,7 @@ class StatusDeletionNoticeImpl implements StatusDeletionNotice, java.io.Serializ
     private final long statusId;
     private final long userId;
 
-    /*package*/ StatusDeletionNoticeImpl(JSONObject status) {
+    /*package*/ StatusDeletionNoticeImpl(final JSONObject status) {
         this.statusId = ParseUtil.getLong("id", status);
         this.userId = ParseUtil.getLong("user_id", status);
     }
@@ -44,7 +44,7 @@ class StatusDeletionNoticeImpl implements StatusDeletionNotice, java.io.Serializ
     }
 
     @Override
-    public int compareTo(StatusDeletionNotice that) {
+    public int compareTo(final StatusDeletionNotice that) {
         long delta = this.statusId - that.getStatusId();
         if (delta < Integer.MIN_VALUE) {
             return Integer.MIN_VALUE;
@@ -55,7 +55,7 @@ class StatusDeletionNoticeImpl implements StatusDeletionNotice, java.io.Serializ
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -76,10 +76,10 @@ class StatusDeletionNoticeImpl implements StatusDeletionNotice, java.io.Serializ
 
     @Override
     public String toString() {
-        return "StatusDeletionNoticeImpl{" +
-                "statusId=" + statusId +
-                ", userId=" + userId +
-                '}';
+        return "StatusDeletionNoticeImpl{"
+                + "statusId=" + statusId
+                + ", userId=" + userId
+                + '}';
     }
 }
 

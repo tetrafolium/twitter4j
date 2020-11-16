@@ -63,7 +63,7 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
     void testRawStreamListener() throws Exception {
         TwitterStream twitterStream1 = new TwitterStreamFactory(bestFriend1Conf).getInstance().addListener(new RawStreamListener() {
             @Override
-            public void onMessage(String rawString) {
+            public void onMessage(final String rawString) {
                 received.add(rawString);
                 synchronized (lock) {
                     lock.notify();
@@ -71,7 +71,7 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
             }
 
             @Override
-            public void onException(Exception ex) {
+            public void onException(final Exception ex) {
             }
         }).sample();
         synchronized (lock) {
@@ -110,11 +110,11 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
 
         twitterStream.addListener(new RawStreamListener() {
             @Override
-            public void onMessage(String rawString) {
+            public void onMessage(final String rawString) {
             }
 
             @Override
-            public void onException(Exception ex) {
+            public void onException(final Exception ex) {
             }
         }).sample().cleanUp().shutdown();
     }
@@ -125,7 +125,7 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
         StatusStream stream = new StatusStreamImpl(new DispatcherFactory().getInstance(), is, conf1);
         stream.next(this);
         waitForNotification();
-        assertEquals(6832057002l, deletionNotice.getStatusId());
+        assertEquals(6832057002L, deletionNotice.getStatusId());
         assertEquals(18378841, deletionNotice.getUserId());
         stream.next(this);
         waitForNotification();
@@ -142,7 +142,7 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
         stream.next(this);
         waitForNotification();
         assertEquals(14090452, userId);
-        assertEquals(23260136625l, upToStatusId);
+        assertEquals(23260136625L, upToStatusId);
         try {
             stream.next(this);
             waitForNotification();
@@ -170,7 +170,7 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
         final List<Status> statuses = new ArrayList<Status>();
         StatusListener listener = new StatusAdapter() {
             @Override
-            public synchronized void onStatus(Status status) {
+            public synchronized void onStatus(final Status status) {
                 statuses.add(status);
                 this.notifyAll();
             }
@@ -318,7 +318,7 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
 
     Status status;
 
-    public void onStatus(Status status) {
+    public void onStatus(final Status status) {
         this.status = status;
         String json = TwitterObjectFactory.getRawJSON(status);
         try {
@@ -337,7 +337,7 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
     StatusDeletionNotice deletionNotice;
 
     //onDeletionNoice
-    public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+    public void onDeletionNotice(final StatusDeletionNotice statusDeletionNotice) {
         this.deletionNotice = statusDeletionNotice;
         System.out.println("got status deletionNotice notification:" + statusDeletionNotice.toString());
         notifyResponse();
@@ -346,13 +346,13 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
     int trackLimit;
 
     //onTrackLimitNotice
-    public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
+    public void onTrackLimitationNotice(final int numberOfLimitedStatuses) {
         this.trackLimit = numberOfLimitedStatuses;
         System.out.println("got limit notice:" + numberOfLimitedStatuses);
         notifyResponse();
     }
 
-    public void onScrubGeo(long userId, long upToStatusId) {
+    public void onScrubGeo(final long userId, final long upToStatusId) {
         this.userId = userId;
         this.upToStatusId = upToStatusId;
         System.out.println("got onScrubGeo");
@@ -360,13 +360,13 @@ public class StreamAPITest extends TwitterTestBase implements StatusListener, Co
     }
 
     @Override
-    public void onStallWarning(StallWarning warning) {
+    public void onStallWarning(final StallWarning warning) {
         this.warning = warning;
     }
 
     Exception ex;
 
-    public void onException(Exception ex) {
+    public void onException(final Exception ex) {
         this.ex = ex;
         ex.printStackTrace();
         notifyResponse();

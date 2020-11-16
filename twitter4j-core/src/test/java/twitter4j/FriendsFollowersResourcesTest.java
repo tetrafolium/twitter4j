@@ -69,7 +69,7 @@ class FriendsFollowersResourcesTest extends TwitterTestBase {
         assertFalse(obamaFriends.hasPrevious());
     }
 
-    private void assertIDExsits(String assertion, IDs ids, long idToFind) {
+    private void assertIDExsits(final String assertion, final IDs ids, final long idToFind) {
         boolean found = false;
         for (long id : ids.getIDs()) {
             if (id == idToFind) {

@@ -27,7 +27,7 @@ public final class TwitterObjectFactory {
      * @return raw JSON
      * @since Twitter4J 2.1.7
      */
-    public static String getRawJSON(Object obj) {
+    public static String getRawJSON(final Object obj) {
         if (!registeredAtleastOnce) {
             throw new IllegalStateException("Apparently jsonStoreEnabled is not set to true.");
         }
@@ -50,7 +50,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static Status createStatus(String rawJSON) throws TwitterException {
+    public static Status createStatus(final String rawJSON) throws TwitterException {
         try {
             return new StatusJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -66,7 +66,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static User createUser(String rawJSON) throws TwitterException {
+    public static User createUser(final String rawJSON) throws TwitterException {
         try {
             return new UserJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -82,7 +82,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.9
      */
-    public static AccountTotals createAccountTotals(String rawJSON) throws TwitterException {
+    public static AccountTotals createAccountTotals(final String rawJSON) throws TwitterException {
         try {
             return new AccountTotalsJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -98,7 +98,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static Relationship createRelationship(String rawJSON) throws TwitterException {
+    public static Relationship createRelationship(final String rawJSON) throws TwitterException {
         try {
             return new RelationshipJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -114,7 +114,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static Place createPlace(String rawJSON) throws TwitterException {
+    public static Place createPlace(final String rawJSON) throws TwitterException {
         try {
             return new PlaceJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -130,7 +130,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static SavedSearch createSavedSearch(String rawJSON) throws TwitterException {
+    public static SavedSearch createSavedSearch(final String rawJSON) throws TwitterException {
         try {
             return new SavedSearchJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -146,7 +146,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static Trend createTrend(String rawJSON) throws TwitterException {
+    public static Trend createTrend(final String rawJSON) throws TwitterException {
         try {
             return new TrendJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -162,7 +162,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static Trends createTrends(String rawJSON) throws TwitterException {
+    public static Trends createTrends(final String rawJSON) throws TwitterException {
         return new TrendsJSONImpl(rawJSON);
     }
 
@@ -174,7 +174,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static IDs createIDs(String rawJSON) throws TwitterException {
+    public static IDs createIDs(final String rawJSON) throws TwitterException {
         return new IDsJSONImpl(rawJSON);
     }
 
@@ -186,7 +186,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static Map<String, RateLimitStatus> createRateLimitStatus(String rawJSON) throws TwitterException {
+    public static Map<String, RateLimitStatus> createRateLimitStatus(final String rawJSON) throws TwitterException {
         try {
             return RateLimitStatusJSONImpl.createRateLimitStatuses(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -202,7 +202,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static Category createCategory(String rawJSON) throws TwitterException {
+    public static Category createCategory(final String rawJSON) throws TwitterException {
         try {
             return new CategoryJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -218,7 +218,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static DirectMessage createDirectMessage(String rawJSON) throws TwitterException {
+    public static DirectMessage createDirectMessage(final String rawJSON) throws TwitterException {
         try {
             return new DirectMessageJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -234,7 +234,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static Location createLocation(String rawJSON) throws TwitterException {
+    public static Location createLocation(final String rawJSON) throws TwitterException {
         try {
             return new LocationJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -250,7 +250,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.7
      */
-    public static UserList createUserList(String rawJSON) throws TwitterException {
+    public static UserList createUserList(final String rawJSON) throws TwitterException {
         try {
             return new UserListJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -266,7 +266,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 3.0.2
      */
-    public static OEmbed createOEmbed(String rawJSON) throws TwitterException {
+    public static OEmbed createOEmbed(final String rawJSON) throws TwitterException {
         try {
             return new OEmbedJSONImpl(new JSONObject(rawJSON));
         } catch (JSONException e) {
@@ -293,7 +293,7 @@ public final class TwitterObjectFactory {
      * @throws TwitterException when provided string is not a valid JSON string.
      * @since Twitter4J 2.1.9
      */
-    public static Object createObject(String rawJSON) throws TwitterException {
+    public static Object createObject(final String rawJSON) throws TwitterException {
         try {
             JSONObject json = new JSONObject(rawJSON);
             JSONObjectType.Type jsonObjectType = JSONObjectType.determine(json);
@@ -337,7 +337,7 @@ public final class TwitterObjectFactory {
      *
      * @since Twitter4J 2.1.7
      */
-    static <T> T registerJSONObject(T key, Object json) {
+    static <T> T registerJSONObject(final T key, final Object json) {
         registeredAtleastOnce = true;
         rawJsonMap.get().put(key, json);
         return key;

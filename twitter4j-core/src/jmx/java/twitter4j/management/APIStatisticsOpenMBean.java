@@ -41,7 +41,7 @@ public class APIStatisticsOpenMBean implements DynamicMBean {
     private final APIStatisticsMBean API_STATISTICS;
     private final TabularType API_STATISTICS_TYPE;
 
-    public APIStatisticsOpenMBean(APIStatistics apiStatistics) {
+    public APIStatisticsOpenMBean(final APIStatistics apiStatistics) {
         API_STATISTICS = apiStatistics;
 
         try {
@@ -142,7 +142,7 @@ public class APIStatisticsOpenMBean implements DynamicMBean {
     }
 
     @Override
-    public Object getAttribute(String attribute)
+    public Object getAttribute(final String attribute)
             throws AttributeNotFoundException, MBeanException, ReflectionException {
         if (attribute.equals("statisticsTable")) {
             return getStatistics();
@@ -159,7 +159,7 @@ public class APIStatisticsOpenMBean implements DynamicMBean {
     }
 
     @Override
-    public AttributeList getAttributes(String[] attributeNames) {
+    public AttributeList getAttributes(final String[] attributeNames) {
         AttributeList resultList = new AttributeList();
         if (attributeNames.length == 0)
             return resultList;
@@ -175,7 +175,7 @@ public class APIStatisticsOpenMBean implements DynamicMBean {
     }
 
     @Override
-    public Object invoke(String actionName, Object[] params, String[] signature)
+    public Object invoke(final String actionName, final Object[] params, final String[] signature)
             throws MBeanException, ReflectionException {
         if (actionName.equals("reset")) {
             reset();
@@ -187,7 +187,7 @@ public class APIStatisticsOpenMBean implements DynamicMBean {
     }
 
     @Override
-    public void setAttribute(Attribute attribute)
+    public void setAttribute(final Attribute attribute)
             throws AttributeNotFoundException, InvalidAttributeValueException, MBeanException,
             ReflectionException {
         throw new AttributeNotFoundException(
@@ -195,7 +195,7 @@ public class APIStatisticsOpenMBean implements DynamicMBean {
     }
 
     @Override
-    public AttributeList setAttributes(AttributeList attributes) {
+    public AttributeList setAttributes(final AttributeList attributes) {
         return new AttributeList();
     }
 }

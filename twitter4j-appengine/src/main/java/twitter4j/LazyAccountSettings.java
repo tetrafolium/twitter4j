@@ -32,7 +32,7 @@ final class LazyAccountSettings implements twitter4j.AccountSettings {
     private final ObjectFactory factory;
     private AccountSettings target = null;
 
-    LazyAccountSettings(HttpResponse res, ObjectFactory factory) {
+    LazyAccountSettings(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -162,7 +162,7 @@ final class LazyAccountSettings implements twitter4j.AccountSettings {
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof AccountSettings)) return false;
         return getTarget().equals(o);
@@ -175,8 +175,8 @@ final class LazyAccountSettings implements twitter4j.AccountSettings {
 
     @Override
     public String toString() {
-        return "LazyAccountSettings{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyAccountSettings{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

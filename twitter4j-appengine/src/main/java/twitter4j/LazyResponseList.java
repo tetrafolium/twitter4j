@@ -65,7 +65,7 @@ abstract class LazyResponseList<T> implements ResponseList<T> {
     }
 
     @Override
-    public boolean contains(Object o) {
+    public boolean contains(final Object o) {
         return getTarget().contains(o);
     }
 
@@ -80,42 +80,42 @@ abstract class LazyResponseList<T> implements ResponseList<T> {
     }
 
     @Override
-    public <T> T[] toArray(T[] ts) {
+    public <T> T[] toArray(final T[] ts) {
         return getTarget().toArray(ts);
     }
 
     @Override
-    public boolean add(T t) {
+    public boolean add(final T t) {
         return getTarget().add(t);
     }
 
     @Override
-    public boolean remove(Object o) {
+    public boolean remove(final Object o) {
         return getTarget().remove(o);
     }
 
     @Override
-    public boolean containsAll(Collection<?> objects) {
+    public boolean containsAll(final Collection<?> objects) {
         return getTarget().containsAll(objects);
     }
 
     @Override
-    public boolean addAll(Collection<? extends T> ts) {
+    public boolean addAll(final Collection<? extends T> ts) {
         return getTarget().addAll(ts);
     }
 
     @Override
-    public boolean addAll(int i, Collection<? extends T> ts) {
+    public boolean addAll(final int i, final Collection<? extends T> ts) {
         return getTarget().addAll(i, ts);
     }
 
     @Override
-    public boolean removeAll(Collection<?> objects) {
+    public boolean removeAll(final Collection<?> objects) {
         return getTarget().removeAll(objects);
     }
 
     @Override
-    public boolean retainAll(Collection<?> objects) {
+    public boolean retainAll(final Collection<?> objects) {
         return getTarget().retainAll(objects);
     }
 
@@ -125,32 +125,32 @@ abstract class LazyResponseList<T> implements ResponseList<T> {
     }
 
     @Override
-    public T get(int i) {
+    public T get(final int i) {
         return getTarget().get(i);
     }
 
     @Override
-    public T set(int i, T t) {
+    public T set(final int i, final T t) {
         return getTarget().set(i, t);
     }
 
     @Override
-    public void add(int i, T t) {
+    public void add(final int i, final T t) {
         getTarget().add(i, t);
     }
 
     @Override
-    public T remove(int i) {
+    public T remove(final int i) {
         return getTarget().remove(i);
     }
 
     @Override
-    public int indexOf(Object o) {
+    public int indexOf(final Object o) {
         return getTarget().indexOf(o);
     }
 
     @Override
-    public int lastIndexOf(Object o) {
+    public int lastIndexOf(final Object o) {
         return getTarget().lastIndexOf(o);
     }
 
@@ -160,17 +160,17 @@ abstract class LazyResponseList<T> implements ResponseList<T> {
     }
 
     @Override
-    public ListIterator<T> listIterator(int i) {
+    public ListIterator<T> listIterator(final int i) {
         return getTarget().listIterator(i);
     }
 
     @Override
-    public List<T> subList(int i, int i1) {
+    public List<T> subList(final int i, final int i1) {
         return getTarget().subList(i, i1);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof LazyResponseList)) return false;
         return getTarget().equals(o);
@@ -183,9 +183,9 @@ abstract class LazyResponseList<T> implements ResponseList<T> {
 
     @Override
     public String toString() {
-        return "LazyResponseList{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyResponseList{"
+                + "target=" + getTarget()
+                + "}";
     }
 
 }

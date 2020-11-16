@@ -30,7 +30,7 @@ import java.lang.management.ManagementFactory;
  * @author Nick Dellamaggiore (nick.dellamaggiore at gmail.com)
  */
 public class MBeanServerRunner {
-    public static void main(String[] args) throws Exception {
+    public static void main(final String[] args) throws Exception {
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         ObjectName name = new ObjectName("twitter4j.mbean:type=APIStatistics");
         ObjectName name2 = new ObjectName("twitter4j.mbean:type=APIStatisticsOpenMBean");

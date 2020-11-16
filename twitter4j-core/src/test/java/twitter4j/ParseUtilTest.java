@@ -44,7 +44,7 @@ class ParseUtilTest {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         assertEquals("2011-07-11"
-                , sdf.format(ParseUtil.parseTrendsDate("2011-07-11T05:31:52Z")));
+, sdf.format(ParseUtil.parseTrendsDate("2011-07-11T05:31:52Z")));
     }
 
 }

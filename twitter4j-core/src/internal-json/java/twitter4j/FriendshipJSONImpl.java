@@ -30,7 +30,7 @@ class FriendshipJSONImpl implements Friendship {
     private boolean following = false;
     private boolean followedBy = false;
 
-    /*package*/ FriendshipJSONImpl(JSONObject json) throws TwitterException {
+    /*package*/ FriendshipJSONImpl(final JSONObject json) throws TwitterException {
         super();
         try {
             id = ParseUtil.getLong("id", json);
@@ -51,7 +51,7 @@ class FriendshipJSONImpl implements Friendship {
     }
 
     /*package*/
-    static ResponseList<Friendship> createFriendshipList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<Friendship> createFriendshipList(final HttpResponse res, final Configuration conf) throws TwitterException {
         try {
             if (conf.isJSONStoreEnabled()) {
                 TwitterObjectFactory.clearThreadLocalMap();
@@ -102,7 +102,7 @@ class FriendshipJSONImpl implements Friendship {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -129,12 +129,12 @@ class FriendshipJSONImpl implements Friendship {
 
     @Override
     public String toString() {
-        return "FriendshipJSONImpl{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", screenName='" + screenName + '\'' +
-                ", following=" + following +
-                ", followedBy=" + followedBy +
-                '}';
+        return "FriendshipJSONImpl{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", screenName='" + screenName + '\''
+                + ", following=" + following
+                + ", followedBy=" + followedBy
+                + '}';
     }
 }

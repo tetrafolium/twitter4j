@@ -30,7 +30,7 @@ public final class AuthorizationFactory {
      * @return authorization instance
      * @since Twitter4J 2.1.11
      */
-    public static Authorization getInstance(Configuration conf) {
+    public static Authorization getInstance(final Configuration conf) {
         Authorization auth = null;
         String consumerKey = conf.getOAuthConsumerKey();
         String consumerSecret = conf.getOAuthConsumerSecret();

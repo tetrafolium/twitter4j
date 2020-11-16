@@ -29,12 +29,12 @@ package twitter4j;
     private String expandedURL;
     private String displayURL;
 
-    /* package */ URLEntityJSONImpl(JSONObject json) throws TwitterException {
+    /* package */ URLEntityJSONImpl(final JSONObject json) throws TwitterException {
         super();
         init(json);
     }
 
-    /* package */ URLEntityJSONImpl(int start, int end, String url, String expandedURL, String displayURL) {
+    /* package */ URLEntityJSONImpl(final int start, final int end, final String url, final String expandedURL, final String displayURL) {
         super();
         setStart(start);
         setEnd(end);
@@ -48,7 +48,7 @@ package twitter4j;
 
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         try {
             JSONArray indicesArray = json.getJSONArray("indices");
             setStart(indicesArray.getInt(0));
@@ -109,7 +109,7 @@ package twitter4j;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -132,10 +132,10 @@ package twitter4j;
 
     @Override
     public String toString() {
-        return "URLEntityJSONImpl{" +
-                "url='" + url + '\'' +
-                ", expandedURL='" + expandedURL + '\'' +
-                ", displayURL='" + displayURL + '\'' +
-                '}';
+        return "URLEntityJSONImpl{"
+                + "url='" + url + '\''
+                + ", expandedURL='" + expandedURL + '\''
+                + ", displayURL='" + displayURL + '\''
+                + '}';
     }
 }

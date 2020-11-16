@@ -25,7 +25,7 @@ abstract class EntityIndex implements Comparable<EntityIndex>, java.io.Serializa
     private int end = -1;
 
     @Override
-    public int compareTo(EntityIndex that) {
+    public int compareTo(final EntityIndex that) {
         long delta = this.start - that.start;
         if (delta < Integer.MIN_VALUE) {
             return Integer.MIN_VALUE;
@@ -35,11 +35,11 @@ abstract class EntityIndex implements Comparable<EntityIndex>, java.io.Serializa
         return (int) delta;
     }
 
-    void setStart(int start) {
+    void setStart(final int start) {
         this.start = start;
     }
 
-    void setEnd(int end) {
+    void setEnd(final int end) {
         this.end = end;
     }
 

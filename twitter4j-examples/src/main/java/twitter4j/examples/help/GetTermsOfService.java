@@ -30,7 +30,7 @@ public class GetTermsOfService {
      *
      * @param args String[]
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Twitter twitter = new TwitterFactory().getInstance();
             System.out.println(twitter.getTermsOfService());

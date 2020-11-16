@@ -38,88 +38,88 @@ public final class OEmbedRequest implements Serializable {
     private WidgetType widgetType = WidgetType.NONE;
     private boolean hideTweet = false;
 
-    public OEmbedRequest(long statusId, String url) {
+    public OEmbedRequest(final long statusId, final String url) {
         this.statusId = statusId;
         this.url = url;
     }
 
-    public void setMaxWidth(int maxWidth) {
+    public void setMaxWidth(final int maxWidth) {
         this.maxWidth = maxWidth;
     }
 
-    public OEmbedRequest MaxWidth(int maxWidth) {
+    public OEmbedRequest MaxWidth(final int maxWidth) {
         this.maxWidth = maxWidth;
         return this;
     }
 
-    public void setHideMedia(boolean hideMedia) {
+    public void setHideMedia(final boolean hideMedia) {
         this.hideMedia = hideMedia;
     }
 
-    public OEmbedRequest HideMedia(boolean hideMedia) {
+    public OEmbedRequest HideMedia(final boolean hideMedia) {
         this.hideMedia = hideMedia;
         return this;
     }
 
-    public void setHideThread(boolean hideThread) {
+    public void setHideThread(final boolean hideThread) {
         this.hideThread = hideThread;
     }
 
-    public OEmbedRequest HideThread(boolean hideThread) {
+    public OEmbedRequest HideThread(final boolean hideThread) {
         this.hideThread = hideThread;
         return this;
     }
 
-    public void setOmitScript(boolean omitScript) {
+    public void setOmitScript(final boolean omitScript) {
         this.omitScript = omitScript;
     }
 
-    public OEmbedRequest omitScript(boolean omitScript) {
+    public OEmbedRequest omitScript(final boolean omitScript) {
         this.omitScript = omitScript;
         return this;
     }
 
-    public void setAlign(Align align) {
+    public void setAlign(final Align align) {
         this.align = align;
     }
 
-    public OEmbedRequest align(Align align) {
+    public OEmbedRequest align(final Align align) {
         this.align = align;
         return this;
     }
 
-    public void setRelated(String[] related) {
+    public void setRelated(final String[] related) {
         this.related = related;
     }
 
-    public OEmbedRequest related(String[] related) {
+    public OEmbedRequest related(final String[] related) {
         this.related = related;
         return this;
     }
 
-    public void setLang(String lang) {
+    public void setLang(final String lang) {
         this.lang = lang;
     }
 
-    public OEmbedRequest lang(String lang) {
+    public OEmbedRequest lang(final String lang) {
         this.lang = lang;
         return this;
     }
 
-    public void setWidgetType(WidgetType widgetType) {
+    public void setWidgetType(final WidgetType widgetType) {
         this.widgetType = widgetType;
     }
 
-    public OEmbedRequest widgetType(WidgetType widgetType) {
+    public OEmbedRequest widgetType(final WidgetType widgetType) {
         this.widgetType = widgetType;
         return this;
     }
 
-    public void setHideTweet(boolean hideTweet) {
+    public void setHideTweet(final boolean hideTweet) {
         this.hideTweet = hideTweet;
     }
 
-    public OEmbedRequest hideTweet(boolean hideTweet) {
+    public OEmbedRequest hideTweet(final boolean hideTweet) {
         this.hideTweet = hideTweet;
         return this;
     }
@@ -150,7 +150,7 @@ public final class OEmbedRequest implements Serializable {
             appendParameter("related", StringUtil.join(related), params);
         }
         appendParameter("lang", lang, params);
-        if(widgetType != WidgetType.NONE) {
+        if (widgetType != WidgetType.NONE) {
             params.add(new HttpParameter("widget_type", widgetType.name().toLowerCase()));
             params.add(new HttpParameter("hide_tweet", hideTweet));
         }
@@ -159,20 +159,20 @@ public final class OEmbedRequest implements Serializable {
         return params.toArray(paramArray);
     }
 
-    private void appendParameter(String name, String value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final String value, final List<HttpParameter> params) {
         if (value != null) {
             params.add(new HttpParameter(name, value));
         }
     }
 
-    private void appendParameter(String name, long value, List<HttpParameter> params) {
+    private void appendParameter(final String name, final long value, final List<HttpParameter> params) {
         if (0 <= value) {
             params.add(new HttpParameter(name, String.valueOf(value)));
         }
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -211,18 +211,18 @@ public final class OEmbedRequest implements Serializable {
 
     @Override
     public String toString() {
-        return "OEmbedRequest{" +
-                "statusId=" + statusId +
-                ", url='" + url + '\'' +
-                ", maxWidth=" + maxWidth +
-                ", hideMedia=" + hideMedia +
-                ", hideThread=" + hideThread +
-                ", omitScript=" + omitScript +
-                ", align=" + align +
-                ", related=" + (related == null ? null : Arrays.asList(related)) +
-                ", lang='" + lang + '\'' +
-                ", widgetType=" + widgetType +
-                ", hideTweet=" + hideTweet +
-                '}';
+        return "OEmbedRequest{"
+                + "statusId=" + statusId
+                + ", url='" + url + '\''
+                + ", maxWidth=" + maxWidth
+                + ", hideMedia=" + hideMedia
+                + ", hideThread=" + hideThread
+                + ", omitScript=" + omitScript
+                + ", align=" + align
+                + ", related=" + (related == null ? null : Arrays.asList(related))
+                + ", lang='" + lang + '\''
+                + ", widgetType=" + widgetType
+                + ", hideTweet=" + hideTweet
+                + '}';
     }
 }

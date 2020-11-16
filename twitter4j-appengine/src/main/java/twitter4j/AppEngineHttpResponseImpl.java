@@ -35,7 +35,7 @@ final class AppEngineHttpResponseImpl extends HttpResponse implements HttpRespon
     private Map<String, String> headers;
     private static Logger logger = Logger.getLogger(AppEngineHttpResponseImpl.class);
 
-    AppEngineHttpResponseImpl(Future<HTTPResponse> futureResponse) {
+    AppEngineHttpResponseImpl(final Future<HTTPResponse> futureResponse) {
         super(ConfigurationContext.getInstance().getHttpClientConfiguration());
         this.future = futureResponse;
     }
@@ -47,7 +47,7 @@ final class AppEngineHttpResponseImpl extends HttpResponse implements HttpRespon
     }
 
     @Override
-    public String getResponseHeader(String name) {
+    public String getResponseHeader(final String name) {
         ensureResponseEvaluated();
         return headers.get(name);
     }
@@ -133,9 +133,9 @@ final class AppEngineHttpResponseImpl extends HttpResponse implements HttpRespon
             }
             responseAsString = inputStreamToString(is);
             if (statusCode < OK || (statusCode != FOUND && MULTIPLE_CHOICES <= statusCode)) {
-                if (statusCode == ENHANCE_YOUR_CLAIM ||
-                        statusCode == BAD_REQUEST ||
-                        statusCode < INTERNAL_SERVER_ERROR) {
+                if (statusCode == ENHANCE_YOUR_CLAIM
+                        || statusCode == BAD_REQUEST
+                        || statusCode < INTERNAL_SERVER_ERROR) {
                     th = new TwitterException(responseAsString, null, statusCode);
                     throw new TwitterRuntimeException(th);
                 }
@@ -150,7 +150,7 @@ final class AppEngineHttpResponseImpl extends HttpResponse implements HttpRespon
         }
     }
 
-    private String inputStreamToString(InputStream is) {
+    private String inputStreamToString(final InputStream is) {
         if (responseAsString == null) {
             StringBuilder buf = new StringBuilder();
             InputStreamReader isr = new InputStreamReader(is);
@@ -170,10 +170,10 @@ final class AppEngineHttpResponseImpl extends HttpResponse implements HttpRespon
 
     @Override
     public String toString() {
-        return "GAEHttpResponse{" +
-                "future=" + future +
-                ", responseGot=" + responseGot +
-                ", headers=" + headers +
-                '}';
+        return "GAEHttpResponse{"
+                + "future=" + future
+                + ", responseGot=" + responseGot
+                + ", headers=" + headers
+                + '}';
     }
 }

@@ -308,7 +308,7 @@ public class ConfigurationTest {
     }
 
 
-    private static Object serializeDeserialize(Object obj) throws Exception {
+    private static Object serializeDeserialize(final Object obj) throws Exception {
         ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(byteOutputStream);
         oos.writeObject(obj);
@@ -330,7 +330,7 @@ public class ConfigurationTest {
 //        assertFalse(conf.isDebugEnabled());
     }
 
-    private void writeFile(String path, String content) throws IOException {
+    private void writeFile(final String path, final String content) throws IOException {
         File file = new File(path);
         file.delete();
         BufferedWriter bw = new BufferedWriter(new FileWriter(file));
@@ -338,7 +338,7 @@ public class ConfigurationTest {
         bw.close();
     }
 
-    private void deleteFile(String path) throws IOException {
+    private void deleteFile(final String path) throws IOException {
         File file = new File(path);
         file.delete();
     }

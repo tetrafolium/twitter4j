@@ -28,12 +28,12 @@ public class LanguageJSONImpl implements HelpResources.Language {
     private String code;
     private String status;
 
-    LanguageJSONImpl(JSONObject json) throws TwitterException {
+    LanguageJSONImpl(final JSONObject json) throws TwitterException {
         super();
         init(json);
     }
 
-    private void init(JSONObject json) throws TwitterException {
+    private void init(final JSONObject json) throws TwitterException {
         try {
             name = json.getString("name");
             code = json.getString("code");
@@ -59,13 +59,13 @@ public class LanguageJSONImpl implements HelpResources.Language {
         return status;
     }
 
-    static ResponseList<HelpResources.Language> createLanguageList(HttpResponse res, Configuration conf) throws TwitterException {
+    static ResponseList<HelpResources.Language> createLanguageList(final HttpResponse res, final Configuration conf) throws TwitterException {
         return createLanguageList(res.asJSONArray(), res, conf);
     }
 
     /*package*/
-    static ResponseList<HelpResources.Language> createLanguageList(JSONArray list, HttpResponse res
-            , Configuration conf) throws TwitterException {
+    static ResponseList<HelpResources.Language> createLanguageList(final JSONArray list, final HttpResponse res
+, final Configuration conf) throws TwitterException {
         if (conf.isJSONStoreEnabled()) {
             TwitterObjectFactory.clearThreadLocalMap();
         }

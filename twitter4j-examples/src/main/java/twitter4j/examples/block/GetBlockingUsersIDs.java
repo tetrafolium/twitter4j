@@ -32,7 +32,7 @@ public final class GetBlockingUsersIDs {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Twitter twitter = new TwitterFactory().getInstance();
             IDs ids = twitter.getBlocksIDs();

@@ -26,7 +26,7 @@ class AppEngineTwitterImpl extends TwitterImpl {
 
     private static final long serialVersionUID = -2740925801854937207L;
 
-    AppEngineTwitterImpl(Configuration conf, Authorization auth) {
+    AppEngineTwitterImpl(final Configuration conf, final Authorization auth) {
         super(conf, auth);
     }
 

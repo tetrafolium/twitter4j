@@ -13,7 +13,7 @@ public final class GetPlaceTrends {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             int woeid = args.length > 0 ? Integer.parseInt(args[0]) : 1;
             Twitter twitter = new TwitterFactory().getInstance();

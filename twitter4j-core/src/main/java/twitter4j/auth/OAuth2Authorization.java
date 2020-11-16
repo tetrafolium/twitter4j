@@ -39,14 +39,14 @@ public class OAuth2Authorization implements Authorization, java.io.Serializable,
 
     private OAuth2Token token;
 
-    public OAuth2Authorization(Configuration conf) {
+    public OAuth2Authorization(final Configuration conf) {
         this.conf = conf;
         setOAuthConsumer(conf.getOAuthConsumerKey(), conf.getOAuthConsumerSecret());
         http = HttpClientFactory.getInstance(conf.getHttpClientConfiguration());
     }
 
     @Override
-    public void setOAuthConsumer(String consumerKey, String consumerSecret) {
+    public void setOAuthConsumer(final String consumerKey, final String consumerSecret) {
         this.consumerKey = consumerKey != null ? consumerKey : "";
         this.consumerSecret = consumerSecret != null ? consumerSecret : "";
     }
@@ -72,7 +72,7 @@ public class OAuth2Authorization implements Authorization, java.io.Serializable,
     }
 
     @Override
-    public void setOAuth2Token(OAuth2Token oauth2Token) {
+    public void setOAuth2Token(final OAuth2Token oauth2Token) {
         this.token = oauth2Token;
     }
 
@@ -106,7 +106,7 @@ public class OAuth2Authorization implements Authorization, java.io.Serializable,
     }
 
     @Override
-    public String getAuthorizationHeader(HttpRequest req) {
+    public String getAuthorizationHeader(final HttpRequest req) {
         if (token == null) {
             String credentials = "";
             try {
@@ -131,7 +131,7 @@ public class OAuth2Authorization implements Authorization, java.io.Serializable,
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (obj == null || !(obj instanceof OAuth2Authorization)) {
             return false;
         }
@@ -160,10 +160,10 @@ public class OAuth2Authorization implements Authorization, java.io.Serializable,
 
     @Override
     public String toString() {
-        return "OAuth2Authorization{" +
-                "consumerKey='" + consumerKey + '\'' +
-                ", consumerSecret='******************************************\'" +
-                ", token=" + ((token == null) ? "null" : token.toString()) +
-                '}';
+        return "OAuth2Authorization{"
+                + "consumerKey='" + consumerKey + '\''
+                + ", consumerSecret='******************************************\'"
+                + ", token=" + ((token == null) ? "null" : token.toString())
+                + '}';
     }
 }

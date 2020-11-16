@@ -29,7 +29,7 @@ public final class GetSuggestedUserCategories {
      *
      * @param args message
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Twitter twitter = new TwitterFactory().getInstance();
             System.out.println("Showing suggested user categories.");

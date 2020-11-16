@@ -35,7 +35,7 @@ public final class ControlStreamInfo implements Serializable {
     private final String replies;
     private final String with;
 
-    /*package*/ ControlStreamInfo(StreamController controller, JSONObject json) throws TwitterException {
+    /*package*/ ControlStreamInfo(final StreamController controller, final JSONObject json) throws TwitterException {
         try {
             JSONObject info = json.getJSONObject("info");
             includeFollowingsActivity = getBoolean("include_followings_activity", info);
@@ -76,7 +76,7 @@ public final class ControlStreamInfo implements Serializable {
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -103,12 +103,12 @@ public final class ControlStreamInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "ControlStreamInfo{" +
-                "users=" + (users == null ? null : Arrays.asList(users)) +
-                ", includeFollowingsActivity=" + includeFollowingsActivity +
-                ", includeUserChanges=" + includeUserChanges +
-                ", replies='" + replies + '\'' +
-                ", with='" + with + '\'' +
-                '}';
+        return "ControlStreamInfo{"
+                + "users=" + (users == null ? null : Arrays.asList(users))
+                + ", includeFollowingsActivity=" + includeFollowingsActivity
+                + ", includeUserChanges=" + includeUserChanges
+                + ", replies='" + replies + '\''
+                + ", with='" + with + '\''
+                + '}';
     }
 }

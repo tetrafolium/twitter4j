@@ -35,7 +35,7 @@ final class LazyUserList implements twitter4j.UserList {
     private final ObjectFactory factory;
     private UserList target = null;
 
-    LazyUserList(HttpResponse res, ObjectFactory factory) {
+    LazyUserList(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -173,12 +173,12 @@ final class LazyUserList implements twitter4j.UserList {
         return getTarget().getAccessLevel();
     }
 
-    public int compareTo(UserList target) {
+    public int compareTo(final UserList target) {
         return getTarget().compareTo(target);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof UserList)) return false;
         return getTarget().equals(o);
@@ -191,8 +191,8 @@ final class LazyUserList implements twitter4j.UserList {
 
     @Override
     public String toString() {
-        return "LazyUserList{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyUserList{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

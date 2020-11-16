@@ -31,7 +31,7 @@ public final class StallWarning implements Serializable {
     private final String message;
     private final int percentFull;
 
-    StallWarning(JSONObject json) throws JSONException {
+    StallWarning(final JSONObject json) throws JSONException {
         JSONObject warning = json.getJSONObject("warning");
         code = getRawString("code", warning);
         message = getRawString("message", warning);
@@ -52,7 +52,7 @@ public final class StallWarning implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -75,10 +75,10 @@ public final class StallWarning implements Serializable {
 
     @Override
     public String toString() {
-        return "StallWarning{" +
-                "code='" + code + '\'' +
-                ", message='" + message + '\'' +
-                ", percentFull=" + percentFull +
-                '}';
+        return "StallWarning{"
+                + "code='" + code + '\''
+                + ", message='" + message + '\''
+                + ", percentFull=" + percentFull
+                + '}';
     }
 }

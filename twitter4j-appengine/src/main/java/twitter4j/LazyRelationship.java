@@ -36,7 +36,7 @@ final class LazyRelationship implements twitter4j.Relationship {
     private final ObjectFactory factory;
     private Relationship target = null;
 
-    LazyRelationship(HttpResponse res, ObjectFactory factory) {
+    LazyRelationship(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -184,7 +184,7 @@ final class LazyRelationship implements twitter4j.Relationship {
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Relationship)) return false;
         return getTarget().equals(o);
@@ -197,8 +197,8 @@ final class LazyRelationship implements twitter4j.Relationship {
 
     @Override
     public String toString() {
-        return "LazyRelationship{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyRelationship{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

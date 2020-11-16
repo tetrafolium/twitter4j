@@ -164,7 +164,7 @@ public interface SiteStreamsListener extends StreamListener {
      * @param retweetedStatus status retweeted retweet
      * @since Twitter4J 4.0.x
      */
-    void onRetweetedRetweet(User source,User target, Status retweetedStatus);
+    void onRetweetedRetweet(User source, User target, Status retweetedStatus);
 
     /**
      * @param source          source user of the event
@@ -172,7 +172,7 @@ public interface SiteStreamsListener extends StreamListener {
      * @param favoritedStatus status favorited retweet
      * @since Twitter4J 4.0.x
      */
-    void onFavoritedRetweet(User source,User target, Status favoritedStatus);
+    void onFavoritedRetweet(User source, User target, Status favoritedStatus);
 
     /**
      * callback method for {@link StreamController#removeUsers(long[])}

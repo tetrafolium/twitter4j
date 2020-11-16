@@ -32,7 +32,7 @@ import java.util.Arrays;
     private long previousCursor = -1;
     private long nextCursor = -1;
 
-    /*package*/ IDsJSONImpl(HttpResponse res, Configuration conf) throws TwitterException {
+    /*package*/ IDsJSONImpl(final HttpResponse res, final Configuration conf) throws TwitterException {
         super(res);
         String json = res.asString();
         init(json);
@@ -42,11 +42,11 @@ import java.util.Arrays;
         }
     }
 
-    /*package*/ IDsJSONImpl(String json) throws TwitterException {
+    /*package*/ IDsJSONImpl(final String json) throws TwitterException {
         init(json);
     }
 
-    private void init(String jsonStr) throws TwitterException {
+    private void init(final String jsonStr) throws TwitterException {
         JSONArray idList;
         try {
             if (jsonStr.startsWith("{")) {
@@ -104,7 +104,7 @@ import java.util.Arrays;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof IDs)) return false;
 
@@ -122,10 +122,10 @@ import java.util.Arrays;
 
     @Override
     public String toString() {
-        return "IDsJSONImpl{" +
-                "ids=" + Arrays.toString(ids) +
-                ", previousCursor=" + previousCursor +
-                ", nextCursor=" + nextCursor +
-                '}';
+        return "IDsJSONImpl{"
+                + "ids=" + Arrays.toString(ids)
+                + ", previousCursor=" + previousCursor
+                + ", nextCursor=" + nextCursor
+                + '}';
     }
 }

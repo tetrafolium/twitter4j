@@ -33,7 +33,7 @@ public class GeoLocation implements java.io.Serializable {
      * @param latitude  the latitude
      * @param longitude the longitude
      */
-    public GeoLocation(double latitude, double longitude) {
+    public GeoLocation(final double latitude, final double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -62,7 +62,7 @@ public class GeoLocation implements java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof GeoLocation)) return false;
 
@@ -87,9 +87,9 @@ public class GeoLocation implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "GeoLocation{" +
-                "latitude=" + latitude +
-                ", longitude=" + longitude +
-                '}';
+        return "GeoLocation{"
+                + "latitude=" + latitude
+                + ", longitude=" + longitude
+                + '}';
     }
 }

@@ -30,20 +30,20 @@ abstract class OAuthToken implements java.io.Serializable {
     private transient SecretKeySpec secretKeySpec;
     private String[] responseStr = null;
 
-    public OAuthToken(String token, String tokenSecret) {
-        if(token == null)
+    public OAuthToken(final String token, final String tokenSecret) {
+        if (token == null)
             throw new IllegalArgumentException("Token can't be null");
-        if(tokenSecret == null)
+        if (tokenSecret == null)
             throw new IllegalArgumentException("TokenSecret can't be null");            
         this.token = token;
         this.tokenSecret = tokenSecret;
     }
 
-    OAuthToken(HttpResponse response) throws TwitterException {
+    OAuthToken(final HttpResponse response) throws TwitterException {
         this(response.asString());
     }
 
-    OAuthToken(String string) {
+    OAuthToken(final String string) {
         responseStr = string.split("&");
         tokenSecret = getParameter("oauth_token_secret");
         token = getParameter("oauth_token");
@@ -57,7 +57,7 @@ abstract class OAuthToken implements java.io.Serializable {
         return tokenSecret;
     }
 
-    /*package*/ void setSecretKeySpec(SecretKeySpec secretKeySpec) {
+    /*package*/ void setSecretKeySpec(final SecretKeySpec secretKeySpec) {
         this.secretKeySpec = secretKeySpec;
     }
 
@@ -65,7 +65,7 @@ abstract class OAuthToken implements java.io.Serializable {
         return secretKeySpec;
     }
 
-    public String getParameter(String parameter) {
+    public String getParameter(final String parameter) {
         String value = null;
         for (String str : responseStr) {
             if (str.startsWith(parameter + '=')) {
@@ -77,7 +77,7 @@ abstract class OAuthToken implements java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof OAuthToken)) return false;
 
@@ -98,10 +98,10 @@ abstract class OAuthToken implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "OAuthToken{" +
-                "token='" + token + '\'' +
-                ", tokenSecret='" + tokenSecret + '\'' +
-                ", secretKeySpec=" + secretKeySpec +
-                '}';
+        return "OAuthToken{"
+                + "token='" + token + '\''
+                + ", tokenSecret='" + tokenSecret + '\''
+                + ", secretKeySpec=" + secretKeySpec
+                + '}';
     }
 }

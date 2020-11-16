@@ -34,7 +34,7 @@ final class LazyIDs implements twitter4j.IDs {
     private final ObjectFactory factory;
     private IDs target = null;
 
-    LazyIDs(HttpResponse res, ObjectFactory factory) {
+    LazyIDs(final HttpResponse res, final ObjectFactory factory) {
         this.res = res;
         this.factory = factory;
     }
@@ -84,7 +84,7 @@ final class LazyIDs implements twitter4j.IDs {
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof IDs)) return false;
         return getTarget().equals(o);
@@ -97,8 +97,8 @@ final class LazyIDs implements twitter4j.IDs {
 
     @Override
     public String toString() {
-        return "LazyIDs{" +
-                "target=" + getTarget() +
-                "}";
+        return "LazyIDs{"
+                + "target=" + getTarget()
+                + "}";
     }
 }

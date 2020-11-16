@@ -30,11 +30,11 @@ public class AccessToken extends OAuthToken implements java.io.Serializable {
     private String screenName;
     private long userId = -1L;
 
-    AccessToken(HttpResponse res) throws TwitterException {
+    AccessToken(final HttpResponse res) throws TwitterException {
         this(res.asString());
     }
 
-    AccessToken(String str) {
+    AccessToken(final String str) {
         super(str);
         screenName = getParameter("screen_name");
         String sUserId = getParameter("user_id");
@@ -43,7 +43,7 @@ public class AccessToken extends OAuthToken implements java.io.Serializable {
         }
     }
 
-    public AccessToken(String token, String tokenSecret) {
+    public AccessToken(final String token, final String tokenSecret) {
         super(token, tokenSecret);
         String sUserId;
         int dashIndex = token.indexOf("-");
@@ -56,7 +56,7 @@ public class AccessToken extends OAuthToken implements java.io.Serializable {
         }
     }
 
-    public AccessToken(String token, String tokenSecret, long userId) {
+    public AccessToken(final String token, final String tokenSecret, final long userId) {
         super(token, tokenSecret);
         this.userId = userId;
     }
@@ -80,7 +80,7 @@ public class AccessToken extends OAuthToken implements java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
@@ -104,9 +104,9 @@ public class AccessToken extends OAuthToken implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "AccessToken{" +
-                "screenName='" + screenName + '\'' +
-                ", userId=" + userId +
-                '}';
+        return "AccessToken{"
+                + "screenName='" + screenName + '\''
+                + ", userId=" + userId
+                + '}';
     }
 }

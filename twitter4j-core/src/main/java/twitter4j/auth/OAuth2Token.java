@@ -33,7 +33,7 @@ public class OAuth2Token implements java.io.Serializable {
 
     private String accessToken;
 
-    OAuth2Token(HttpResponse res) throws TwitterException {
+    OAuth2Token(final HttpResponse res) throws TwitterException {
         JSONObject json = res.asJSONObject();
         tokenType = getRawString("token_type", json);
         try {
@@ -42,7 +42,7 @@ public class OAuth2Token implements java.io.Serializable {
         }
     }
 
-    public OAuth2Token(String tokenType, String accessToken) {
+    public OAuth2Token(final String tokenType, final String accessToken) {
         this.tokenType = tokenType;
         this.accessToken = accessToken;
     }
@@ -65,7 +65,7 @@ public class OAuth2Token implements java.io.Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (obj == null || !(obj instanceof OAuth2Token)) {
             return false;
         }
@@ -90,13 +90,13 @@ public class OAuth2Token implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "OAuth2Token{" +
-                "tokenType='" + tokenType + '\'' +
-                ", accessToken='" + accessToken + '\'' +
-                '}';
+        return "OAuth2Token{"
+                + "tokenType='" + tokenType + '\''
+                + ", accessToken='" + accessToken + '\''
+                + '}';
     }
 
-    private static String getRawString(String name, JSONObject json) {
+    private static String getRawString(final String name, final JSONObject json) {
         try {
             if (json.isNull(name)) {
                 return null;

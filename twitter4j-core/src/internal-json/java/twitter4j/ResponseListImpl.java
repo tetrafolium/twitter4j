@@ -27,23 +27,23 @@ class ResponseListImpl<T> extends ArrayList<T> implements ResponseList<T> {
     private transient RateLimitStatus rateLimitStatus = null;
     private transient int accessLevel;
 
-    ResponseListImpl(HttpResponse res) {
+    ResponseListImpl(final HttpResponse res) {
         super();
         init(res);
     }
 
-    ResponseListImpl(int size, HttpResponse res) {
+    ResponseListImpl(final int size, final HttpResponse res) {
         super(size);
         init(res);
     }
 
-    ResponseListImpl(RateLimitStatus rateLimitStatus, int accessLevel) {
+    ResponseListImpl(final RateLimitStatus rateLimitStatus, final int accessLevel) {
         super();
         this.rateLimitStatus = rateLimitStatus;
         this.accessLevel = accessLevel;
     }
 
-    private void init(HttpResponse res) {
+    private void init(final HttpResponse res) {
         this.rateLimitStatus = RateLimitStatusJSONImpl.createFromResponseHeader(res);
         accessLevel = ParseUtil.toAccessLevel(res);
     }

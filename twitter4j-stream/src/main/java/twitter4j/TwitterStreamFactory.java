@@ -53,7 +53,7 @@ public final class TwitterStreamFactory implements java.io.Serializable {
      * @param conf the configuration to use
      * @since Twitter4J 2.1.1
      */
-    public TwitterStreamFactory(Configuration conf) {
+    public TwitterStreamFactory(final Configuration conf) {
         this.conf = conf;
     }
 
@@ -62,7 +62,7 @@ public final class TwitterStreamFactory implements java.io.Serializable {
      *
      * @param configTreePath the path
      */
-    public TwitterStreamFactory(String configTreePath) {
+    public TwitterStreamFactory(final String configTreePath) {
         this(ConfigurationContext.getInstance(configTreePath));
     }
 
@@ -85,7 +85,7 @@ public final class TwitterStreamFactory implements java.io.Serializable {
      * @param accessToken access token
      * @return an instance
      */
-    public TwitterStream getInstance(AccessToken accessToken) {
+    public TwitterStream getInstance(final AccessToken accessToken) {
         String consumerKey = conf.getOAuthConsumerKey();
         String consumerSecret = conf.getOAuthConsumerSecret();
         if (null == consumerKey && null == consumerSecret) {
@@ -102,11 +102,11 @@ public final class TwitterStreamFactory implements java.io.Serializable {
      * @param auth authorization object to be associated
      * @return an instance
      */
-    public TwitterStream getInstance(Authorization auth) {
+    public TwitterStream getInstance(final Authorization auth) {
         return getInstance(conf, auth);
     }
 
-    private TwitterStream getInstance(Configuration conf, Authorization auth) {
+    private TwitterStream getInstance(final Configuration conf, final Authorization auth) {
         return new TwitterStreamImpl(conf, auth);
     }
 
