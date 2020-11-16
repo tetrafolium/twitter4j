@@ -132,13 +132,11 @@ final class AppEngineHttpResponseImpl extends HttpResponse implements HttpRespon
                 }
             }
             responseAsString = inputStreamToString(is);
-            if (statusCode < OK || (statusCode != FOUND && MULTIPLE_CHOICES <= statusCode)) {
-                if (statusCode == ENHANCE_YOUR_CLAIM
+            if ((statusCode < OK || (statusCode != FOUND && MULTIPLE_CHOICES <= statusCode)) && (statusCode == ENHANCE_YOUR_CLAIM
                         || statusCode == BAD_REQUEST
-                        || statusCode < INTERNAL_SERVER_ERROR) {
-                    th = new TwitterException(responseAsString, null, statusCode);
-                    throw new TwitterRuntimeException(th);
-                }
+                        || statusCode < INTERNAL_SERVER_ERROR)) {
+                th = new TwitterException(responseAsString, null, statusCode);
+                throw new TwitterRuntimeException(th);
             }
         } catch (ExecutionException e) {
             th = e.getCause();

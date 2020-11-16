@@ -167,11 +167,9 @@ final class HTMLEntity {
 			}
 			delta = 0;
 		}
-		if (entityIndex < entityIndexes.length) {
-			if (entityIndexes[entityIndex].getEnd() == textCodePointLength) {
-				entityIndexes[entityIndex].setEnd(unescaped.length());
-			}
-		}
+		if ((entityIndex < entityIndexes.length) && (entityIndexes[entityIndex].getEnd() == textCodePointLength)) {
+                        entityIndexes[entityIndex].setEnd(unescaped.length());
+                }
 
         return unescaped.toString();
     }

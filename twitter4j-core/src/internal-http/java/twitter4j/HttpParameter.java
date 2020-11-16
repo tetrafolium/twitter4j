@@ -243,10 +243,8 @@ public final class HttpParameter implements Comparable<HttpParameter>, java.io.S
         if (name != null) {
             compared = name.compareTo(o.name);
         }
-        if (0 == compared) {
-            if (value != null) {
-                compared = value.compareTo(o.value);
-            }
+        if ((0 == compared) && (value != null)) {
+            compared = value.compareTo(o.value);
         }
         return compared;
     }

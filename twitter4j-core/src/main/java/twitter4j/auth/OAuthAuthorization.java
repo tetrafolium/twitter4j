@@ -391,10 +391,8 @@ public class OAuthAuthorization implements Authorization, java.io.Serializable, 
                 buf.append(HttpParameter.encode(param.getValue()));
             }
         }
-        if (buf.length() != 0) {
-            if (quot) {
-                buf.append("\"");
-            }
+        if ((buf.length() != 0) && (quot)) {
+            buf.append("\"");
         }
         return buf.toString();
     }

@@ -326,11 +326,9 @@ class TwitterStreamImpl extends TwitterBaseImpl implements TwitterStream {
     public synchronized TwitterStream shutdown() {
         cleanUp();
         synchronized (TwitterStreamImpl.class) {
-            if (0 == numberOfHandlers) {
-                if (dispatcher != null) {
-                    dispatcher.shutdown();
-                    dispatcher = null;
-                }
+            if ((0 == numberOfHandlers) && (dispatcher != null)) {
+                dispatcher.shutdown();
+                dispatcher = null;
             }
         }
         return this;
